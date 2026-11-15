@@ -1,0 +1,841 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>바라스 잠실 이용안내</title>
+<meta name="description" content="바라스 잠실(잠실 2베드룸) 체크인·체크아웃, 오시는 길, 출입 방법, 와이파이, 숙소 규칙, 시설 사용법, 분리수거, 비상 연락처를 4개 국어로 안내합니다.">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0d8a7f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%230d8a7f'/%3E%3Ctext x='16' y='22' font-family='sans-serif' font-size='16' font-weight='bold' fill='white' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
+<!--
+  바라스 잠실 이용안내 · 단일 HTML 파일 (외부 파일 의존 없음)
+  ─ 사진은 images/ 폴더에 있습니다 (entrance.jpg 건물 전경 · entrance-door.jpg 공동현관 근접).
+    사진을 바꾸려면 같은 이름으로 파일만 교체하면 됩니다.
+  ─ 도어락 비밀번호는 이 페이지에 넣지 않습니다(공개 URL). 체크인 당일 메시지로 안내.
+-->
+<style>
+:root{
+  --teal:#0d8a7f; --teal-dark:#0a6f66; --teal-soft:#e8f5f3;
+  --ink:#16181d; --body:#333a44; --muted:#6b7280; --line:#e6e8ee;
+  --bg:#f5f6f8; --card:#ffffff;
+  --warn-bg:#fff8ea; --warn-line:#f5dcae; --warn-ink:#7a4a04;
+  --danger-bg:#fef4f2; --danger-line:#f7d2cc; --danger-ink:#8f2318;
+  --r:16px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--body);font-size:16px;line-height:1.68;-webkit-font-smoothing:antialiased;
+  font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Hiragino Kaku Gothic ProN","Noto Sans KR","Noto Sans JP","PingFang SC","Microsoft YaHei",system-ui,sans-serif}
+h1,h2,h3{color:var(--ink);line-height:1.32;letter-spacing:-.01em}
+a{color:var(--teal-dark)}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+
+/* header */
+.header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:saturate(150%) blur(10px);-webkit-backdrop-filter:saturate(150%) blur(10px);border-bottom:1px solid var(--line)}
+.header-in{max-width:760px;margin:0 auto;padding:9px 16px;display:flex;align-items:center;gap:10px}
+.brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink);min-width:0}
+.brand-mark{flex:0 0 auto;width:32px;height:32px;border-radius:10px;background:var(--teal);color:#fff;display:grid;place-items:center;font-weight:800;font-size:13px;letter-spacing:.02em}
+.brand-txt{display:flex;flex-direction:column;min-width:0}
+.brand-name{font-size:14.5px;font-weight:800;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand-sub{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.langs{margin-left:auto;flex:0 0 auto;display:flex;gap:2px;padding:3px;background:#f0f2f5;border-radius:999px}
+.langs a{padding:5px 8px;border-radius:999px;font-size:12px;font-weight:700;color:#525a68;text-decoration:none;white-space:nowrap;line-height:1.5}
+.langs a.active{background:#fff;color:var(--teal-dark);box-shadow:0 1px 3px rgba(16,24,40,.12)}
+.langs a:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+
+/* section chips */
+.nav{background:#fff;border-bottom:1px solid var(--line)}
+.nav-in{max-width:760px;margin:0 auto;padding:0 16px 9px;display:flex;gap:7px;overflow-x:auto;scrollbar-width:none}
+.nav-in::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;display:inline-flex;align-items:center;padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:#fff;color:#3c4450;font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap;transition:background .15s,border-color .15s,color .15s}
+.chip:hover{border-color:#cfd6df}
+.chip.active{background:var(--teal-soft);border-color:#bee4df;color:var(--teal-dark)}
+.chip:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+
+/* layout */
+.wrap{max-width:760px;margin:0 auto;padding:18px 16px 92px}
+.hero{padding:6px 4px 16px}
+.eyebrow{margin:0;font-size:11.5px;font-weight:800;color:var(--teal);letter-spacing:.14em}
+.hero h1{font-size:26px;margin:6px 0 10px;font-weight:800;letter-spacing:-.025em}
+.lead{margin:0;font-size:14.5px;color:#4b5563}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.meta span{font-size:12.5px;font-weight:700;color:#3c4450;background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 11px}
+
+/* cards */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px 16px;margin:0 0 14px;scroll-margin-top:104px}
+.card h2{font-size:18px;margin:0 0 12px;font-weight:800;display:flex;align-items:center;gap:8px}
+.sub{font-size:13.5px;font-weight:800;color:var(--ink);margin:16px 0 6px}
+.sub:first-of-type{margin-top:12px}
+.list{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.list li{position:relative;padding-left:15px;font-size:14.5px;line-height:1.62}
+.list li::before{content:"";position:absolute;left:2px;top:.65em;width:5px;height:5px;border-radius:50%;background:#c6cdd8}
+.list li b{color:var(--ink);font-weight:800}
+.note{display:flex;gap:9px;border-radius:12px;padding:12px 14px;font-size:13.8px;line-height:1.6;margin-top:13px}
+.note .ico{flex:0 0 auto;line-height:1.5}
+.note.warn{background:var(--warn-bg);border:1px solid var(--warn-line);color:var(--warn-ink)}
+.note.danger{background:var(--danger-bg);border:1px solid var(--danger-line);color:var(--danger-ink)}
+.note.info{background:var(--teal-soft);border:1px solid #cbe7e3;color:#0b6059}
+.note b{font-weight:800}
+
+/* links */
+.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
+.linkbtn{display:inline-flex;align-items:center;gap:6px;border:1px solid #cbe7e3;background:var(--teal-soft);color:var(--teal-dark);text-decoration:none;font-size:13px;font-weight:800;padding:9px 13px;border-radius:11px}
+.linkbtn:active{background:#dcefeb}
+
+/* wifi */
+.wifi{display:grid;gap:8px;margin-top:4px}
+.wifi-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#fbfcfd}
+.floor{flex:0 0 auto;min-width:64px;font-size:12px;font-weight:800;color:var(--muted)}
+.nets{display:flex;flex-wrap:wrap;gap:6px}
+.nets code{font-size:13px;background:#eef1f5;border-radius:7px;padding:2px 7px;color:#1f2937}
+.pw{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border:1px dashed #cfd6df;border-radius:12px;padding:11px 13px;margin-top:9px;background:#fff}
+.pw-label{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:800;color:var(--muted)}
+.pw-label code{font-size:15px;font-weight:800;color:var(--ink);letter-spacing:.02em}
+.btn-copy{flex:0 0 auto;border:1px solid var(--teal);background:var(--teal);color:#fff;font-family:inherit;font-size:12.5px;font-weight:800;padding:8px 14px;border-radius:999px;cursor:pointer;transition:background .15s,color .15s}
+.btn-copy.copied{background:#fff;color:var(--teal-dark)}
+.btn-copy:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+
+/* photos */
+.photos{display:grid;grid-template-columns:1fr;gap:10px;margin-top:13px}
+.photo{margin:0}
+.photo img{display:block;width:100%;height:auto;border-radius:12px;border:1px solid var(--line)}
+.photo figcaption{margin-top:6px;font-size:12px;color:var(--muted);text-align:center}
+@media(min-width:560px){.photos.two{grid-template-columns:1fr 1fr}}
+
+/* contact */
+.tel{font-weight:800;color:var(--ink);white-space:nowrap}
+
+/* footer */
+.foot{max-width:760px;margin:0 auto;padding:4px 20px 40px;text-align:center;color:var(--muted);font-size:12px;line-height:1.7}
+.foot p{margin:2px 0}
+
+/* back to top — 화면 구석에 고정하지 않고 오른쪽 중간에서 스크롤을 따라 움직임 */
+.to-top-rail{position:sticky;top:0;height:0;z-index:45;pointer-events:none}
+.to-top{position:absolute;top:calc(50vh - 22px);right:max(12px,calc((100vw - 760px)/2 - 58px));width:44px;height:44px;padding:0;border-radius:50%;border:1px solid rgba(16,24,40,.12);background:rgba(255,255,255,.88);-webkit-backdrop-filter:saturate(140%) blur(8px);backdrop-filter:saturate(140%) blur(8px);color:#3c4450;font-family:inherit;font-size:10.5px;font-weight:800;letter-spacing:.06em;box-shadow:0 6px 18px rgba(16,24,40,.12);cursor:pointer;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .28s ease,visibility .28s ease,background .15s ease,box-shadow .15s ease}
+.to-top.show{opacity:1;visibility:visible;pointer-events:auto}
+.to-top:hover{background:rgba(255,255,255,.97);box-shadow:0 8px 22px rgba(16,24,40,.18)}
+.to-top:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+@media(max-width:899px){
+  /* 좁은 화면에서는 본문 글자를 가리지 않도록 오른쪽 가장자리의 얇은 탭으로 */
+  .to-top{top:calc(50vh - 42px);right:-1px;width:26px;height:84px;border-radius:10px 0 0 10px;border-right:0;font-size:9.5px;letter-spacing:.16em;writing-mode:vertical-rl;text-orientation:mixed;text-align:center;background:rgba(255,255,255,.84)}
+}
+
+@media(max-width:400px){
+  .brand-sub{display:none}
+  .langs a{padding:5px 6px;font-size:11.5px}
+  .hero h1{font-size:23px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .to-top{transition:none}
+}
+@media print{
+  .header,.nav,.to-top-rail,.to-top,.btn-copy{display:none!important}
+  body{background:#fff}
+  .card{break-inside:avoid;border-color:#ddd}
+}
+</style>
+</head>
+<body>
+
+<div class="to-top-rail">
+  <button class="to-top" id="toTop" type="button" title="맨 위로" aria-label="맨 위로" data-i18n-aria="aria.top" data-ko-aria="맨 위로">TOP</button>
+</div>
+
+<header class="header">
+  <div class="header-in">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">B</span>
+      <span class="brand-txt">
+        <span class="brand-name" data-i18n="brand.name">바라스 잠실</span>
+        <span class="brand-sub" data-i18n="brand.sub">잠실 · 2베드룸</span>
+      </span>
+    </a>
+    <nav class="langs" aria-label="언어" data-i18n-aria="aria.lang" data-ko-aria="언어">
+      <a href="?lang=ko" data-lang="ko" class="active" hreflang="ko">한국어</a>
+      <a href="?lang=en" data-lang="en" hreflang="en">English</a>
+      <a href="?lang=ja" data-lang="ja" hreflang="ja">日本語</a>
+      <a href="?lang=zh" data-lang="zh" hreflang="zh-Hans">中文</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="nav" aria-label="안내 목차" data-i18n-aria="aria.nav" data-ko-aria="안내 목차">
+  <div class="nav-in">
+    <a class="chip" href="#checkin" data-i18n="s.checkin">🕓 체크인 · 체크아웃</a>
+    <a class="chip" href="#directions" data-i18n="s.directions">📍 오시는 길</a>
+    <a class="chip" href="#access" data-i18n="s.access">🔑 출입 방법</a>
+    <a class="chip" href="#wifi" data-i18n="s.wifi">📶 와이파이</a>
+    <a class="chip" href="#rules" data-i18n="s.rules">📌 규칙 및 주의사항</a>
+    <a class="chip" href="#facilities" data-i18n="s.facilities">🛠️ 시설·가전 사용법</a>
+    <a class="chip" href="#trash" data-i18n="s.trash">🗑️ 쓰레기 분리수거</a>
+    <a class="chip" href="#contact" data-i18n="s.contact">☎️ 비상 연락처</a>
+  </div>
+</nav>
+
+<main class="wrap" id="top">
+
+  <div class="hero">
+    <p class="eyebrow" data-i18n="hero.eyebrow">이용안내</p>
+    <h1 data-i18n="hero.h1">바라스 잠실 이용안내</h1>
+    <p class="lead" data-i18n="hero.lead">잠실역과 롯데월드, 코엑스까지 편리한 2베드룸 아파트, 바라스 잠실입니다. 체크인부터 체크아웃까지 필요한 안내를 한곳에 정리했습니다.</p>
+    <div class="meta">
+      <span data-i18n="meta.checkinout">체크인 16:00 · 체크아웃 11:00</span>
+      <span data-i18n="meta.rooms">2베드룸 · 최대 6인</span>
+      <span data-i18n="meta.parking">건물 내 주차 불가</span>
+    </div>
+  </div>
+
+  <!-- ────────── 체크인 · 체크아웃 ────────── -->
+  <section class="card" id="checkin">
+    <h2 data-i18n="s.checkin">🕓 체크인 · 체크아웃</h2>
+    <ul class="list">
+      <li data-i18n="checkin.in"><b>체크인</b> 오후 4시(16:00) 이후입니다. 셀프 체크인이며, 도어락 비밀번호는 체크인 당일 1시간 전에 메시지로 보내드립니다.</li>
+      <li data-i18n="checkin.out"><b>체크아웃</b> 오전 11시(11:00)까지입니다. 퇴실하실 때 메시지를 남겨 주시면 15분 뒤 스태프가 방문합니다.</li>
+      <li data-i18n="checkin.extra"><b>얼리 체크인 · 레이트 체크아웃 · 숙소 내 짐 보관</b> 단독 세대에 청소·정비 일정(11:00~15:00)이 있어 어렵습니다.</li>
+    </ul>
+    <div class="note info">
+      <span class="ico" aria-hidden="true">🕙</span>
+      <span data-i18n="checkin.info">숙소 상세 안내와 주소는 체크인 당일 오전 10시에, 도어락 비밀번호는 체크인 1시간 전에 보내드립니다.</span>
+    </div>
+
+    <h3 class="sub" data-i18n="checkin.alt.t">짐 보관이 필요하시면</h3>
+    <ul class="list">
+      <li data-i18n="checkin.alt1">삼전역 역사 안 물품보관함 — 05:00~24:00, 2~4시간 기본요금 1,000~6,100원(크기와 주말 여부에 따라 다름)</li>
+      <li data-i18n="checkin.alt2">TripEasy 인천공항 짐 배송 서비스 — 짐을 공항으로 보내거나 받을 수 있습니다.</li>
+    </ul>
+    <div class="links">
+      <a class="linkbtn" href="https://www.tripeasy.co.kr/user_en/index.php" target="_blank" rel="noopener" data-i18n="checkin.tripeasy">🧳 TripEasy 짐 배송</a>
+    </div>
+
+    <h3 class="sub" data-i18n="checkin.outlist.t">체크아웃 시 확인해 주세요</h3>
+    <ul class="list">
+      <li data-i18n="checkin.out1">전체 소등</li>
+      <li data-i18n="checkin.out2">에어컨 전원 끄기</li>
+      <li data-i18n="checkin.out3">보일러는 실온 유지로 두기</li>
+      <li data-i18n="checkin.out4">쓰레기는 주방 지정 공간에 정리</li>
+      <li data-i18n="checkin.out5">퇴실 메시지 남기기</li>
+    </ul>
+  </section>
+
+  <!-- ────────── 오시는 길 ────────── -->
+  <section class="card" id="directions">
+    <h2 data-i18n="s.directions">📍 오시는 길</h2>
+    <ul class="list">
+      <li data-i18n="dir.addr"><b>주소</b> 서울특별시 송파구 삼전로7길 17 (잠실동) 101호 · 우편번호 05568</li>
+      <li data-i18n="dir.floor"><b>층</b> 건물 1층입니다. 공동현관에서 계단 6~7칸을 올라오시면 101호가 나옵니다.</li>
+      <li data-i18n="dir.parking"><b>주차</b> 건물 안에는 주차할 수 없습니다. 도보 7분 거리 새마을시장 노상 공영주차장(서울 송파구 잠실동 279)을 이용해 주세요. 1시간 3,000원이며 ‘모두의 주차장’ 앱에서 확인할 수 있습니다.</li>
+    </ul>
+    <div class="links">
+      <a class="linkbtn" href="https://www.google.com/maps/search/?api=1&amp;query=%EC%84%9C%EC%9A%B8%20%EC%86%A1%ED%8C%8C%EA%B5%AC%20%EC%82%BC%EC%A0%84%EB%A1%9C7%EA%B8%B8%2017" target="_blank" rel="noopener" data-i18n="dir.map">🗺️ 구글 지도로 보기</a>
+      <a class="linkbtn" href="https://www.google.com/maps/dir/?api=1&amp;origin=%EC%9D%B8%EC%B2%9C%EA%B5%AD%EC%A0%9C%EA%B3%B5%ED%95%AD&amp;destination=%EC%84%9C%EC%9A%B8%20%EC%86%A1%ED%8C%8C%EA%B5%AC%20%EC%82%BC%EC%A0%84%EB%A1%9C7%EA%B8%B8%2017&amp;travelmode=transit" target="_blank" rel="noopener" data-i18n="dir.route">✈️ 인천공항에서 길찾기</a>
+    </div>
+
+    <h3 class="sub" data-i18n="dir.airport.t">인천국제공항에서</h3>
+    <ul class="list">
+      <li data-i18n="dir.subway"><b>인천공항철도 (약 1시간 50분)</b> 인천공항1터미널역 → 김포공항역 하차 → 9호선 환승(공항시장역 방면) → 고속터미널역에서 내려 다시 9호선 승차 → 삼전역 하차 → 도보 2분</li>
+      <li data-i18n="dir.bus"><b>공항 리무진 6006 (약 1시간 45분)</b> 몽촌토성역 방면 → 잠실새내역 하차 → 도보 14분</li>
+    </ul>
+
+    <div class="note info">
+      <span class="ico" aria-hidden="true">🛂</span>
+      <span data-i18n="dir.keta"><b>입국 신고(K-ETA)용 정보</b> 주소 서울시 송파구 삼전로 7길 17, 101호 · 우편번호 05568 · 연락처 <span class="tel">010-9397-1289</span></span>
+    </div>
+
+    <figure class="photo">
+      <img src="images/entrance.jpg" width="1100" height="1298" alt="건물 입구와 공동현관 (building entrance)" loading="lazy" decoding="async">
+      <figcaption data-i18n="dir.photo">건물 입구와 공동현관</figcaption>
+    </figure>
+  </section>
+
+  <!-- ────────── 출입 방법 ────────── -->
+  <section class="card" id="access">
+    <h2 data-i18n="s.access">🔑 출입 방법</h2>
+    <ul class="list">
+      <li data-i18n="access.enter"><b>들어오시는 길</b> 공동현관을 지나 계단 6~7칸을 올라오시면 101호입니다.</li>
+      <li data-i18n="access.door"><b>도어락</b> 키패드에 비밀번호를 입력하면 열립니다.</li>
+      <li data-i18n="access.slippers"><b>슬리퍼</b> 실내 거실화는 따로 없습니다. 실외용 슬리퍼를 준비해 두었으니 사용해 주세요.</li>
+    </ul>
+    <div class="note info">
+      <span class="ico" aria-hidden="true">🔐</span>
+      <span data-i18n="access.code">도어락 비밀번호는 공개 페이지에 표시하지 않습니다. 체크인 당일 1시간 전에 메시지로 별도 안내해 드립니다.</span>
+    </div>
+    <div class="note warn">
+      <span class="ico" aria-hidden="true">🌙</span>
+      <span data-i18n="access.note">이웃이 함께 사는 건물입니다. 늦은 시간에는 발소리와 문소리를 조심해 주세요.</span>
+    </div>
+
+    <div class="photos">
+      <figure class="photo">
+        <img src="images/entrance-door.jpg" width="590" height="693" alt="공동현관 (shared entrance door)" loading="lazy" decoding="async">
+        <figcaption data-i18n="access.photo.entrance">공동현관</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ────────── 와이파이 ────────── -->
+  <section class="card" id="wifi">
+    <h2 data-i18n="s.wifi">📶 와이파이</h2>
+    <div class="wifi">
+      <div class="wifi-row">
+        <span class="floor" data-i18n="wifi.ssid">네트워크</span>
+        <span class="nets"><code>KT_GiGA_11C3</code></span>
+      </div>
+    </div>
+    <div class="pw">
+      <span class="pw-label"><span data-i18n="wifi.pw">비밀번호</span><code>2db03ch986</code></span>
+      <button class="btn-copy" type="button" data-copy="2db03ch986" data-done-i18n="wifi.copied" data-i18n="wifi.copy">복사</button>
+    </div>
+    <div class="note info">
+      <span class="ico" aria-hidden="true">💡</span>
+      <span data-i18n="wifi.tip">연결이 잘 되지 않으면 와이파이를 껐다가 다시 켜 보세요. 그래도 안 되면 메시지로 알려 주세요.</span>
+    </div>
+  </section>
+
+  <!-- ────────── 규칙 및 주의사항 ────────── -->
+  <section class="card" id="rules">
+    <h2 data-i18n="s.rules">📌 규칙 및 주의사항</h2>
+    <ul class="list">
+      <li data-i18n="rules.smoke"><b>절대 금연</b> 실내 전 구역이 금연입니다. 화재 감지기가 작동합니다.</li>
+      <li data-i18n="rules.quiet"><b>조용한 시간</b> 밤 10시 이후에는 이웃을 위해 소음을 자제해 주세요.</li>
+      <li data-i18n="rules.toilet"><b>변기</b> 물티슈·음식물 등 이물질을 변기에 버리지 마세요. 막힘이나 파손이 생기면 원상 복구 비용을 에어비앤비 해결 센터를 통해 정산합니다.</li>
+      <li data-i18n="rules.shoes"><b>실내화</b> 실내 거실화는 따로 없습니다. 실외용 슬리퍼를 사용해 주세요.</li>
+      <li data-i18n="rules.bedding"><b>추가 침구</b> 5인 이상일 때 기본 제공되며, 그 외 추가는 별도 비용이 있습니다.</li>
+      <li data-i18n="rules.lost"><b>분실물</b> 퇴실 후 남겨진 물건은 연락이 닿지 않으면 바로 폐기됩니다. 떠나시기 전에 한 번 더 확인해 주세요.</li>
+    </ul>
+    <div class="note danger">
+      <span class="ico" aria-hidden="true">🚭</span>
+      <span data-i18n="rules.smokenote">흡연이 확인되면 다음 게스트를 위해 즉시 환기·청소가 필요합니다. 숙소 이용규칙 위반으로 예약이 취소(즉시 퇴실)될 수 있고, 에어비앤비 정책에 따른 조치 대상이 될 수 있습니다. 꼭 지켜 주세요.</span>
+    </div>
+    <div class="note warn">
+      <span class="ico" aria-hidden="true">🧺</span>
+      <span data-i18n="rules.laundrytime"><b>세탁기·건조기</b> 밤 9시부터 아침 7시까지는 사용을 자제해 주세요.</span>
+    </div>
+  </section>
+
+  <!-- ────────── 시설·가전 사용법 ────────── -->
+  <section class="card" id="facilities">
+    <h2 data-i18n="s.facilities">🛠️ 시설·가전 사용법</h2>
+
+    <h3 class="sub" data-i18n="fac.hotwater.t">온수</h3>
+    <ul class="list">
+      <li data-i18n="fac.hotwater">온수를 쓰실 때는 보일러를 켜 주세요. 퇴실 시에는 보일러를 실온 유지로 두고 가 주세요.</li>
+    </ul>
+
+    <h3 class="sub" data-i18n="fac.laundry.t">세탁기 · 건조기</h3>
+    <ul class="list">
+      <li data-i18n="fac.laundry">발코니에 있습니다. 건조기 안에 남아 있는 침구는 세탁바구니에 꺼내 두고 사용해 주세요.</li>
+      <li data-i18n="fac.laundry.use">세탁이 끝나면 세탁기 문을 열어 두면 냄새와 곰팡이를 막을 수 있습니다.</li>
+    </ul>
+
+    <h3 class="sub" data-i18n="fac.sofa.t">소파베드</h3>
+    <ul class="list">
+      <li data-i18n="fac.sofa.cond"><b>5인 이상 예약</b>에서 소파베드를 침대로 사용하시며, 침구는 기본 제공됩니다. 5인 미만 예약에서 추가 침구가 필요하시면 별도 비용이 있습니다.</li>
+      <li data-i18n="fac.sofa">베란다 이불보관함에 매트리스 커버·이불·베개가 있습니다. 반드시 매트리스 커버를 깔고 사용해 주세요.</li>
+      <li data-i18n="fac.table">소파베드 방에는 접이식 테이블과 스툴이 준비되어 있습니다.</li>
+    </ul>
+
+    <h3 class="sub" data-i18n="fac.ac.t">에어컨</h3>
+    <ul class="list">
+      <li data-i18n="fac.ac">소파베드 방 바깥 창문은 에어컨 실외기 환기를 위해 열어 두세요. 에어컨을 쓰지 않는 계절에는 닫아 주세요.</li>
+    </ul>
+  </section>
+
+  <!-- ────────── 쓰레기 분리수거 ────────── -->
+  <section class="card" id="trash">
+    <h2 data-i18n="s.trash">🗑️ 쓰레기 분리수거</h2>
+    <p style="margin:0 0 12px;font-size:14.5px" data-i18n="trash.intro">한국은 분리배출 규정이 엄격하고, 잘못 배출하면 과태료가 부과될 수 있습니다. 번거롭더라도 꼭 나눠 주세요.</p>
+    <ul class="list">
+      <li data-i18n="trash.bags"><b>봉투 위치</b> 싱크대 하부장 또는 냉장고 오른쪽 서랍장에 있습니다.</li>
+      <li data-i18n="trash.general"><b>일반쓰레기</b> 지정 봉투에 담아 주세요.</li>
+      <li data-i18n="trash.recycle"><b>재활용</b> 분리한 뒤 비닐봉지째 묶어 주세요.</li>
+      <li data-i18n="trash.food"><b>음식물</b> 음식물 전용 봉투에 담아 주세요.</li>
+      <li data-i18n="trash.where"><b>모아 둘 곳</b> 체크아웃 시에는 숙소 안 주방 지정 공간에 모아 주시면 스태프가 정리합니다. <b>숙박 중 쓰레기통을 비우고 싶으신 경우</b>에는 숙소 공동현관을 나와 왼편 지정 장소를 이용하시면 됩니다.</li>
+    </ul>
+  </section>
+
+  <!-- ────────── 비상 연락처 ────────── -->
+  <section class="card" id="contact">
+    <h2 data-i18n="s.contact">☎️ 비상 연락처</h2>
+    <ul class="list">
+      <li data-i18n="contact.app"><b>숙박 중 문의·문제</b> 예약하신 앱의 메시지로 연락 주세요. 가장 빠르게 도와드릴 수 있습니다.</li>
+      <li data-i18n="contact.phone"><b>운영자 긴급 연락</b> <span class="tel">010-9397-1289</span> · 통화가 어려우면 문자를 남겨 주세요.</li>
+      <li data-i18n="contact.emergency"><b>긴급 전화</b> 화재·구급 119 · 경찰 112 · 응급의료 상담 1339</li>
+      <li data-i18n="contact.tour"><b>통역 안내</b> 관광 통역 안내 1330 (영어·일본어·중국어)</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <p data-i18n="contact.review">숙박이 좋으셨다면 예약하신 앱에 후기를 남겨 주세요. 큰 힘이 됩니다.</p>
+  <p data-i18n="foot.addr">바라스 잠실 · 서울 송파구 삼전로7길 17 101호 · 주식회사 아른스테이</p>
+  <p data-i18n="foot.note">이 페이지의 사진과 안내는 예고 없이 보완될 수 있습니다.</p>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var I18N = {
+    en: {
+      "brand.name": "Baras Jamsil",
+      "brand.sub": "Jamsil · 2 bedrooms",
+      "aria.lang": "Language",
+      "aria.nav": "Guide contents",
+      "aria.top": "Back to top",
+      "hero.eyebrow": "HOUSE GUIDE",
+      "hero.h1": "Welcome to Baras Jamsil",
+      "hero.lead": "A two-bedroom flat close to Jamsil Station, Lotte World and COEX. Everything you need from check-in to check-out is collected here.",
+      "meta.checkinout": "Check-in 16:00 · Check-out 11:00",
+      "meta.rooms": "2 bedrooms · up to 6 guests",
+      "meta.parking": "No parking in the building",
+      "s.checkin": "🕓 Check-in · Check-out",
+      "checkin.in": "<b>Check-in</b> from 4:00 PM. It is self check-in, and the door code is sent by message one hour before check-in.",
+      "checkin.out": "<b>Check-out</b> by 11:00 AM. Send us a message when you leave and our staff will come 15 minutes later.",
+      "checkin.extra": "<b>Early check-in · Late check-out · Luggage storage</b> are not possible: this is a single-unit flat with same-day cleaning and preparation from 11:00 to 15:00.",
+      "checkin.info": "Full arrival details and the address are sent at 10:00 AM on your check-in day, and the door code one hour before check-in.",
+      "checkin.alt.t": "If you need to store luggage",
+      "checkin.alt1": "Coin lockers inside Samjeon Station — 05:00 to 24:00, from 1,000 to 6,100 KRW for 2 to 4 hours depending on locker size and weekends",
+      "checkin.alt2": "TripEasy airport luggage delivery — send your bags to or from the airport.",
+      "checkin.tripeasy": "🧳 TripEasy baggage delivery",
+      "checkin.outlist.t": "Before you leave",
+      "checkin.out1": "Turn off all lights",
+      "checkin.out2": "Turn off the air conditioning",
+      "checkin.out3": "Leave the boiler on room-temperature mode",
+      "checkin.out4": "Leave rubbish in the kitchen area",
+      "checkin.out5": "Message us that you have checked out",
+      "s.directions": "📍 Getting here",
+      "dir.addr": "<b>Address</b> 101, 17 Samjeon-ro 7-gil, Songpa-gu, Seoul 05568, Korea",
+      "dir.floor": "<b>Floor</b> the 1st floor of the building: go through the shared entrance and up 6 to 7 steps to unit 101.",
+      "dir.parking": "<b>Parking</b> there is no parking in the building. Use the Saemaeul Market roadside public car park about 7 minutes away on foot (279 Jamsil-dong, Songpa-gu, Seoul), 3,000 KRW per hour; see the Moduui Juchajang app.",
+      "dir.map": "🗺️ Open in Google Maps",
+      "dir.route": "✈️ Directions from Incheon Airport",
+      "dir.airport.t": "From Incheon International Airport",
+      "dir.subway": "<b>Airport Railroad (about 1 h 50 min)</b> Incheon Airport T1 → alight at Gimpo Airport → transfer to Line 9 (towards Airport Market) → get off and change at Express Bus Terminal → Samjeon Station → 2 min walk",
+      "dir.bus": "<b>Airport limousine bus 6006 (about 1 h 45 min)</b> towards Mongchontoseong Station → alight at Jamsilsaenae Station → 14 min walk",
+      "dir.keta": "<b>For your arrival card (K-ETA)</b> address 101, 17 Samjeon-ro 7-gil, Songpa-gu, Seoul · postcode 05568 · phone <span class=\u0027tel\u0027>010-9397-1289</span>",
+      "dir.photo": "Building entrance and shared door",
+      "s.access": "🔑 Getting in",
+      "access.enter": "<b>Getting to the door</b> go through the shared entrance and up 6 to 7 steps; unit 101 is right there.",
+      "access.door": "<b>Door lock</b> enter the code on the keypad and the door opens.",
+      "access.slippers": "<b>Slippers</b> we do not provide indoor slippers; please use the outdoor slippers by the door.",
+      "access.code": "Door codes are not posted on this public page. They are sent by message one hour before your check-in time.",
+      "access.note": "This is a building shared with neighbours. Please keep footsteps and doors quiet late at night.",
+      "access.photo.entrance": "Shared entrance",
+      "s.wifi": "📶 Wi-Fi",
+      "wifi.ssid": "Network",
+      "wifi.pw": "Password",
+      "wifi.copy": "Copy",
+      "wifi.copied": "Copied",
+      "wifi.tip": "If the connection is weak, turn Wi-Fi off and on again. If it still fails, message us.",
+      "s.rules": "📌 House rules",
+      "rules.smoke": "<b>Strictly no smoking</b> the whole flat is non-smoking. The fire alarm is active.",
+      "rules.quiet": "<b>Quiet hours</b> please keep noise down after 10 PM for our neighbours.",
+      "rules.toilet": "<b>Toilet</b> please do not flush wipes, food or anything else. Any blockage or damage is settled at actual cost through Airbnb's Resolution Center.",
+      "rules.shoes": "<b>Indoor footwear</b> we do not provide indoor slippers; please use the outdoor slippers.",
+      "rules.bedding": "<b>Extra bedding</b> provided as standard for 5 or more guests; extra sets beyond that are charged.",
+      "rules.lost": "<b>Lost property</b> items left behind are discarded straight away if we cannot reach you, so please check once more before you leave.",
+      "rules.smokenote": "If smoking is detected, the flat has to be aired and cleaned before the next guests. A breach of the house rules may lead to the reservation being cancelled (immediate check-out), and action may be taken under Airbnb's policies. Thank you for respecting this.",
+      "rules.laundrytime": "<b>Washer and dryer</b> please avoid using them between 9 PM and 7 AM.",
+      "s.facilities": "🛠️ Facilities & appliances",
+      "fac.hotwater.t": "Hot water",
+      "fac.hotwater": "Turn the boiler on when you need hot water, and leave it on room-temperature mode when you check out.",
+      "fac.laundry.t": "Washer & dryer",
+      "fac.laundry": "They are on the balcony. Please take any bedding out of the dryer into the laundry basket before you use it.",
+      "fac.laundry.use": "Leave the washer door open after use to prevent smells and mould.",
+      "fac.sofa.t": "Sofa bed",
+      "fac.sofa.cond": "The sofa bed is used as a bed for reservations of 5 or more guests, and bedding is provided by default. For fewer than 5 guests, extra bedding is available at an additional charge.",
+      "fac.sofa": "The mattress cover, duvet and pillows are in the bedding box on the balcony. Always use the mattress cover.",
+      "fac.table": "A folding table and stools are in the sofa-bed room.",
+      "fac.ac.t": "Air conditioning",
+      "fac.ac": "Keep the window outside the sofa-bed room open so the outdoor unit can vent. Close it in seasons when the air conditioning is not used.",
+      "s.trash": "🗑️ Waste & recycling",
+      "trash.intro": "Recycling rules in Korea are strict, and putting waste out incorrectly can bring a fine. Please take a moment to sort it.",
+      "trash.bags": "<b>Bags</b> in the cupboard under the sink or in the drawer unit to the right of the fridge.",
+      "trash.general": "<b>General waste</b> in the designated bags.",
+      "trash.recycle": "<b>Recycling</b> separate it, then tie it up in a plastic bag.",
+      "trash.food": "<b>Food waste</b> in the food-waste bags.",
+      "trash.where": "<b>Where to leave it</b> at check-out, leave your sorted rubbish and recycling in the designated spot in the kitchen — our staff takes care of disposal. If you would like to empty the bins during your stay, the designated area is outside the shared entrance, on the left.",
+      "s.contact": "☎️ Contacts",
+      "contact.app": "<b>Questions or problems during your stay</b> message us in the app you booked with; that reaches us fastest.",
+      "contact.phone": "<b>Host, urgent</b> <span class=\u0027tel\u0027>010-9397-1289</span> · if we cannot answer, please leave a text message.",
+      "contact.emergency": "<b>Emergency numbers</b> fire and ambulance 119 · police 112 · medical advice 1339",
+      "contact.tour": "<b>Interpretation</b> Korea Travel Hotline 1330 (English, Japanese, Chinese)",
+      "contact.review": "If you enjoyed your stay, a review in the app you booked with means a lot to us.",
+      "foot.addr": "Baras Jamsil · 101, 17 Samjeon-ro 7-gil, Songpa-gu, Seoul · ARN STAY Corp.",
+      "foot.note": "Photos and details on this page may be updated without notice.",
+      "doc.title": "Baras Jamsil — House Guide",
+      "doc.desc": "Baras Jamsil, a two-bedroom flat in Jamsil: check-in and check-out, directions, door access, Wi-Fi, house rules, appliances, recycling and emergency contacts, in four languages."
+    },
+    ja: {
+      "brand.name": "バラス チャムシル",
+      "brand.sub": "チャムシル · 2ベッドルーム",
+      "aria.lang": "言語",
+      "aria.nav": "ご案内目次",
+      "aria.top": "ページ上部へ",
+      "hero.eyebrow": "ご利用案内",
+      "hero.h1": "バラス チャムシルへようこそ",
+      "hero.lead": "蚕室（チャムシル）駅・ロッテワールド・COEX に便利な2ベッドルームのアパート、バラス チャムシルです。チェックインからチェックアウトまでのご案内をまとめました。",
+      "meta.checkinout": "チェックイン 16:00・チェックアウト 11:00",
+      "meta.rooms": "2ベッドルーム・最大6名",
+      "meta.parking": "建物内駐車不可",
+      "s.checkin": "🕓 チェックイン・チェックアウト",
+      "checkin.in": "<b>チェックイン</b> 16:00以降です。セルフチェックインで、ドアロックの暗証番号はチェックイン1時間前にメッセージでお送りします。",
+      "checkin.out": "<b>チェックアウト</b> 11:00までです。ご出発の際にメッセージをいただければ、15分後にスタッフが伺います。",
+      "checkin.extra": "<b>アーリーチェックイン・レイトチェックアウト・館内での荷物預かり</b> はできません。1室のみの物件で、当日11:00〜15:00に清掃・準備を行います。",
+      "checkin.info": "宿の詳細と住所はチェックイン当日の10:00に、ドアロックの暗証番号はチェックイン1時間前にお送りします。",
+      "checkin.alt.t": "お荷物を預けたい場合",
+      "checkin.alt1": "三田（サムジョン）駅構内のコインロッカー — 05:00〜24:00、2〜4時間で1,000〜6,100ウォン（サイズ・週末により異なります）",
+      "checkin.alt2": "TripEasy 仁川空港への荷物配送サービス — 空港へ、または空港から荷物を送れます。",
+      "checkin.tripeasy": "🧳 TripEasy 荷物配送",
+      "checkin.outlist.t": "ご出発前にご確認ください",
+      "checkin.out1": "すべての照明を消す",
+      "checkin.out2": "エアコンの電源を切る",
+      "checkin.out3": "ボイラーは室温維持に設定する",
+      "checkin.out4": "ゴミはキッチンの指定場所にまとめる",
+      "checkin.out5": "ご出発のメッセージを送る",
+      "s.directions": "📍 アクセス",
+      "dir.addr": "<b>住所</b> ソウル特別市 松坡区 三田路7キル 17（チャムシル洞）101号・郵便番号 05568",
+      "dir.floor": "<b>階</b> 建物の1階です。共用玄関から階段6〜7段を上がると101号です。",
+      "dir.parking": "<b>駐車場</b> 建物内には駐車できません。徒歩約7分のセマウル市場路上公共駐車場（ソウル 松坡区 チャムシル洞 279）をご利用ください。1時間3,000ウォンで、「모두의 주차장」アプリで確認できます。",
+      "dir.map": "🗺️ Google マップで見る",
+      "dir.route": "✈️ 仁川空港からのルート",
+      "dir.airport.t": "仁川国際空港から",
+      "dir.subway": "<b>空港鉄道（約1時間50分）</b> 仁川空港第1ターミナル駅 → 金浦空港駅で下車 → 9号線に乗換（空港市場方面）→ 高速ターミナル駅で下車・乗換 → 三田（サムジョン）駅下車 → 徒歩2分",
+      "dir.bus": "<b>空港リムジン6006（約1時間45分）</b> 夢村土城駅方面 → チャムシルセネ駅下車 → 徒歩14分",
+      "dir.keta": "<b>入国申告（K-ETA）用</b> 住所 ソウル市 松坡区 三田路7キル 17, 101号・郵便番号 05568・連絡先 <span class=\u0027tel\u0027>010-9397-1289</span>",
+      "dir.photo": "建物入口と共用玄関",
+      "s.access": "🔑 入室方法",
+      "access.enter": "<b>お部屋まで</b> 共用玄関から階段6〜7段を上がると101号です。",
+      "access.door": "<b>ドアロック</b> キーパッドに暗証番号を入力すると開きます。",
+      "access.slippers": "<b>スリッパ</b> 室内用スリッパはありません。屋外用スリッパをご用意していますのでご使用ください。",
+      "access.code": "暗証番号はこの公開ページには掲載していません。チェックイン1時間前にメッセージでお知らせします。",
+      "access.note": "ご近所の方が住む建物です。夜遅くは足音やドアの音にお気をつけください。",
+      "access.photo.entrance": "共用玄関",
+      "s.wifi": "📶 Wi-Fi",
+      "wifi.ssid": "ネットワーク",
+      "wifi.pw": "パスワード",
+      "wifi.copy": "コピー",
+      "wifi.copied": "コピーしました",
+      "wifi.tip": "つながりにくい場合は Wi-Fi を切り、もう一度オンにしてください。それでもだめならメッセージでお知らせください。",
+      "s.rules": "📌 ご滞在ルール",
+      "rules.smoke": "<b>完全禁煙</b> 室内はすべて禁煙です。火災報知器が作動します。",
+      "rules.quiet": "<b>静かな時間</b> 22時以降はご近所へのご配慮をお願いします。",
+      "rules.toilet": "<b>トイレ</b> ウェットティッシュや食べ物などを流さないでください。詰まりや破損が生じた場合は、Airbnbの解決センターを通じて実費で清算します。",
+      "rules.shoes": "<b>室内履き</b> 室内用スリッパはありません。屋外用スリッパをご使用ください。",
+      "rules.bedding": "<b>追加寝具</b> 5名以上は標準でご用意します。それ以上の追加は別料金です。",
+      "rules.lost": "<b>忘れ物</b> ご連絡が取れない場合、置き忘れられた物はすぐに処分されます。ご出発前に今一度ご確認ください。",
+      "rules.smokenote": "喫煙が確認された場合は、次のゲストのためにすぐ換気・清掃が必要になります。宿泊ルール違反としてご予約がキャンセル（即時退室）となる場合があり、Airbnbのポリシーに基づく措置の対象となることがあります。ご協力をお願いします。",
+      "rules.laundrytime": "<b>洗濯機・乾燥機</b> 21時から翌朝7時まではご使用をお控えください。",
+      "s.facilities": "🛠️ 設備・家電の使い方",
+      "fac.hotwater.t": "お湯",
+      "fac.hotwater": "お湯を使うときはボイラーをオンにしてください。ご出発時は室温維持に設定してください。",
+      "fac.laundry.t": "洗濯機・乾燥機",
+      "fac.laundry": "バルコニーにあります。乾燥機の中に残っている寝具は洗濯かごに出してからご使用ください。",
+      "fac.laundry.use": "洗濯後は洗濯機のドアを開けておくと、においやカビの防止になります。",
+      "fac.sofa.t": "ソファベッド",
+      "fac.sofa.cond": "ソファベッドは5名以上のご予約でベッドとしてご利用いただき、寝具は基本提供です。5名未満で追加の寝具が必要な場合は別途料金がかかります。",
+      "fac.sofa": "ベランダの寝具入れにマットレスカバー・掛け布団・枕があります。必ずマットレスカバーを敷いてご使用ください。",
+      "fac.table": "ソファベッドの部屋には折りたたみテーブルとスツールがあります。",
+      "fac.ac.t": "エアコン",
+      "fac.ac": "ソファベッドの部屋の外側の窓は、室外機の換気のため開けておいてください。エアコンを使わない季節は閉めてください。",
+      "s.trash": "🗑️ ゴミの分別",
+      "trash.intro": "韓国は分別排出のルールが厳しく、正しく出さないと過料が科されることがあります。お手数ですが分けてください。",
+      "trash.bags": "<b>袋の場所</b> シンク下の収納、または冷蔵庫右側の引き出しにあります。",
+      "trash.general": "<b>一般ゴミ</b> 指定の袋に入れてください。",
+      "trash.recycle": "<b>リサイクル</b> 分けたあと、ビニール袋ごと縛ってください。",
+      "trash.food": "<b>生ゴミ</b> 生ゴミ専用袋に入れてください。",
+      "trash.where": "<b>まとめる場所</b> チェックアウト時は、分別したゴミとリサイクルを室内のキッチン指定スペースにまとめてください。整理・排出はスタッフが行います。<b>滞在中にゴミ箱を空けたい場合</b>は、共用玄関を出て左側の指定場所をご利用ください。",
+      "s.contact": "☎️ 緊急連絡先",
+      "contact.app": "<b>ご滞在中のご質問・トラブル</b> ご予約のアプリのメッセージでご連絡ください。一番早く対応できます。",
+      "contact.phone": "<b>運営者（緊急）</b> <span class=\u0027tel\u0027>010-9397-1289</span>・通話に出られない場合はメッセージをお残しください。",
+      "contact.emergency": "<b>緊急電話</b> 消防・救急 119・警察 112・医療相談 1339",
+      "contact.tour": "<b>通訳案内</b> 観光通訳案内 1330（英語・日本語・中国語）",
+      "contact.review": "ご満足いただけたら、ご予約のアプリにレビューをいただけると嬉しいです。",
+      "foot.addr": "バラス チャムシル・ソウル 松坡区 三田路7キル 17 101号・ARN STAY Corp.",
+      "foot.note": "本ページの写真・内容は予告なく更新される場合があります。",
+      "doc.title": "バラス チャムシル ご利用案内",
+      "doc.desc": "蚕室のバラス チャムシル（2ベッドルーム）：チェックイン・チェックアウト、アクセス、入室方法、Wi-Fi、ご滞在ルール、設備、ゴミ分別、緊急連絡先を4言語でご案内します。"
+    },
+    zh: {
+      "brand.name": "巴拉斯 蚕室",
+      "brand.sub": "蚕室 · 两居室",
+      "aria.lang": "语言",
+      "aria.nav": "指南目录",
+      "aria.top": "回到顶部",
+      "hero.eyebrow": "入住指南",
+      "hero.h1": "欢迎入住巴拉斯 蚕室",
+      "hero.lead": "靠近蚕室站、乐天世界与 COEX 的两居室公寓，巴拉斯 蚕室。以下是从入住到退房所需的全部说明。",
+      "meta.checkinout": "入住 16:00 · 退房 11:00",
+      "meta.rooms": "两居室 · 最多 6 人",
+      "meta.parking": "楼内不可停车",
+      "s.checkin": "🕓 入住 · 退房",
+      "checkin.in": "<b>入住</b> 下午 4:00 之后。采用自助入住，门锁密码会在入住前 1 小时通过消息发送。",
+      "checkin.out": "<b>退房</b> 上午 11:00 之前。离开时请留言告知，15 分钟后工作人员会上门。",
+      "checkin.extra": "<b>提前入住 · 延迟退房 · 房内行李寄存</b> 均无法安排：本房源为单一住户结构，当天 11:00–15:00 需清扫与整理。",
+      "checkin.info": "房源详细说明与地址会在入住当天上午 10:00 发送，门锁密码在入住前 1 小时发送。",
+      "checkin.alt.t": "需要寄存行李时",
+      "checkin.alt1": "三田站站内寄存柜 — 05:00–24:00，2–4 小时基本费用 1,000–6,100 韩元（按尺寸及是否周末而不同）",
+      "checkin.alt2": "TripEasy 仁川机场行李配送 — 可将行李送至机场或从机场取回。",
+      "checkin.tripeasy": "🧳 TripEasy 行李配送",
+      "checkin.outlist.t": "退房前请确认",
+      "checkin.out1": "关闭全部照明",
+      "checkin.out2": "关闭空调电源",
+      "checkin.out3": "锅炉调至维持室温模式",
+      "checkin.out4": "垃圾集中到厨房指定位置",
+      "checkin.out5": "发送退房留言",
+      "s.directions": "📍 交通",
+      "dir.addr": "<b>地址</b> 首尔特别市 松坡区 三田路7街 17（蚕室洞）101 号 · 邮编 05568",
+      "dir.floor": "<b>楼层</b> 位于建筑 1 层。从共用玄关上来 6–7 级台阶即是 101 号。",
+      "dir.parking": "<b>停车</b> 楼内不可停车。请使用步行约 7 分钟的新村市场路边公共停车场（首尔松坡区蚕室洞 279），每小时 3,000 韩元，可在「모두의 주차장」App 查询。",
+      "dir.map": "🗺️ 在 Google 地图中查看",
+      "dir.route": "✈️ 从仁川机场出发的路线",
+      "dir.airport.t": "从仁川国际机场出发",
+      "dir.subway": "<b>机场铁路（约 1 小时 50 分）</b> 仁川机场 1 号航站楼站 → 金浦机场站下车 → 换乘 9 号线（机场市场方向）→ 高速巴士客运站站下车后再乘 9 号线 → 三田站下车 → 步行 2 分钟",
+      "dir.bus": "<b>机场大巴 6006（约 1 小时 45 分）</b> 梦村土城站方向 → 蚕室新内站下车 → 步行 14 分钟",
+      "dir.keta": "<b>入境申报（K-ETA）信息</b> 地址 首尔市松坡区三田路7街 17, 101 号 · 邮编 05568 · 电话 <span class=\u0027tel\u0027>010-9397-1289</span>",
+      "dir.photo": "建筑入口与共用玄关",
+      "s.access": "🔑 门禁与进入",
+      "access.enter": "<b>前往房间</b> 经过共用玄关，上 6–7 级台阶即是 101 号。",
+      "access.door": "<b>门锁</b> 在键盘上输入密码即可开门。",
+      "access.slippers": "<b>拖鞋</b> 房内不提供室内拖鞋，门外备有室外拖鞋，请使用。",
+      "access.code": "门锁密码不会公开在本页面上，会在入住前 1 小时通过消息单独发送给您。",
+      "access.note": "本建筑有其他住户同住，深夜请留意脚步声与关门声。",
+      "access.photo.entrance": "共用玄关",
+      "s.wifi": "📶 Wi-Fi",
+      "wifi.ssid": "网络",
+      "wifi.pw": "密码",
+      "wifi.copy": "复制",
+      "wifi.copied": "已复制",
+      "wifi.tip": "连接不畅时，请关闭 Wi-Fi 后重新开启。仍然无法连接请留言告知。",
+      "s.rules": "📌 入住须知",
+      "rules.smoke": "<b>绝对禁烟</b> 室内全部禁烟，火灾报警器已启用。",
+      "rules.quiet": "<b>安静时段</b> 晚上 10 点后请为邻居保持安静。",
+      "rules.toilet": "<b>马桶</b> 请勿将湿巾、食物等异物丢入马桶。发生堵塞或损坏时，将通过 Airbnb 调解中心按实际费用结算。",
+      "rules.shoes": "<b>室内鞋</b> 不提供室内拖鞋，请使用室外拖鞋。",
+      "rules.bedding": "<b>加床品</b> 5 人以上按标准提供，额外增加需另付费用。",
+      "rules.lost": "<b>遗失物品</b> 退房后遗留的物品若无法联系到您，将立即处理，离开前请再确认一次。",
+      "rules.smokenote": "若确认吸烟，需立即通风清洁以便接待下一位客人。违反住宿规则可能导致预订被取消（立即退房），并可能依据 Airbnb 政策处理，请务必遵守。",
+      "rules.laundrytime": "<b>洗衣机与烘干机</b> 晚上 9 点至次日上午 7 点请勿使用。",
+      "s.facilities": "🛠️ 设施与家电",
+      "fac.hotwater.t": "热水",
+      "fac.hotwater": "需要热水时请开启锅炉。退房时请将锅炉调至维持室温模式。",
+      "fac.laundry.t": "洗衣机 · 烘干机",
+      "fac.laundry": "位于阳台。使用前请将烘干机内残留的床上用品取出放入洗衣篮。",
+      "fac.laundry.use": "使用后请将洗衣机门打开，可防止异味与发霉。",
+      "fac.sofa.t": "沙发床",
+      "fac.sofa.cond": "5位及以上预订可将沙发床作为床使用，床品默认提供。5位以下如需额外床品将另行收费。",
+      "fac.sofa": "床垫罩、被子和枕头放在阳台的床品收纳箱里，使用时请务必铺上床垫罩。",
+      "fac.table": "沙发床房间备有折叠桌和凳子。",
+      "fac.ac.t": "空调",
+      "fac.ac": "沙发床房间外侧的窗户请保持打开，以便空调室外机通风；不使用空调的季节请关上。",
+      "s.trash": "🗑️ 垃圾分类",
+      "trash.intro": "韩国的垃圾分类规定很严格，投放不当可能被罚款，麻烦您务必分开处理。",
+      "trash.bags": "<b>垃圾袋位置</b> 水槽下方柜子或冰箱右侧抽屉。",
+      "trash.general": "<b>一般垃圾</b> 请装入指定垃圾袋。",
+      "trash.recycle": "<b>可回收物</b> 分类后连塑料袋一起捆好。",
+      "trash.food": "<b>厨余垃圾</b> 请装入厨余专用袋。",
+      "trash.where": "<b>集中放置处</b> 退房时请将分好的垃圾和可回收物集中在室内厨房指定位置，由工作人员整理。<b>住宿期间如需清空垃圾桶</b>，请出共用玄关后使用左侧的指定地点。",
+      "s.contact": "☎️ 紧急联络",
+      "contact.app": "<b>入住期间的咨询与问题</b> 请通过预订所用 App 的消息联系我们，这是最快的联系方式。",
+      "contact.phone": "<b>房东（紧急）</b> <span class=\u0027tel\u0027>010-9397-1289</span> · 如未接听，请留下短信。",
+      "contact.emergency": "<b>紧急电话</b> 消防与急救 119 · 警察 112 · 医疗咨询 1339",
+      "contact.tour": "<b>翻译服务</b> 旅游翻译热线 1330（支持英语、日语、中文）",
+      "contact.review": "如果住得满意，欢迎在预订所用 App 留下评价，对我们帮助很大。",
+      "foot.addr": "巴拉斯 蚕室 · 首尔松坡区三田路7街 17 101 号 · ARN STAY Corp.",
+      "foot.note": "本页照片与内容可能随时更新，恕不另行通知。",
+      "doc.title": "巴拉斯 蚕室 入住指南",
+      "doc.desc": "蚕室巴拉斯（两居室）：入住与退房、交通、门禁、Wi-Fi、入住须知、设施使用、垃圾分类与紧急联络，四种语言说明。"
+    }
+  };
+
+  var LANGS = ["ko","en","ja","zh"];
+  var LANG_ATTR = {ko:"ko", en:"en", ja:"ja", zh:"zh-CN"};
+  var koStore = new Map();
+  var koAriaStore = new Map();
+  var koTitle = document.title;
+  var descEl = document.querySelector('meta[name="description"]');
+  var koDesc = descEl ? descEl.getAttribute("content") : "";
+  var current = "ko";
+
+  function nodes(sel){ return Array.prototype.slice.call(document.querySelectorAll(sel)); }
+
+  nodes("[data-i18n]").forEach(function(el){ koStore.set(el, el.innerHTML); });
+  nodes("[data-i18n-aria]").forEach(function(el){ koAriaStore.set(el, el.getAttribute("data-ko-aria") || ""); });
+
+  function tr(lang, key){
+    if (lang === "ko") return null;
+    var pack = I18N[lang];
+    if (!pack) return null;
+    return Object.prototype.hasOwnProperty.call(pack, key) ? pack[key] : null;
+  }
+
+  function applyLang(lang){
+    if (LANGS.indexOf(lang) === -1) lang = "ko";
+    current = lang;
+    document.documentElement.setAttribute("lang", LANG_ATTR[lang]);
+
+    nodes("[data-i18n]").forEach(function(el){
+      var key = el.getAttribute("data-i18n");
+      var fallback = koStore.has(el) ? koStore.get(el) : el.innerHTML;
+      var val = tr(lang, key);
+      el.innerHTML = (val === null) ? fallback : val;
+    });
+
+    nodes("[data-i18n-aria]").forEach(function(el){
+      var key = el.getAttribute("data-i18n-aria");
+      var base = koAriaStore.get(el) || "";
+      var val = tr(lang, key);
+      el.setAttribute("aria-label", (val === null) ? base : val);
+      if (el.id === "toTop") el.setAttribute("title", (val === null) ? base : val);
+    });
+
+    document.title = tr(lang, "doc.title") || koTitle;
+    if (descEl) descEl.setAttribute("content", tr(lang, "doc.desc") || koDesc);
+
+    nodes("[data-lang]").forEach(function(a){
+      var on = a.getAttribute("data-lang") === lang;
+      a.classList.toggle("active", on);
+      if (on) a.setAttribute("aria-current", "true");
+      else a.removeAttribute("aria-current");
+    });
+
+    try {
+      var u = new URL(window.location.href);
+      u.searchParams.set("lang", lang);
+      history.replaceState(null, "", u.toString());
+    } catch (e) { /* file:// 등에서 실패해도 화면 전환은 유지 */ }
+  }
+
+  nodes("[data-lang]").forEach(function(a){
+    a.addEventListener("click", function(ev){
+      ev.preventDefault();
+      applyLang(a.getAttribute("data-lang"));
+    });
+  });
+
+  /* 현재 보이는 섹션의 목차 칩 강조 */
+  var chips = nodes(".chip");
+  var cards = nodes("main .card");
+  var ticking = false;
+
+  function syncChips(){
+    ticking = false;
+    var line = 130;
+    var activeId = null;
+    cards.forEach(function(c){
+      if (c.getBoundingClientRect().top <= line) activeId = c.id;
+    });
+    if (cards.length && window.scrollY < 60) activeId = null;
+    if (!activeId && cards.length && window.scrollY + window.innerHeight >= document.body.scrollHeight - 8){
+      activeId = cards[cards.length - 1].id;
+    }
+    chips.forEach(function(chip){
+      var on = chip.getAttribute("href") === "#" + activeId;
+      chip.classList.toggle("active", on);
+      if (on){
+        var box = chip.parentNode;
+        var boxRect = box.getBoundingClientRect();
+        var chipRect = chip.getBoundingClientRect();
+        var delta = (chipRect.left - boxRect.left) - (boxRect.width - chipRect.width) / 2;
+        if (Math.abs(delta) > 40) box.scrollTo({left: box.scrollLeft + delta, behavior: "smooth"});
+      }
+    });
+  }
+
+  window.addEventListener("scroll", function(){
+    if (!ticking){ ticking = true; window.requestAnimationFrame(syncChips); }
+  }, {passive: true});
+
+  /* TOP 버튼 — 오른쪽 중간에 머물며 스크롤을 따라 부드럽게 움직입니다 */
+  var toTop = document.getElementById("toTop");
+  var toTopReduce = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  var toTopLastY = window.scrollY || 0;
+  var toTopDrift = 0, toTopTarget = 0, toTopRaf = null;
+
+  function paintDrift(){
+    toTop.style.transform = toTopDrift ? "translateY(" + toTopDrift.toFixed(2) + "px)" : "";
+  }
+  function driftFrame(){
+    toTopDrift += (toTopTarget - toTopDrift) * 0.18;
+    toTopTarget *= 0.86;
+    if (Math.abs(toTopTarget) < 0.06 && Math.abs(toTopDrift) < 0.06){
+      toTopDrift = 0; toTopTarget = 0; toTopRaf = null; paintDrift(); return;
+    }
+    paintDrift();
+    toTopRaf = window.requestAnimationFrame(driftFrame);
+  }
+  function nudgeDrift(delta){
+    if (toTopReduce || !delta) return;
+    toTopTarget = Math.max(-8, Math.min(8, toTopTarget + (-delta * 0.3)));
+    if (!toTopRaf) toTopRaf = window.requestAnimationFrame(driftFrame);
+  }
+  function syncTopBtn(){
+    toTop.classList.toggle("show", window.scrollY > 420);
+  }
+  window.addEventListener("scroll", function(){
+    var y = window.scrollY;
+    nudgeDrift(y - toTopLastY);
+    toTopLastY = y;
+    syncTopBtn();
+  }, {passive: true});
+  toTop.addEventListener("click", function(){
+    toTopDrift = 0; toTopTarget = 0; paintDrift();
+    window.scrollTo({top: 0, behavior: toTopReduce ? "auto" : "smooth"});
+  });
+
+  /* 와이파이 비밀번호 복사 */
+  function legacyCopy(text){
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.top = "-1000px";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+
+  function copyText(text){
+    return new Promise(function(resolve){
+      if (navigator.clipboard && window.isSecureContext){
+        navigator.clipboard.writeText(text).then(function(){ resolve(true); }, function(){ resolve(legacyCopy(text)); });
+      } else {
+        resolve(legacyCopy(text));
+      }
+    });
+  }
+
+  nodes("[data-copy]").forEach(function(btn){
+    var resetTimer = null;
+    btn.addEventListener("click", function(){
+      var text = btn.getAttribute("data-copy") || "";
+      copyText(text).then(function(ok){
+        var doneKey = btn.getAttribute("data-done-i18n");
+        var original = koStore.has(btn) ? koStore.get(btn) : btn.textContent;
+        var doneText = tr(current, doneKey) || "복사됨";
+        btn.textContent = ok ? doneText : (tr(current, "wifi.copy") || "복사");
+        btn.classList.toggle("copied", ok);
+        if (resetTimer) clearTimeout(resetTimer);
+        resetTimer = setTimeout(function(){
+          btn.innerHTML = tr(current, btn.getAttribute("data-i18n")) || original;
+          btn.classList.remove("copied");
+        }, 1800);
+      });
+    });
+  });
+
+  var params = new URLSearchParams(window.location.search);
+  applyLang(((params.get("lang") || "ko").toLowerCase()).slice(0, 2));
+  syncTopBtn();
+  syncChips();
+})();
+</script>
+</body>
+</html>
