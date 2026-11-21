@@ -24,7 +24,7 @@
 }
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--body);font-size:16px;line-height:1.66;-webkit-font-smoothing:antialiased;
+body{margin:0;background:var(--bg);color:var(--body);font-size:16px;line-height:1.66;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word;
   font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Hiragino Kaku Gothic ProN","Noto Sans KR","Noto Sans JP","PingFang SC","Microsoft YaHei",system-ui,sans-serif}
 h1,h2,p,ul{margin:0}
 a{color:inherit}
@@ -62,7 +62,7 @@ img{max-width:100%}
 .stay{--accent:var(--arn);display:flex;flex-direction:column}
 .stay.jamsil{--accent:var(--jamsil)}
 .stay figure{margin:0;border-radius:var(--r);overflow:hidden;background:#e9e5de}
-.stay figure img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;transition:transform .55s cubic-bezier(.2,.7,.3,1)}
+.stay figure img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;transition:transform .55s cubic-bezier(.2,.7,.3,1)}
 .stay:hover figure img{transform:scale(1.015)}
 .stay h2{margin-top:24px;font-size:clamp(21px,2vw,26px);font-weight:600;letter-spacing:-.02em;color:var(--ink);display:flex;align-items:center;gap:10px;line-height:1.25}
 .dot{flex:0 0 auto;width:9px;height:9px;border-radius:50%;background:var(--accent)}
