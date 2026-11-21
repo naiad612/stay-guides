@@ -114,6 +114,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
 .stage-t{display:block;font-size:15.5px;font-weight:700;color:var(--ink);line-height:1.35}
 .stage-s{display:block;margin-top:3px;font-size:12.5px;color:var(--muted);line-height:1.45}
 .stage-arrow{flex:0 0 auto;margin-left:auto;color:#b9ad98;font-size:15px}
+.stage:last-child:nth-child(odd){grid-column:1/-1}
 
 /* sections */
 .card{
@@ -197,6 +198,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
 }
 .fold[open] > summary::after{content:"–"}
 .fold > summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.fold > summary::marker,.faq summary::marker{content:"";color:transparent;font-size:0}
 .fold-body{padding:0 2px 6px}
 .fold-body > .list:first-child{margin-top:4px}
 
@@ -290,6 +292,10 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
   }
 }
 
+@media(min-width:900px){
+  .nav{position:static;background:transparent;border-bottom:0;-webkit-backdrop-filter:none;backdrop-filter:none}
+  .nav-in{flex-wrap:wrap;overflow:visible;padding:10px 18px 6px}
+}
 @media(max-width:560px){
   .header-in{padding:9px 16px}
   .nav-in{padding:8px 16px}
@@ -352,7 +358,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
     <a class="chip" href="#rules" data-i18n="s.rules">📌 규칙 및 주의사항</a>
     <a class="chip" href="#facilities" data-i18n="s.facilities">🛠️ 시설·가전 사용법</a>
     <a class="chip" href="#trash" data-i18n="s.trash">🗑️ 쓰레기 분리수거</a>
-    <a class="chip" href="#eat" data-i18n="s.eat">🍽️ 맛집 & 체험</a>
+    <a class="chip" href="#eat" data-i18n="s.eat">🍴 맛집 & 체험</a>
     <a class="chip" href="#faq" data-i18n="s.faq">💬 자주 묻는 질문</a>
     <a class="chip" href="#contact" data-i18n="s.contact">☎️ 비상 연락처</a>
   </div>
@@ -392,7 +398,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
         <span class="stage-arrow" aria-hidden="true">→</span>
       </a>
       <a class="stage" href="#eat">
-        <span class="stage-ico" aria-hidden="true">🍽️</span>
+        <span class="stage-ico" aria-hidden="true">🍴</span>
         <span>
           <span class="stage-t" data-i18n="stage.3.t">주변에 갈 곳</span>
           <span class="stage-s" data-i18n="stage.3.s">걸어서 가는 맛집 · 체험</span>
@@ -641,7 +647,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
 
 <!-- ────────── 맛집 & 체험 ────────── -->
   <section class="card" id="eat">
-    <h2 data-i18n="s.eat">🍽️ 맛집 & 체험</h2>
+    <h2 data-i18n="s.eat">🍴 맛집 & 체험</h2>
     <p data-i18n="eat.intro">바로 인근 지인 숙소(Moment Seoul)의 안내를 그대로 옮겨 왔습니다. 걸어서 가는 삼전동 골목부터 송리단길·석촌호수·롯데월드몰까지, 도착한 날 바로 쓸 수 있는 목록입니다.</p>
     <p data-i18n="eat.note">이동 시간과 영업시간은 인근 숙소 기준으로 정리된 안내입니다. 문을 닫았거나 시간이 바뀌었을 수 있으니, 출발 전에 지도 앱으로 한 번 확인해 주세요.</p>
     <div id="eatBody"></div>
@@ -1169,7 +1175,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
       "stage.3.s": "Places to eat within walking distance",
       "stage.4.t": "Need help",
       "stage.4.s": "Contact · rules · rubbish",
-      "s.eat": "🍽️ Food & experiences",
+      "s.eat": "🍴 Food & experiences",
       "s.faq": "💬 FAQ",
       "eat.intro": "Copied over from the guide of a neighbouring house (Moment Seoul). From the Samjeon-dong alleys you can walk to, to Songnidan-gil, Seokchon Lake and Lotte World Mall — a list you can use on the day you arrive.",
       "eat.note": "Walking times and hours come from that nearby house. A place may have closed or changed its hours, so please check a map app before you set out.",
@@ -1314,7 +1320,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
       "stage.3.s": "歩いて行けるお店・体験",
       "stage.4.t": "困ったとき",
       "stage.4.s": "連絡先・ルール・ゴミ",
-      "s.eat": "🍽️ グルメ＆体験",
+      "s.eat": "🍴 グルメ＆体験",
       "s.faq": "💬 よくある質問",
       "eat.intro": "すぐ近くの知人宅（Moment Seoul）の案内をそのまま移しました。歩いて行ける三田洞の路地から、ソンリダンキル・石村湖・ロッテワールドモールまで、到着日から使えるリストです。",
       "eat.note": "移動時間と営業時間は近隣の宿を基準にまとめた案内です。閉店や時間変更があるかもしれないので、出発前に地図アプリでご確認ください。",
@@ -1459,7 +1465,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
       "stage.3.s": "步行可达的美食与体验",
       "stage.4.t": "需要帮助时",
       "stage.4.s": "联系方式 · 规则 · 垃圾分类",
-      "s.eat": "🍽️ 美食与体验",
+      "s.eat": "🍴 美食与体验",
       "s.faq": "💬 常见问题",
       "eat.intro": "内容照附近朋友家（Moment Seoul）的指南搬来。从步行可达的三田洞小巷，到松理团路、石村湖和乐天世界购物中心，是到达当天就能用的清单。",
       "eat.note": "移动时间和营业时间是按附近住宿整理的。店家可能已关门或改了时间，出发前请用地图App确认一下。",

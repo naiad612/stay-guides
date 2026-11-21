@@ -111,6 +111,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
 .stage-t{display:block;font-size:15.5px;font-weight:700;color:var(--ink);line-height:1.35}
 .stage-s{display:block;margin-top:3px;font-size:12.5px;color:var(--muted);line-height:1.45}
 .stage-arrow{flex:0 0 auto;margin-left:auto;color:#b9ad98;font-size:15px}
+.stage:last-child:nth-child(odd){grid-column:1/-1}
 
 /* sections */
 .card{
@@ -194,6 +195,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
 }
 .fold[open] > summary::after{content:"–"}
 .fold > summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.fold > summary::marker,.faq summary::marker{content:"";color:transparent;font-size:0}
 .fold-body{padding:0 2px 6px}
 .fold-body > .list:first-child{margin-top:4px}
 
@@ -287,6 +289,10 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
   }
 }
 
+@media(min-width:900px){
+  .nav{position:static;background:transparent;border-bottom:0;-webkit-backdrop-filter:none;backdrop-filter:none}
+  .nav-in{flex-wrap:wrap;overflow:visible;padding:10px 18px 6px}
+}
 @media(max-width:560px){
   .header-in{padding:9px 16px}
   .nav-in{padding:8px 16px}
@@ -349,7 +355,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
     <a class="chip" href="#house" data-i18n="s.house">🏠 집 사용 안내</a>
     <a class="chip" href="#meeting" data-i18n="s.meeting">💼 회의실</a>
     <a class="chip" href="#garden" data-i18n="s.garden">🌿 정원·웰컴 선물</a>
-    <a class="chip" href="#guasha" data-i18n="s.guasha">🪷 괄사 사용법</a>
+    <a class="chip" href="#guasha" data-i18n="s.guasha">💆 괄사 사용법</a>
     <a class="chip" href="#rules" data-i18n="s.rules">📌 규칙 및 안전</a>
     <a class="chip" href="#trash" data-i18n="s.trash">🗑️ 분리수거</a>
     <a class="chip" href="#area" data-i18n="s.area">☕ 주변 정보</a>
@@ -712,13 +718,13 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
       <figcaption data-i18n="gift.photo">웰컴 선물</figcaption>
     </figure>
     <div class="links">
-      <a class="linkbtn solid" href="#guasha" data-i18n="gs.jump">🪷 괄사 사용법 바로 보기</a>
+      <a class="linkbtn solid" href="#guasha" data-i18n="gs.jump">💆 괄사 사용법 바로 보기</a>
     </div>
   </section>
 
   <!-- ────────── 괄사 사용법 ────────── -->
   <section class="card" id="guasha">
-    <h2 data-i18n="s.guasha">🪷 괄사 사용법</h2>
+    <h2 data-i18n="s.guasha">💆 괄사 사용법</h2>
     <p data-i18n="gs.intro">웰컴 선물로 드린 괄사는 얼굴과 몸을 가볍게 마사지하는 도구입니다. 힘을 빼고, 크림이나 오일을 충분히 바른 뒤 천천히 사용해 주세요. 아래 내용은 원본 노션 가이드(Gua Sha Welcome Guide)를 그대로 옮긴 것입니다.</p>
 
     <details class="fold" open>
@@ -1194,10 +1200,10 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
       "stage.2.s": "Wi-Fi · kitchen · meeting room · garden",
       "stage.3.t": "Need help",
       "stage.3.s": "Contact · house rules · rubbish",
-      "s.guasha": "🪷 Gua Sha guide",
+      "s.guasha": "💆 Gua Sha guide",
       "s.faq": "💬 FAQ",
       "house.lead": "Tap kitchen, living room, lights or boiler to open it.",
-      "gs.jump": "🪷 Open the Gua Sha guide",
+      "gs.jump": "💆 Open the Gua Sha guide",
       "gs.intro": "The gua sha tool is our welcome gift — a gentle massage tool for the face and body. Keep the pressure light and use plenty of cream or oil. This page follows the original Notion guide (Gua Sha Welcome Guide).",
       "gs.1.t": "1. Check your skin's reaction first",
       "gs.1.p": "If three or more of the five below apply to you, your skin may be easily irritated. In that case use even less pressure and keep it short.",
@@ -1453,10 +1459,10 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
       "stage.2.s": "Wi-Fi・キッチン・会議室・庭",
       "stage.3.t": "困ったとき",
       "stage.3.s": "連絡先・ルール・ゴミ",
-      "s.guasha": "🪷 かっさの使い方",
+      "s.guasha": "💆 かっさの使い方",
       "s.faq": "💬 よくある質問",
       "house.lead": "キッチン・リビング・照明・ボイラーをタップすると開きます。",
-      "gs.jump": "🪷 かっさの使い方を見る",
+      "gs.jump": "💆 かっさの使い方を見る",
       "gs.intro": "かっさはウェルカムギフトとしてお渡ししている、顔と体をやさしくマッサージする道具です。力を抜いて、クリームかオイルを十分に塗ってからゆっくりお使いください。この内容は元のNotionガイド（Gua Sha Welcome Guide）をそのまま移したものです。",
       "gs.1.t": "1. まず肌の反応を確認",
       "gs.1.p": "次の5つのうち3つ以上当てはまる方は、肌が刺激に敏感かもしれません。その場合はさらに力を抜いて、短い時間にしてください。",
@@ -1712,10 +1718,10 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
       "stage.2.s": "Wi-Fi · 厨房 · 会议室 · 花园",
       "stage.3.t": "需要帮助时",
       "stage.3.s": "联系方式 · 规则 · 垃圾分类",
-      "s.guasha": "🪷 刮痧板用法",
+      "s.guasha": "💆 刮痧板用法",
       "s.faq": "💬 常见问题",
       "house.lead": "点击厨房、客厅、照明或锅炉即可展开。",
-      "gs.jump": "🪷 查看刮痧板用法",
+      "gs.jump": "💆 查看刮痧板用法",
       "gs.intro": "刮痧板是送给您的欢迎礼物，用来轻轻按摩面部和身体。请放松力度，充分涂抹面霜或精油后慢慢使用。以下内容照原 Notion 指南（Gua Sha Welcome Guide）移录。",
       "gs.1.t": "1. 先确认皮肤反应",
       "gs.1.p": "下面5项中有3项以上符合，说明皮肤可能对刺激比较敏感。那就把力度再放轻、时间缩短。",
