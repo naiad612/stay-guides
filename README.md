@@ -62,6 +62,7 @@ T("한국어", "English", "日本語", "中文")
 - `app.js` — 화면 그리기·검색·사진 크게 보기·언어 전환·날씨.
 - `content_arn.py` · `content_jamsil.py` — 내용(네 언어). 기존 페이지에서 뽑아 둔 번역 사전(`_ref/`)을 그대로 쓰는 부분이 있어 문구가 서로 어긋나지 않습니다.
 - `build_v2.py` — 위 셋을 합쳐 `arn/index.html`·`jamsil/index.html`을 만듭니다.
+- `_ref/` — 다시 만들 때 쓰는 원본 자료: `momentseoul.html`(틀을 가져온 지인 사이트 저장본), 기존 페이지에서 뽑은 번역 사전(`i18n-*.json`, `ko-*.json`), 잠실 맛집·코스·체험 데이터(`jamsil-data.json`).
 - `check_render.py` — (개발용) 브라우저로 열어 화면·언어를 확인합니다. 이 작업 환경에서는 chromium 라이브러리가 없어 실행되지 않았고, 실제 확인은 배포 주소에서 했습니다.
 
 ```sh
