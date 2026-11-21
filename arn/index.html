@@ -1049,19 +1049,19 @@ var CONFIG = {
    [
     "images/bath-2f.jpg",
     {
-     "ko": "2층 욕실",
-     "en": "2F bathroom",
-     "ja": "2階の浴室",
-     "zh": "2楼浴室"
-    }
-   ],
-   [
-    "images/bath-2f.jpg",
-    {
      "ko": "2층 욕실장 · 수건",
      "en": "Towels in the 2F bathroom cabinet",
      "ja": "2階浴室のタオル",
      "zh": "2楼浴室的毛巾"
+    }
+   ],
+   [
+    "images/garden-c.jpg",
+    {
+     "ko": "저녁의 정원과 테라스",
+     "en": "The garden and terrace in the evening",
+     "ja": "夕暮れの庭とテラス",
+     "zh": "傍晚的庭院与露台"
     }
    ],
    [
@@ -5071,7 +5071,8 @@ var CONFIG = {
    "tab": "home",
    "blocks": [
     {
-     "type": "address"
+     "type": "address",
+     "noTaxi": true
     },
     {
      "type": "heading",
@@ -6274,7 +6275,7 @@ var CONFIG = {
       add(f, el("h2", "sub-heading", b.text), !isEmpty(b.sub) ? el("p", "sub-heading-sub", b.sub) : null);
       return f;
     },
-    address: function () {
+    address: function (b) {
       var c = el("div", "block card");
       add(c, el("p", "card-label", U.addressLabel), el("p", "big-value", C.address), !isEmpty(C.addressOld) ? el("p", "card-small", C.addressOld) : null);
       if (!isEmpty(U.addressNote)) { add(c, el("p", "card-small", U.addressNote)); }
@@ -6285,8 +6286,11 @@ var CONFIG = {
         linkBtn(U.naverMap, naverUrl(String(C.address || "")), "outline", true),
         linkBtn(U.googleMap, "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(String(C.address || "")), "outline", true));
       add(c, row);
-      var tx = goLink("btn uber", "taxi"); tx.appendChild(T(U.taxiButton));
-      return add(c, tx);
+      if (!b.noTaxi) {
+        var tx = goLink("btn uber", "taxi"); tx.appendChild(T(U.taxiButton));
+        add(c, tx);
+      }
+      return c;
     },
     uber: function (b) {
       var c = el("div", "block card");
