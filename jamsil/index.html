@@ -10,7 +10,10 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%230d8a7f'/%3E%3Ctext x='16' y='22' font-family='sans-serif' font-size='16' font-weight='bold' fill='white' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E">
 <!--
   바라스 잠실 이용안내 · 단일 HTML 파일 (외부 파일 의존 없음)
-  ─ 사진은 images/ 폴더에 있습니다 (entrance.jpg 건물 전경 · entrance-door.jpg 공동현관 근접).
+  ─ 사진은 images/ 폴더에 있습니다.
+    건물·공동현관: entrance.jpg, entrance-door.jpg (2026-11-15)
+    실내: bedroom-1a/bedroom-1d 침실 1 · sofabed·sofa·sofabed-room 침실 2 · dining 식사 공간
+          kitchen·kitchen-2 주방 · bathroom 욕실 · laundry 베란다 세탁기·건조기 · hallway 복도 (2026-11-22 에어비앤비 리스닝 사진)
     사진을 바꾸려면 같은 이름으로 파일만 교체하면 됩니다.
   ─ 도어락 비밀번호는 이 페이지에 넣지 않습니다(공개 URL). 체크인 당일 메시지로 안내.
 -->
@@ -163,6 +166,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
 
 <nav class="nav" aria-label="안내 목차" data-i18n-aria="aria.nav" data-ko-aria="안내 목차">
   <div class="nav-in">
+    <a class="chip" href="#spaces" data-i18n="s.spaces">🏠 숙소 공간</a>
     <a class="chip" href="#checkin" data-i18n="s.checkin">🕓 체크인 · 체크아웃</a>
     <a class="chip" href="#directions" data-i18n="s.directions">📍 오시는 길</a>
     <a class="chip" href="#access" data-i18n="s.access">🔑 출입 방법</a>
@@ -186,6 +190,38 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
       <span data-i18n="meta.parking">건물 내 주차 불가</span>
     </div>
   </div>
+
+  <!-- ────────── 숙소 공간 (실제 사진) ────────── -->
+  <section class="card" id="spaces">
+    <h2 data-i18n="s.spaces">🏠 숙소 공간</h2>
+    <p style="margin:0;font-size:14.5px" data-i18n="spaces.intro">사진은 지금 머무시는 그대로입니다. 방 배치와 가구는 사진과 같고, 소파베드는 5인 이상 예약 시 침대로 준비합니다.</p>
+    <div class="photos two">
+      <figure class="photo">
+        <img src="images/bedroom-1a.jpg" width="1200" height="899" alt="침실 1 — 퀸베드 두 개" loading="lazy" decoding="async">
+        <figcaption data-i18n="spaces.bed1">침실 1 · 퀸베드 2개</figcaption>
+      </figure>
+      <figure class="photo">
+        <img src="images/sofabed.jpg" width="1200" height="899" alt="침실 2 — 소파베드를 펼친 모습" loading="lazy" decoding="async">
+        <figcaption data-i18n="spaces.bed2">침실 2 · 소파베드</figcaption>
+      </figure>
+      <figure class="photo">
+        <img src="images/dining.jpg" width="1200" height="899" alt="식사 공간 — 6인 접이식 테이블" loading="lazy" decoding="async">
+        <figcaption data-i18n="spaces.dining">식사 공간 · 6인 접이식 테이블</figcaption>
+      </figure>
+      <figure class="photo">
+        <img src="images/kitchen.jpg" width="1200" height="899" alt="주방 — 냉장고와 조리 공간" loading="lazy" decoding="async">
+        <figcaption data-i18n="spaces.kitchen">주방 · 냉장고·전자레인지·커피머신</figcaption>
+      </figure>
+      <figure class="photo">
+        <img src="images/bathroom.jpg" width="1200" height="899" alt="욕실 — 샤워와 세면대" loading="lazy" decoding="async">
+        <figcaption data-i18n="spaces.bath">욕실 · 샤워·세면</figcaption>
+      </figure>
+      <figure class="photo">
+        <img src="images/laundry.jpg" width="1200" height="1602" alt="베란다 — 세탁기와 건조기" loading="lazy" decoding="async">
+        <figcaption data-i18n="spaces.laundry">베란다 · 세탁기·건조기</figcaption>
+      </figure>
+    </div>
+  </section>
 
   <!-- ────────── 체크인 · 체크아웃 ────────── -->
   <section class="card" id="checkin">
@@ -271,6 +307,10 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
         <img src="images/entrance-door.jpg" width="590" height="693" alt="공동현관 (shared entrance door)" loading="lazy" decoding="async">
         <figcaption data-i18n="access.photo.entrance">공동현관</figcaption>
       </figure>
+      <figure class="photo">
+        <img src="images/hallway.jpg" width="1200" height="1602" alt="공동현관을 지나 101호로 이어지는 복도" loading="lazy" decoding="async">
+        <figcaption data-i18n="access.photo.hall">공동현관 안쪽 복도 · 계단 6~7칸</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -335,6 +375,10 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
       <li data-i18n="fac.sofa">베란다 이불보관함에 매트리스 커버·이불·베개가 있습니다. 반드시 매트리스 커버를 깔고 사용해 주세요.</li>
       <li data-i18n="fac.table">소파베드 방에는 접이식 테이블과 스툴이 준비되어 있습니다.</li>
     </ul>
+    <figure class="photo">
+      <img src="images/sofabed-room.jpg" width="1200" height="899" alt="침실 2의 소파베드" loading="lazy" decoding="async">
+      <figcaption data-i18n="fac.sofa.photo">침실 2의 소파베드</figcaption>
+    </figure>
 
     <h3 class="sub" data-i18n="fac.ac.t">에어컨</h3>
     <ul class="list">
@@ -391,6 +435,15 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
       "meta.checkinout": "Check-in 16:00 · Check-out 11:00",
       "meta.rooms": "2 bedrooms · up to 6 guests",
       "meta.parking": "No parking in the building",
+      "s.spaces": "🏠 Rooms and spaces",
+      "spaces.intro": "These are photos of the flat as you will find it. The layout and furniture match the photos, and the sofa bed is made up as a bed for bookings of 5 or more.",
+      "spaces.bed1": "Bedroom 1 · two queen beds",
+      "spaces.bed2": "Bedroom 2 · sofa bed",
+      "spaces.dining": "Dining area · folding table for six",
+      "spaces.kitchen": "Kitchen · fridge, microwave, coffee machine",
+      "spaces.bath": "Bathroom · shower and sink",
+      "spaces.laundry": "Balcony · washer and dryer",
+      "fac.sofa.photo": "The sofa bed in bedroom 2",
       "s.checkin": "🕓 Check-in · Check-out",
       "checkin.in": "<b>Check-in</b> from 4:00 PM. It is self check-in, and the door code is sent by message one hour before check-in.",
       "checkin.out": "<b>Check-out</b> by 11:00 AM. Send us a message when you leave and our staff will come 15 minutes later.",
@@ -424,6 +477,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
       "access.code": "Door codes are not posted on this public page. They are sent by message one hour before your check-in time.",
       "access.note": "This is a building shared with neighbours. Please keep footsteps and doors quiet late at night.",
       "access.photo.entrance": "Shared entrance",
+      "access.photo.hall": "Inside the shared entrance · up 6 to 7 steps",
       "s.wifi": "📶 Wi-Fi",
       "wifi.ssid": "Network",
       "wifi.pw": "Password",
@@ -481,6 +535,15 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
       "meta.checkinout": "チェックイン 16:00・チェックアウト 11:00",
       "meta.rooms": "2ベッドルーム・最大6名",
       "meta.parking": "建物内駐車不可",
+      "s.spaces": "🏠 お部屋と空間",
+      "spaces.intro": "写真は実際の宿の様子です。間取りと家具は写真どおりで、ソファベッドは5名以上のご予約でベッドとしてご用意します。",
+      "spaces.bed1": "寝室1・クイーンベッド2台",
+      "spaces.bed2": "寝室2・ソファベッド",
+      "spaces.dining": "ダイニング・6人用折りたたみテーブル",
+      "spaces.kitchen": "キッチン・冷蔵庫・電子レンジ・コーヒーマシン",
+      "spaces.bath": "バスルーム・シャワー・洗面",
+      "spaces.laundry": "ベランダ・洗濯機・乾燥機",
+      "fac.sofa.photo": "寝室2のソファベッド",
       "s.checkin": "🕓 チェックイン・チェックアウト",
       "checkin.in": "<b>チェックイン</b> 16:00以降です。セルフチェックインで、ドアロックの暗証番号はチェックイン1時間前にメッセージでお送りします。",
       "checkin.out": "<b>チェックアウト</b> 11:00までです。ご出発の際にメッセージをいただければ、15分後にスタッフが伺います。",
@@ -514,6 +577,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
       "access.code": "暗証番号はこの公開ページには掲載していません。チェックイン1時間前にメッセージでお知らせします。",
       "access.note": "ご近所の方が住む建物です。夜遅くは足音やドアの音にお気をつけください。",
       "access.photo.entrance": "共用玄関",
+      "access.photo.hall": "共用玄関の内側の廊下・階段6〜7段",
       "s.wifi": "📶 Wi-Fi",
       "wifi.ssid": "ネットワーク",
       "wifi.pw": "パスワード",
@@ -571,6 +635,15 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
       "meta.checkinout": "入住 16:00 · 退房 11:00",
       "meta.rooms": "两居室 · 最多 6 人",
       "meta.parking": "楼内不可停车",
+      "s.spaces": "🏠 房间与空间",
+      "spaces.intro": "照片是您入住时的真实样子。房间布局与家具与照片一致，沙发床在5人以上预订时会铺成床。",
+      "spaces.bed1": "卧室1 · 两张1.8米大床",
+      "spaces.bed2": "卧室2 · 沙发床",
+      "spaces.dining": "用餐区 · 六人折叠桌",
+      "spaces.kitchen": "厨房 · 冰箱、微波炉、咖啡机",
+      "spaces.bath": "浴室 · 淋浴与洗手台",
+      "spaces.laundry": "阳台 · 洗衣机与烘干机",
+      "fac.sofa.photo": "卧室2的沙发床",
       "s.checkin": "🕓 入住 · 退房",
       "checkin.in": "<b>入住</b> 下午 4:00 之后。采用自助入住，门锁密码会在入住前 1 小时通过消息发送。",
       "checkin.out": "<b>退房</b> 上午 11:00 之前。离开时请留言告知，15 分钟后工作人员会上门。",
@@ -604,6 +677,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
       "access.code": "门锁密码不会公开在本页面上，会在入住前 1 小时通过消息单独发送给您。",
       "access.note": "本建筑有其他住户同住，深夜请留意脚步声与关门声。",
       "access.photo.entrance": "共用玄关",
+      "access.photo.hall": "共用玄关内侧的走廊 · 6~7级台阶",
       "s.wifi": "📶 Wi-Fi",
       "wifi.ssid": "网络",
       "wifi.pw": "密码",

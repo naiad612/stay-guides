@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ARN STAY · 서울의 두 채</title>
+<meta name="description" content="아른스테이의 두 숙소, 스테이 아른(강남 프라이빗 하우스)과 바라스 잠실(잠실 2베드룸). 4개 국어 숙소 안내와 에어비앤비 예약 링크를 한 곳에 모았습니다.">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#f7f5f1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%2314675a'/%3E%3Ctext x='16' y='21' font-family='sans-serif' font-size='10' font-weight='bold' fill='white' text-anchor='middle'%3EARN%3C/text%3E%3C/svg%3E">
+<!--
+  ARN STAY 통합 메인 — 스테이 아른 · 바라스 잠실 (단일 HTML 파일, 외부 파일 의존 없음)
+  · 사진: images/arn-cover.jpg, images/jamsil-cover.jpg
+  · 예약 전 상세 주소·동호수·도어락 비밀번호는 넣지 않습니다(공개 URL).
+  · 숙소 안내 버튼은 선택한 언어를 그대로 넘깁니다(arn/?lang=xx, jamsil/?lang=xx).
+-->
+<style>
+:root{
+  --bg:#f7f5f1; --card:#ffffff; --ink:#191a1c; --body:#45464a; --muted:#74757a;
+  --line:#e4dfd7; --chip:#ffffff;
+  --arn:#14675a; --jamsil:#a8663a;
+  --accent:#14675a;
+  --r:10px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--body);font-size:16px;line-height:1.66;-webkit-font-smoothing:antialiased;
+  font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Hiragino Kaku Gothic ProN","Noto Sans KR","Noto Sans JP","PingFang SC","Microsoft YaHei",system-ui,sans-serif}
+h1,h2,p,ul{margin:0}
+a{color:inherit}
+img{max-width:100%}
+:focus-visible{outline:2px solid var(--arn);outline-offset:3px;border-radius:4px}
+
+.container{max-width:1240px;margin:0 auto;padding:0 28px}
+@media(max-width:640px){.container{padding:0 18px}}
+
+/* header */
+.top{padding:26px 0 0}
+.top-in{display:flex;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;min-width:0}
+.brand-mark{flex:0 0 auto;width:38px;height:38px;border-radius:11px;background:#191a1c;color:#fff;display:grid;place-items:center;
+  font-size:10.5px;font-weight:800;letter-spacing:.06em}
+.brand-txt{display:flex;flex-direction:column;min-width:0}
+.brand-name{font-size:16px;font-weight:700;color:var(--ink);letter-spacing:.01em;line-height:1.35}
+.brand-sub{font-size:10.5px;font-weight:700;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;line-height:1.4}
+.langs{margin-left:auto;flex:0 0 auto;display:flex;gap:2px;padding:3px;background:#efebe4;border-radius:999px}
+.langs a{padding:6px 10px;border-radius:999px;font-size:12.5px;font-weight:700;color:#5d5e63;text-decoration:none;white-space:nowrap;line-height:1.4}
+.langs a.active{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(16,24,40,.12)}
+
+/* hero */
+.hero{padding:clamp(46px,7vw,84px) 0 clamp(28px,4vw,44px)}
+.eyebrow{font-size:11.5px;font-weight:800;color:var(--arn);letter-spacing:.18em;text-transform:uppercase}
+.hero h1{margin:16px 0 0;font-weight:400;font-size:clamp(38px,6.6vw,86px);line-height:1.02;letter-spacing:-.042em;color:var(--ink)}
+.hero h1 .dim{display:block;color:#7d7e82}
+.lead{margin-top:clamp(20px,3vw,30px);max-width:44ch;font-size:clamp(15px,1.3vw,17px);color:#55565a;line-height:1.75}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.chips span{font-size:12.5px;font-weight:700;color:#3b3c40;background:var(--chip);border:1px solid var(--line);border-radius:999px;padding:7px 14px;white-space:nowrap}
+
+/* cards */
+.stays{margin-top:clamp(34px,5vw,56px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,56px) clamp(28px,4vw,48px)}
+@media(max-width:880px){.stays{grid-template-columns:1fr}}
+.stay{--accent:var(--arn);display:flex;flex-direction:column}
+.stay.jamsil{--accent:var(--jamsil)}
+.stay figure{margin:0;border-radius:var(--r);overflow:hidden;background:#e9e5de}
+.stay figure img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;transition:transform .55s cubic-bezier(.2,.7,.3,1)}
+.stay:hover figure img{transform:scale(1.015)}
+.stay h2{margin-top:24px;font-size:clamp(21px,2vw,26px);font-weight:600;letter-spacing:-.02em;color:var(--ink);display:flex;align-items:center;gap:10px;line-height:1.25}
+.dot{flex:0 0 auto;width:9px;height:9px;border-radius:50%;background:var(--accent)}
+.alias{margin-top:6px;font-size:13px;font-weight:600;color:#8d8e92;letter-spacing:.02em}
+.place{margin-top:14px;font-size:15px;color:var(--muted)}
+.tagline{margin-top:8px;font-size:clamp(16.5px,1.5vw,18px);color:#242527;letter-spacing:-.01em;line-height:1.5}
+.sep{border:0;border-top:1px solid var(--line);margin:22px 0}
+.specs{list-style:none;padding:0;display:grid;gap:9px;font-size:15.5px;color:var(--body);line-height:1.6}
+.buttons{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:26px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:13px 24px;border-radius:999px;font-size:14.5px;font-weight:700;
+  text-decoration:none;border:1px solid transparent;transition:background .16s ease,border-color .16s ease,color .16s ease,transform .16s ease;white-space:nowrap}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{transform:translateY(-1px)}
+.btn-ghost{background:#fff;border-color:#dcd6cd;color:#242527}
+.btn-ghost:hover{border-color:#c3bcb1}
+.btn .arrow{font-size:12px;opacity:.75}
+
+/* footer */
+.foot{margin-top:clamp(56px,8vw,88px);border-top:1px solid var(--line);padding:30px 0 64px}
+.foot-in{display:flex;flex-wrap:wrap;gap:18px 40px;justify-content:space-between;align-items:flex-start}
+.foot-brand{font-size:15px;font-weight:800;color:var(--ink);letter-spacing:.01em}
+.foot p{font-size:13.5px;color:var(--muted);line-height:1.8}
+.foot .right{text-align:right;min-width:220px}
+@media(max-width:640px){.foot .right{text-align:left}}
+.foot .tiny{font-size:12px;color:#9b9c9f}
+
+@media(prefers-reduced-motion:reduce){
+  .stay figure img,.btn{transition:none}
+  .stay:hover figure img{transform:none}
+  .btn-primary:hover{transform:none}
+}
+@media print{
+  body{background:#fff}
+  .langs{display:none}
+  .stay{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="container top-in">
+    <a class="brand" href="./">
+      <span class="brand-mark" aria-hidden="true">ARN</span>
+      <span class="brand-txt">
+        <span class="brand-name">ARN STAY</span>
+        <span class="brand-sub" data-i18n="brand.sub">아른스테이</span>
+      </span>
+    </a>
+    <nav class="langs" aria-label="언어" data-i18n-aria="aria.lang" data-ko-aria="언어">
+      <a href="?lang=ko" data-lang="ko" class="active" hreflang="ko">한국어</a>
+      <a href="?lang=en" data-lang="en" hreflang="en">English</a>
+      <a href="?lang=ja" data-lang="ja" hreflang="ja">日本語</a>
+      <a href="?lang=zh" data-lang="zh" hreflang="zh-Hans">中文</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+
+    <section class="hero">
+      <p class="eyebrow" data-i18n="hero.eyebrow">서울 · 두 개의 프라이빗 스테이</p>
+      <h1>Your home in Seoul.<span class="dim">Live like a local.</span></h1>
+      <p class="lead" data-i18n="hero.lead">강남의 정원이 있는 집, 잠실의 아늑한 아파트. 두 곳 모두 서울을 제 집처럼 쓰는 숙소입니다. 머물 곳을 골라 주세요.</p>
+      <div class="chips">
+        <span data-i18n="meta.capacity">두 곳 합쳐 최대 20인</span>
+        <span data-i18n="meta.langs">한국어 · English · 日本語 · 中文 안내</span>
+      </div>
+    </section>
+
+    <div class="stays">
+
+      <!-- ────────── 스테이 아른 ────────── -->
+      <article class="stay arn">
+        <figure>
+          <img src="images/arn-cover.jpg" width="1000" height="667" alt="정원과 계단이 있는 스테이 아른 건물 외관" loading="eager" fetchpriority="high" decoding="async">
+        </figure>
+        <h2><span class="dot" aria-hidden="true"></span>Stay ARN</h2>
+        <p class="alias" data-i18n="arn.alias">스테이 아른</p>
+        <p class="place" data-i18n="arn.place">서울 강남구 역삼동 · 강남 한복판</p>
+        <p class="tagline" data-i18n="arn.tagline">정원이 있는 5룸 프라이빗 독채</p>
+        <hr class="sep">
+        <ul class="specs">
+          <li data-i18n="arn.s1">선릉역 도보 5분 (2호선)</li>
+          <li data-i18n="arn.s2">최대 14인 · 침실 5 · 침대 7</li>
+          <li data-i18n="arn.s3">단독 정원 · 무료 주차 1대</li>
+          <li data-i18n="arn.s4">지하 회의실(별채) · 최대 21석</li>
+          <li data-i18n="arn.s5">셀프 체크인 · 체크인 16:00 / 체크아웃 11:00</li>
+        </ul>
+        <div class="buttons">
+          <a class="btn btn-primary" href="arn/" data-sub="arn/" data-i18n="btn.guide">숙소 안내 보기</a>
+          <a class="btn btn-ghost" href="https://www.airbnb.co.kr/rooms/1660200703835193446" target="_blank" rel="noopener noreferrer" data-i18n="btn.airbnb">에어비앤비에서 보기 <span class="arrow" aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+
+      <!-- ────────── 바라스 잠실 ────────── -->
+      <article class="stay jamsil">
+        <figure>
+          <img src="images/jamsil-cover.jpg" width="1200" height="899" alt="바라스 잠실 침실 — 퀸베드 두 개와 창" loading="lazy" decoding="async">
+        </figure>
+        <h2><span class="dot" aria-hidden="true"></span>Puerto Varas Jamsil</h2>
+        <p class="alias" data-i18n="jamsil.alias">바라스 잠실</p>
+        <p class="place" data-i18n="jamsil.place">서울 송파구 잠실동 · 롯데월드·잠실 인접</p>
+        <p class="tagline" data-i18n="jamsil.tagline">아늑한 2베드룸 프라이빗 스테이</p>
+        <hr class="sep">
+        <ul class="specs">
+          <li data-i18n="jamsil.s1">삼전역 도보 2~3분 (평지)</li>
+          <li data-i18n="jamsil.s2">최대 6인 · 침실 2 · 퀸베드 2</li>
+          <li data-i18n="jamsil.s3">거실 소파베드 (5인 이상)</li>
+          <li data-i18n="jamsil.s4">세탁기·건조기 완비</li>
+          <li data-i18n="jamsil.s5">무료 와이파이 · 셀프 체크인</li>
+        </ul>
+        <div class="buttons">
+          <a class="btn btn-primary" href="jamsil/" data-sub="jamsil/" data-i18n="btn.guide">숙소 안내 보기</a>
+          <a class="btn btn-ghost" href="https://www.airbnb.co.kr/rooms/1212894116498353000" target="_blank" rel="noopener noreferrer" data-i18n="btn.airbnb">에어비앤비에서 보기 <span class="arrow" aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <footer class="foot">
+    <div class="container foot-in">
+      <div>
+        <p class="foot-brand">ARN STAY · 주식회사 아른스테이</p>
+        <p data-i18n="foot.contact">문의는 예약하신 사이트의 메시지로 보내 주세요.</p>
+        <p data-i18n="foot.privacy">상세 주소와 출입 비밀번호는 예약 확정 후 안내드립니다.</p>
+        <p class="tiny" data-i18n="foot.note">이 페이지의 사진과 안내는 예고 없이 보완될 수 있습니다.</p>
+      </div>
+      <div class="right">
+        <p>Host · Clara Kim</p>
+        <p class="tiny">서울 강남구 역삼동 · 서울 송파구 잠실동</p>
+      </div>
+    </div>
+  </footer>
+</main>
+
+<script>
+(function(){
+  "use strict";
+
+  var I18N = {
+    en: {
+      "brand.sub": "ARN STAY Corp.",
+      "aria.lang": "Language",
+      "hero.eyebrow": "SEOUL · TWO PRIVATE STAYS",
+      "hero.lead": "A garden house in Gangnam, a cosy flat in Jamsil. Both are places to use Seoul as your own home. Choose where you stay.",
+      "meta.capacity": "Up to 20 guests across both",
+      "meta.langs": "Guides in Korean, English, Japanese and Chinese",
+      "arn.alias": "Stay ARN",
+      "arn.place": "Yeoksam-dong, Gangnam-gu, Seoul · heart of Gangnam",
+      "arn.tagline": "A five-bedroom private house with its own garden",
+      "arn.s1": "Seolleung Station · 5 min walk (Line 2)",
+      "arn.s2": "Up to 14 guests · 5 bedrooms · 7 beds",
+      "arn.s3": "Private garden · 1 free parking space",
+      "arn.s4": "Basement meeting room (annex) · up to 21 seats",
+      "arn.s5": "Self check-in · check-in 16:00 / check-out 11:00",
+      "jamsil.alias": "Baras Jamsil",
+      "jamsil.place": "Jamsil-dong, Songpa-gu, Seoul · next to Lotte World and Jamsil",
+      "jamsil.tagline": "A quiet two-bedroom private stay",
+      "jamsil.s1": "Samjeon Station · 2–3 min walk (flat ground)",
+      "jamsil.s2": "Up to 6 guests · 2 bedrooms · 2 queen beds",
+      "jamsil.s3": "Sofa bed in the living room (5+ guests)",
+      "jamsil.s4": "Washer and dryer",
+      "jamsil.s5": "Free Wi-Fi · self check-in",
+      "btn.guide": "View house guide",
+      "btn.airbnb": "View on Airbnb",
+      "foot.contact": "For anything you need, message us on the site you booked with.",
+      "foot.privacy": "The full address and door codes are sent once your booking is confirmed.",
+      "foot.note": "The photos and information on this page may be updated without notice.",
+      "doc.title": "ARN STAY · two homes in Seoul",
+      "doc.desc": "Stay ARN (a private garden house in Gangnam) and Puerto Varas Jamsil (a two-bedroom flat in Jamsil) by ARN STAY. House guides in four languages and Airbnb links."
+    },
+    ja: {
+      "brand.sub": "アーン・ステイ",
+      "aria.lang": "言語",
+      "hero.eyebrow": "ソウル · 2つのプライベートステイ",
+      "hero.lead": "江南の庭のある家、蚕室の居心地のよいアパート。どちらもソウルをわが家のように使える宿です。お泊まりになる場所をお選びください。",
+      "meta.capacity": "2棟あわせて最大20名",
+      "meta.langs": "韓国語・英語・日本語・中国語のご案内",
+      "arn.alias": "ステイ・アーン",
+      "arn.place": "ソウル江南区 駅三洞 · 江南の中心",
+      "arn.tagline": "庭のある5ベッドルームの一棟貸し",
+      "arn.s1": "宣陵駅 徒歩5分（2号線）",
+      "arn.s2": "最大14名・寝室5・ベッド7",
+      "arn.s3": "専用庭・無料駐車1台",
+      "arn.s4": "地下会議室（別棟）・最大21席",
+      "arn.s5": "セルフチェックイン・チェックイン16:00 / チェックアウト11:00",
+      "jamsil.alias": "バラス・チャムシル",
+      "jamsil.place": "ソウル松坡区 蚕室洞 · ロッテワールド・蚕室すぐ",
+      "jamsil.tagline": "静かな2ベッドルームのプライベートステイ",
+      "jamsil.s1": "三田駅 徒歩2〜3分（平坦な道）",
+      "jamsil.s2": "最大6名・寝室2・クイーンベッド2",
+      "jamsil.s3": "リビングのソファベッド（5名以上）",
+      "jamsil.s4": "洗濯機・乾燥機完備",
+      "jamsil.s5": "無料Wi-Fi・セルフチェックイン",
+      "btn.guide": "館内案内を見る",
+      "btn.airbnb": "Airbnbで見る",
+      "foot.contact": "ご連絡は、ご予約いただいたサイトのメッセージからお願いいたします。",
+      "foot.privacy": "詳しい住所と暗証番号は、ご予約確定後にお知らせします。",
+      "foot.note": "このページの写真と案内は予告なく更新されることがあります。",
+      "doc.title": "ARN STAY · ソウルの2つの宿",
+      "doc.desc": "アーン・ステイの2つの宿、ステイ・アーン（江南の庭付き一棟貸し）とバラス・チャムシル（蚕室の2ベッドルーム）。4言語の館内案内とAirbnbのリンク。"
+    },
+    zh: {
+      "brand.sub": "阿恩酒店管理",
+      "aria.lang": "语言",
+      "hero.eyebrow": "首尔 · 两处私享住所",
+      "hero.lead": "江南带庭院的房子，蚕室温馨的公寓。两处都能把首尔当作自己的家来使用。请选择您的住处。",
+      "meta.capacity": "两栋合计最多20人",
+      "meta.langs": "提供韩语、英语、日语、中文指南",
+      "arn.alias": "斯泰阿恩",
+      "arn.place": "首尔江南区 驿三洞 · 江南中心",
+      "arn.tagline": "带庭院的五居室整栋私宅",
+      "arn.s1": "宣陵站 步行5分钟（2号线）",
+      "arn.s2": "最多14人 · 5间卧室 · 7张床",
+      "arn.s3": "专属庭院 · 免费停车1辆",
+      "arn.s4": "地下会议室（附楼）· 最多21席",
+      "arn.s5": "自助入住 · 入住16:00 / 退房11:00",
+      "jamsil.alias": "巴拉斯蚕室",
+      "jamsil.place": "首尔松坡区 蚕室洞 · 紧邻乐天世界和蚕室",
+      "jamsil.tagline": "安静的两居室私享住所",
+      "jamsil.s1": "三田站 步行2~3分钟（平坦路面）",
+      "jamsil.s2": "最多6人 · 2间卧室 · 2张大床",
+      "jamsil.s3": "客厅沙发床（5人以上）",
+      "jamsil.s4": "洗衣机·烘干机齐全",
+      "jamsil.s5": "免费Wi-Fi · 自助入住",
+      "btn.guide": "查看住宿指南",
+      "btn.airbnb": "在Airbnb上查看",
+      "foot.contact": "如有需要，请通过您预订的网站消息联系我们。",
+      "foot.privacy": "详细地址与门锁密码将在预订确认后告知。",
+      "foot.note": "本页照片与说明可能在不另行通知的情况下更新。",
+      "doc.title": "ARN STAY · 首尔的两处住所",
+      "doc.desc": "阿恩酒店管理旗下的两处住所：斯泰阿恩（江南带庭院整栋私宅）与巴拉斯蚕室（蚕室两居室）。四种语言的入住指南与Airbnb链接。"
+    }
+  };
+
+  var LANGS = ["ko","en","ja","zh"];
+  var LANG_ATTR = {ko:"ko", en:"en", ja:"ja", zh:"zh-CN"};
+  var koStore = new Map();
+  var koAriaStore = new Map();
+  var koTitle = document.title;
+  var descEl = document.querySelector('meta[name="description"]');
+  var koDesc = descEl ? descEl.getAttribute("content") : "";
+  var current = "ko";
+
+  function nodes(sel){ return Array.prototype.slice.call(document.querySelectorAll(sel)); }
+
+  nodes("[data-i18n]").forEach(function(el){ koStore.set(el, el.innerHTML); });
+  nodes("[data-i18n-aria]").forEach(function(el){ koAriaStore.set(el, el.getAttribute("data-ko-aria") || ""); });
+
+  function tr(lang, key){
+    if (lang === "ko") return null;
+    var pack = I18N[lang];
+    if (!pack) return null;
+    return Object.prototype.hasOwnProperty.call(pack, key) ? pack[key] : null;
+  }
+
+  /* 숙소 안내 버튼에 선택한 언어를 붙여 넘깁니다 */
+  var subs = nodes("[data-sub]");
+  function syncSubLinks(lang){
+    subs.forEach(function(a){
+      var base = a.getAttribute("data-sub");
+      a.setAttribute("href", lang === "ko" ? base : base + "?lang=" + lang);
+    });
+  }
+
+  function applyLang(lang){
+    if (LANGS.indexOf(lang) === -1) lang = "ko";
+    current = lang;
+    document.documentElement.setAttribute("lang", LANG_ATTR[lang]);
+
+    nodes("[data-i18n]").forEach(function(el){
+      var key = el.getAttribute("data-i18n");
+      var fallback = koStore.has(el) ? koStore.get(el) : el.innerHTML;
+      var val = tr(lang, key);
+      el.innerHTML = (val === null) ? fallback : val;
+    });
+
+    nodes("[data-i18n-aria]").forEach(function(el){
+      var key = el.getAttribute("data-i18n-aria");
+      var base = koAriaStore.get(el) || "";
+      var val = tr(lang, key);
+      el.setAttribute("aria-label", (val === null) ? base : val);
+    });
+
+    document.title = tr(lang, "doc.title") || koTitle;
+    if (descEl) descEl.setAttribute("content", tr(lang, "doc.desc") || koDesc);
+
+    nodes("[data-lang]").forEach(function(a){
+      var on = a.getAttribute("data-lang") === lang;
+      a.classList.toggle("active", on);
+      if (on) a.setAttribute("aria-current", "true");
+      else a.removeAttribute("aria-current");
+    });
+
+    syncSubLinks(lang);
+
+    try {
+      var u = new URL(window.location.href);
+      u.searchParams.set("lang", lang);
+      history.replaceState(null, "", u.toString());
+    } catch (e) { /* file:// 등에서 실패해도 화면 전환은 유지 */ }
+  }
+
+  nodes("[data-lang]").forEach(function(a){
+    a.addEventListener("click", function(ev){
+      ev.preventDefault();
+      applyLang(a.getAttribute("data-lang"));
+    });
+  });
+
+  var params = new URLSearchParams(window.location.search);
+  applyLang(((params.get("lang") || "ko").toLowerCase()).slice(0, 2));
+})();
+</script>
+</body>
+</html>
