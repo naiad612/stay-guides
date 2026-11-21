@@ -365,7 +365,7 @@
     background: rgba(255, 255, 255, 0.96); border-top: 1px solid var(--line);
   }
   .tabbar-inner { display: grid; grid-template-columns: repeat(4, 1fr); max-width: 480px; margin: 0 auto; }
-  .tab { display: flex; align-items: center; justify-content: center; min-height: 60px; padding: 4px 4px; text-align: center; line-height: 1.25; font-size: 16px; font-weight: 600; color: var(--muted); text-decoration: none; position: relative; }
+  .tab { display: flex; align-items: center; justify-content: center; min-height: 60px; padding: 4px 2px; text-align: center; line-height: 1.2; font-size: 15px; font-weight: 600; color: var(--muted); text-decoration: none; position: relative; word-break: keep-all; }
   .tab.on { color: var(--accent); }
   .tab.on::before { content: ""; position: absolute; top: 0; left: 30%; right: 30%; height: 3px; border-radius: 0 0 3px 3px; background: var(--accent); }
 
@@ -749,7 +749,7 @@ var CONFIG = {
   [
    "faq",
    {
-    "ko": "자주 묻는 질문",
+    "ko": "FAQ",
     "en": "FAQ",
     "ja": "よくある質問",
     "zh": "常见问题"
