@@ -6224,6 +6224,7 @@ var CONFIG = {
   function metaLine(label, value) {
     var p = el("p", "meta"); add(p, el("b", "", label)); p.appendChild(T(value)); return p;
   }
+  var zoomHintShown = false;
   var R = {
     text: function (b) {
       var w = el("div", "block text");
@@ -6256,7 +6257,7 @@ var CONFIG = {
         add(w, fg);
       });
       var box = el("div", "block"); add(box, w);
-      if (b.zoom && !isEmpty(U.zoomHint)) { add(box, el("p", "zoom-hint", U.zoomHint)); }
+      if (b.zoom && !zoomHintShown && !isEmpty(U.zoomHint)) { add(box, el("p", "zoom-hint", U.zoomHint)); zoomHintShown = true; }
       return box;
     },
     facts: function (b) {
@@ -7019,6 +7020,7 @@ var CONFIG = {
   }
 
   function render(keepScroll) {
+    zoomHintShown = false;
     var id = currentRoute();
     var y = window.scrollY;
     app.innerHTML = "";
