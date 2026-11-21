@@ -16,11 +16,11 @@
 -->
 <style>
 :root{
-  --bg:#f7f5f1; --card:#ffffff; --ink:#191a1c; --body:#45464a; --muted:#74757a;
-  --line:#e4dfd7; --chip:#ffffff;
+  --bg:#fbf8f2; --card:#ffffff; --ink:#1f1b16; --body:#4a443c; --muted:#7d7466;
+  --line:#ece4d5; --chip:#ffffff;
   --arn:#14675a; --jamsil:#a8663a;
   --accent:#14675a;
-  --r:10px;
+  --r:22px;
 }
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -74,8 +74,8 @@ img{max-width:100%}
 @media(max-width:880px){.stays{grid-template-columns:1fr}}
 .stay{--accent:var(--arn);display:flex;flex-direction:column}
 .stay.jamsil{--accent:var(--jamsil)}
-.stay figure{margin:0;border-radius:var(--r);overflow:hidden;background:#e9e5de}
-.stay figure img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;transition:transform .55s cubic-bezier(.2,.7,.3,1)}
+.stay figure{margin:0;border-radius:var(--r);overflow:hidden;background:#ece6da;border:1px solid var(--line)}
+.stay figure img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;transition:transform .55s cubic-bezier(.2,.7,.3,1)}
 .stay:hover figure img{transform:scale(1.015)}
 .stay h2{margin-top:24px;font-size:clamp(21px,2vw,26px);font-weight:600;letter-spacing:-.02em;color:var(--ink);display:flex;align-items:center;gap:10px;line-height:1.25}
 .dot{flex:0 0 auto;width:9px;height:9px;border-radius:50%;background:var(--accent)}
@@ -88,9 +88,9 @@ img{max-width:100%}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:13px 24px;border-radius:999px;font-size:14.5px;font-weight:700;
   text-decoration:none;border:1px solid transparent;transition:background .16s ease,border-color .16s ease,color .16s ease,transform .16s ease;white-space:nowrap}
 .btn-primary{background:var(--accent);color:#fff}
-.btn-primary:hover{transform:translateY(-1px)}
-.btn-ghost{background:#fff;border-color:#dcd6cd;color:#242527}
-.btn-ghost:hover{border-color:#c3bcb1}
+.btn-primary:hover{transform:translateY(-1px);opacity:.94}
+.btn-ghost{background:#fff;border-color:var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:#d8cdb8}
 .btn .arrow{font-size:12px;opacity:.75}
 
 /* footer */
@@ -142,7 +142,6 @@ img{max-width:100%}
       <h1>Your home in Seoul.<span class="dim">Live like a local.</span></h1>
       <p class="lead" data-i18n="hero.lead">강남의 정원이 있는 집, 잠실의 아늑한 아파트. 두 곳 모두 서울을 제 집처럼 쓰는 숙소입니다. 머물 곳을 골라 주세요.</p>
       <div class="chips">
-        <span data-i18n="meta.capacity">두 곳 합쳐 최대 20인</span>
         <span data-i18n="meta.langs">한국어 · English · 日本語 · 中文 안내</span>
       </div>
     </section>
@@ -224,7 +223,6 @@ img{max-width:100%}
       "aria.lang": "Language",
       "hero.eyebrow": "SEOUL · TWO PRIVATE STAYS",
       "hero.lead": "A garden house in Gangnam, a cosy flat in Jamsil. Both are places to use Seoul as your own home. Choose where you stay.",
-      "meta.capacity": "Up to 20 guests across both",
       "meta.langs": "Guides in Korean, English, Japanese and Chinese",
       "arn.alias": "Gangnam private house",
       "arn.place": "Yeoksam-dong, Gangnam-gu, Seoul · heart of Gangnam",
@@ -252,12 +250,12 @@ img{max-width:100%}
       "doc.title": "ARN STAY · two homes in Seoul",
       "doc.desc": "Stay ARN (a private garden house in Gangnam) and Puerto Varas Jamsil (a two-bedroom flat in Jamsil) by ARN STAY. House guides in four languages and Airbnb links."
     },
+
     ja: {
       "brand.sub": "ステイ・アーン · バラス・チャムシル",
       "aria.lang": "言語",
       "hero.eyebrow": "ソウル · 2つのプライベートステイ",
       "hero.lead": "江南の庭のある家、蚕室の居心地のよいアパート。どちらもソウルをわが家のように使える宿です。お泊まりになる場所をお選びください。",
-      "meta.capacity": "2棟あわせて最大20名",
       "meta.langs": "韓国語・英語・日本語・中国語のご案内",
       "arn.alias": "江南の一棟貸し",
       "arn.place": "ソウル江南区 駅三洞 · 江南の中心",
@@ -285,12 +283,12 @@ img{max-width:100%}
       "doc.title": "ARN STAY · ソウルの2つの宿",
       "doc.desc": "アーン・ステイの2つの宿、ステイ・アーン（江南の庭付き一棟貸し）とバラス・チャムシル（蚕室の2ベッドルーム）。4言語の館内案内とAirbnbのリンク。"
     },
+
     zh: {
       "brand.sub": "斯泰阿恩 · 巴拉斯蚕室",
       "aria.lang": "语言",
       "hero.eyebrow": "首尔 · 两处私享住所",
       "hero.lead": "江南带庭院的房子，蚕室温馨的公寓。两处都能把首尔当作自己的家来使用。请选择您的住处。",
-      "meta.capacity": "两栋合计最多20人",
       "meta.langs": "提供韩语、英语、日语、中文指南",
       "arn.alias": "江南整栋私宅",
       "arn.place": "首尔江南区 驿三洞 · 江南中心",

@@ -16,120 +16,292 @@
 -->
 <style>
 :root{
-  --teal:#0d8a7f; --teal-dark:#0a6f66; --teal-soft:#e8f5f3;
-  --ink:#16181d; --body:#333a44; --muted:#6b7280; --line:#e6e8ee;
-  --bg:#f5f6f8; --card:#ffffff;
-  --warn-bg:#fff8ea; --warn-line:#f5dcae; --warn-ink:#7a4a04;
-  --danger-bg:#fef4f2; --danger-line:#f7d2cc; --danger-ink:#8f2318;
-  --r:16px;
+  --accent:#14675a; --accent-dark:#0e574c; --accent-soft:#e7f0ed;
+  --ink:#1f1b16; --body:#4a443c; --muted:#7d7466;
+  --line:#ece4d5; --line-soft:#f3eee2;
+  --bg:#fbf8f2; --card:#ffffff; --soft:#f6f0e4;
+  --warn-bg:#fdf7e8; --warn-line:#f0e0b8; --warn-ink:#7b5311;
+  --danger-bg:#fdf1ee; --danger-line:#f3d5cc; --danger-ink:#8c2f1f;
+  --r:20px;
+  --shadow:0 1px 2px rgba(31,27,22,.05);
 }
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--body);font-size:16px;line-height:1.68;-webkit-font-smoothing:antialiased;
-  font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Hiragino Kaku Gothic ProN","Noto Sans KR","Noto Sans JP","PingFang SC","Microsoft YaHei",system-ui,sans-serif}
-h1,h2,h3{color:var(--ink);line-height:1.32;letter-spacing:-.01em}
-a{color:var(--teal-dark)}
+body{
+  margin:0;background:var(--bg);color:var(--body);
+  font-size:16px;line-height:1.78;-webkit-font-smoothing:antialiased;
+  word-break:keep-all;overflow-wrap:break-word;
+  font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Hiragino Kaku Gothic ProN","Noto Sans KR","Noto Sans JP","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+}
+h1,h2,h3{color:var(--ink);line-height:1.35;letter-spacing:-.022em;margin:0}
+p{margin:0}
+a{color:var(--accent-dark)}
+img{max-width:100%}
 code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
 
-/* header */
-.header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:saturate(150%) blur(10px);-webkit-backdrop-filter:saturate(150%) blur(10px);border-bottom:1px solid var(--line)}
-.header-in{max-width:760px;margin:0 auto;padding:9px 16px;display:flex;align-items:center;gap:10px}
-.brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink);min-width:0}
-.brand-mark{flex:0 0 auto;width:32px;height:32px;border-radius:10px;background:var(--teal);color:#fff;display:grid;place-items:center;font-weight:800;font-size:13px;letter-spacing:.02em}
+/* ── header ───────────────────────────────────────── */
+.header{
+  position:sticky;top:0;z-index:60;
+  background:rgba(251,248,242,.9);
+  -webkit-backdrop-filter:saturate(160%) blur(14px);
+  backdrop-filter:saturate(160%) blur(14px);
+  border-bottom:1px solid rgba(236,228,213,.75);
+}
+.header-in{max-width:780px;margin:0 auto;padding:10px 18px;display:flex;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);min-width:0}
+.brand-mark{
+  flex:0 0 auto;width:30px;height:30px;border-radius:50%;
+  background:var(--ink);color:#fff;display:grid;place-items:center;
+  font-weight:700;font-size:11px;letter-spacing:.02em;
+}
 .brand-txt{display:flex;flex-direction:column;min-width:0}
-.brand-name{font-size:14.5px;font-weight:800;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.brand-sub{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.langs{margin-left:auto;flex:0 0 auto;display:flex;gap:2px;padding:3px;background:#f0f2f5;border-radius:999px}
-.langs a{padding:5px 8px;border-radius:999px;font-size:12px;font-weight:700;color:#525a68;text-decoration:none;white-space:nowrap;line-height:1.5}
-.langs a.active{background:#fff;color:var(--teal-dark);box-shadow:0 1px 3px rgba(16,24,40,.12)}
-.langs a:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+.brand-name{font-size:15px;font-weight:700;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand-sub{font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.4}
+.langs{margin-left:auto;flex:0 0 auto;display:flex;gap:2px;padding:3px;background:rgba(31,27,22,.05);border-radius:999px}
+.langs a{padding:6px 9px;border-radius:999px;font-size:12px;font-weight:600;color:#6b6357;text-decoration:none;white-space:nowrap;line-height:1.4;transition:color .15s,background .15s}
+.langs a.active{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(31,27,22,.12)}
+.langs a:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
 
-/* section chips */
-.nav{background:#fff;border-bottom:1px solid var(--line)}
-.nav-in{max-width:760px;margin:0 auto;padding:0 16px 9px;display:flex;gap:7px;overflow-x:auto;scrollbar-width:none}
+/* ── section index (sticky chips) ─────────────────── */
+.nav{position:sticky;top:51px;z-index:55;background:rgba(251,248,242,.95);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid rgba(236,228,213,.7)}
+.nav-in{max-width:780px;margin:0 auto;padding:9px 18px;display:flex;gap:7px;overflow-x:auto;scrollbar-width:none}
 .nav-in::-webkit-scrollbar{display:none}
-.chip{flex:0 0 auto;display:inline-flex;align-items:center;padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:#fff;color:#3c4450;font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap;transition:background .15s,border-color .15s,color .15s}
-.chip:hover{border-color:#cfd6df}
-.chip.active{background:var(--teal-soft);border-color:#bee4df;color:var(--teal-dark)}
-.chip:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+.chip{
+  flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;
+  padding:7px 13px;border:1px solid var(--line);border-radius:999px;
+  background:#fff;color:#5b5448;font-size:13px;font-weight:600;
+  text-decoration:none;white-space:nowrap;
+  transition:border-color .15s,background .15s,color .15s;
+}
+.chip:hover{border-color:#ddd2bd}
+.chip.active{background:var(--accent-soft);border-color:transparent;color:var(--accent-dark)}
+.chip:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
 
-/* layout */
-.wrap{max-width:760px;margin:0 auto;padding:18px 16px 92px}
-.hero{padding:6px 4px 16px}
-.eyebrow{margin:0;font-size:11.5px;font-weight:800;color:var(--teal);letter-spacing:.14em}
-.hero h1{font-size:26px;margin:6px 0 10px;font-weight:800;letter-spacing:-.025em}
-.lead{margin:0;font-size:14.5px;color:#4b5563}
-.hero-img{display:block;width:100%;height:auto;max-height:360px;object-fit:cover;border-radius:var(--r);margin:14px 0 0;border:1px solid var(--line)}
-.quote{margin:14px 0 0;padding:12px 14px;border-left:3px solid #bee4df;background:#fff;border-radius:0 12px 12px 0;color:#555f6d;font-size:13.5px;line-height:1.7}
-.meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
-.meta span{font-size:12.5px;font-weight:700;color:#3c4450;background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 11px}
+/* ── layout ───────────────────────────────────────── */
+.wrap{max-width:780px;margin:0 auto;padding:0 18px 40px}
 
-/* cards */
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px 16px;margin:0 0 14px;scroll-margin-top:104px}
-.card h2{font-size:18px;margin:0 0 12px;font-weight:800;display:flex;align-items:center;gap:8px}
-.sub{font-size:13.5px;font-weight:800;color:var(--ink);margin:18px 0 6px}
-.sub:first-of-type{margin-top:4px}
-.list{list-style:none;margin:0;padding:0;display:grid;gap:9px}
-.list li{position:relative;padding-left:15px;font-size:14.5px;line-height:1.62}
-.list li::before{content:"";position:absolute;left:2px;top:.65em;width:5px;height:5px;border-radius:50%;background:#c6cdd8}
-.list li b{color:var(--ink);font-weight:800}
-.note{display:flex;gap:9px;border-radius:12px;padding:12px 14px;font-size:13.8px;line-height:1.6;margin-top:13px}
+/* hero */
+.hero{padding:26px 0 4px}
+.eyebrow{margin:0;font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.2em;text-transform:uppercase}
+.hero h1{font-size:clamp(27px,5.4vw,36px);margin:12px 0 14px;font-weight:700;letter-spacing:-.035em}
+.lead{font-size:16px;color:#5a5347;line-height:1.72}
+.hero-media{position:relative;margin:22px 0 0;border-radius:24px;overflow:hidden;background:var(--soft)}
+.hero-media img{display:block;width:100%;height:clamp(230px,42vh,400px);object-fit:cover}
+.hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(251,248,242,0) 45%,rgba(251,248,242,.55) 82%,var(--bg) 100%);pointer-events:none}
+.quote{
+  margin:18px 0 0;padding:0 0 0 16px;border-left:2px solid var(--accent-soft);
+  color:#6b6357;font-size:14.5px;line-height:1.75;
+}
+.meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
+.meta span{font-size:12.5px;font-weight:600;color:#5b5448;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+
+/* stage cards */
+.stages-label{margin:34px 0 12px;font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.2em;text-transform:uppercase}
+.stages{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stage{
+  display:flex;align-items:center;gap:12px;
+  background:var(--card);border:1px solid var(--line);border-radius:18px;
+  padding:15px 16px;text-decoration:none;color:inherit;box-shadow:var(--shadow);
+  transition:border-color .15s,transform .15s;
+}
+.stage:hover{border-color:#ded3bd}
+.stage:active{transform:scale(.995)}
+.stage-ico{flex:0 0 auto;width:40px;height:40px;border-radius:50%;background:var(--accent-soft);color:var(--accent-dark);display:grid;place-items:center;font-size:17px;line-height:1}
+.stage-t{display:block;font-size:15.5px;font-weight:700;color:var(--ink);line-height:1.35}
+.stage-s{display:block;margin-top:3px;font-size:12.5px;color:var(--muted);line-height:1.45}
+.stage-arrow{flex:0 0 auto;margin-left:auto;color:#b9ad98;font-size:15px}
+
+/* sections */
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:22px 20px;margin:14px 0 0;box-shadow:var(--shadow);
+  scroll-margin-top:110px;
+}
+.card + .card{margin-top:12px}
+.card h2{font-size:18.5px;font-weight:700;margin:0 0 4px;display:flex;align-items:center;gap:8px;letter-spacing:-.025em}
+.card h2 + .list,.card h2 + p,.card h2 + .wifi,.card h2 + .facts,.card h2 + .links,.card h2 + .table{margin-top:14px}
+.card > p{font-size:15px;color:#575043;margin:10px 0 0}
+.sub{font-size:15px;font-weight:700;color:var(--ink);margin:22px 0 8px;letter-spacing:-.01em}
+.sub:first-of-type{margin-top:16px}
+.lead-line{font-size:14.5px;color:var(--muted);margin:0 0 12px}
+
+/* lists */
+.list{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:10px}
+.list li{position:relative;padding-left:16px;font-size:14.8px;line-height:1.72;color:#4c463c}
+.list li::before{content:"";position:absolute;left:3px;top:.72em;width:4px;height:4px;border-radius:50%;background:#cfc3ad}
+.list li b{color:var(--ink);font-weight:700}
+.list.tight{gap:7px}
+
+/* notes */
+.note{display:flex;gap:10px;border-radius:14px;padding:14px 16px;font-size:14px;line-height:1.68;margin-top:14px;background:var(--soft);color:#4c463c}
 .note .ico{flex:0 0 auto;line-height:1.5}
-.note.warn{background:var(--warn-bg);border:1px solid var(--warn-line);color:var(--warn-ink)}
-.note.danger{background:var(--danger-bg);border:1px solid var(--danger-line);color:var(--danger-ink)}
-.note.info{background:var(--teal-soft);border:1px solid #cbe7e3;color:#0b6059}
-.note b{font-weight:800}
+.note b{font-weight:700}
+.note.warn{background:var(--warn-bg);color:var(--warn-ink);border:1px solid var(--warn-line)}
+.note.danger{background:var(--danger-bg);color:var(--danger-ink);border:1px solid var(--danger-line)}
+.note.info{background:var(--accent-soft);border:1px solid transparent;color:var(--accent-dark)}
 
-/* links */
-.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
-.linkbtn{display:inline-flex;align-items:center;gap:6px;border:1px solid #cbe7e3;background:var(--teal-soft);color:var(--teal-dark);text-decoration:none;font-size:13px;font-weight:800;padding:9px 13px;border-radius:11px}
-.linkbtn:active{background:#dcefeb}
+/* links / buttons */
+.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.linkbtn{
+  display:inline-flex;align-items:center;gap:6px;
+  border:1px solid var(--line);background:#fff;color:var(--ink);
+  text-decoration:none;font-size:13.5px;font-weight:600;padding:10px 15px;border-radius:999px;
+  transition:border-color .15s,background .15s;
+}
+.linkbtn:hover{border-color:#d9cdb5;background:#fffdf9}
+.linkbtn.solid{background:var(--accent);border-color:var(--accent);color:#fff}
+.linkbtn.solid:hover{background:var(--accent-dark);border-color:var(--accent-dark)}
 
 /* wifi */
-.wifi{display:grid;gap:8px;margin-top:4px}
-.wifi-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#fbfcfd}
-.floor{flex:0 0 auto;min-width:64px;font-size:12px;font-weight:800;color:var(--muted)}
+.wifi{display:grid;gap:8px;margin-top:14px}
+.wifi-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;border:1px solid var(--line-soft);border-radius:14px;padding:11px 13px;background:#fdfbf7}
+.floor{flex:0 0 auto;min-width:60px;font-size:12px;font-weight:700;color:var(--muted)}
 .nets{display:flex;flex-wrap:wrap;gap:6px}
-.nets code{font-size:13px;background:#eef1f5;border-radius:7px;padding:2px 7px;color:#1f2937}
-.pw{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border:1px dashed #cfd6df;border-radius:12px;padding:11px 13px;margin-top:9px;background:#fff}
-.pw-label{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:800;color:var(--muted)}
-.pw-label code{font-size:15px;font-weight:800;color:var(--ink);letter-spacing:.02em}
-.btn-copy{flex:0 0 auto;border:1px solid var(--teal);background:var(--teal);color:#fff;font-family:inherit;font-size:12.5px;font-weight:800;padding:8px 14px;border-radius:999px;cursor:pointer;transition:background .15s,color .15s}
-.btn-copy.copied{background:#fff;color:var(--teal-dark)}
-.btn-copy:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.nets code{font-size:12.5px;background:#f2ece0;border-radius:8px;padding:3px 8px;color:#3c3730}
+.pw{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border:1px dashed #dccfb6;border-radius:14px;padding:12px 14px;margin-top:10px;background:#fff}
+.pw-label{display:flex;align-items:center;gap:9px;font-size:12.5px;font-weight:700;color:var(--muted)}
+.pw-label code{font-size:15.5px;font-weight:700;color:var(--ink);letter-spacing:.03em}
+.btn-copy{flex:0 0 auto;border:0;background:var(--ink);color:#fff;font-family:inherit;font-size:12.5px;font-weight:700;padding:9px 16px;border-radius:999px;cursor:pointer;transition:background .15s,opacity .15s}
+.btn-copy.copied{background:var(--accent)}
+.btn-copy:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
 /* photos */
-.photo{margin:14px 0 0}
-.photo img{display:block;width:100%;height:auto;max-height:420px;object-fit:cover;border-radius:12px;border:1px solid var(--line)}
-.photo figcaption{margin-top:7px;font-size:12px;color:var(--muted);text-align:center;line-height:1.5}
-.gallery{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.photo{margin:16px 0 0}
+.photo img{display:block;width:100%;height:auto;max-height:440px;object-fit:cover;border-radius:16px;background:var(--soft)}
+.photo figcaption{margin-top:8px;font-size:12px;color:var(--muted);text-align:center;line-height:1.5}
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
 .gallery .photo{margin:0}
-.gallery .photo img{aspect-ratio:1/1;max-height:none;object-fit:cover}
-@media(max-width:380px){.gallery{grid-template-columns:1fr}}
+.gallery .photo img{aspect-ratio:1/1;max-height:none;object-fit:cover;border-radius:14px}
+.photos{display:grid;gap:10px;margin-top:16px}
+.photos.two{grid-template-columns:1fr 1fr}
+.photos .photo{margin:0}
+.photos .photo img{border-radius:14px}
+.photos.two .photo img{aspect-ratio:4/3;object-fit:cover;max-height:none}
 
-/* contact */
-.tel{font-weight:800;color:var(--ink);white-space:nowrap}
+/* accordion */
+.fold{border-top:1px solid var(--line-soft);margin-top:16px;padding-top:2px}
+.fold:first-of-type{border-top:0;margin-top:10px;padding-top:0}
+.fold > summary{
+  list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;
+  padding:14px 2px;font-size:15px;font-weight:700;color:var(--ink);
+  letter-spacing:-.01em;
+}
+.fold > summary::-webkit-details-marker{display:none}
+.fold > summary::after{
+  content:"+";margin-left:auto;flex:0 0 auto;color:var(--accent);
+  font-size:19px;font-weight:400;line-height:1;transition:transform .2s ease;
+}
+.fold[open] > summary::after{content:"–"}
+.fold > summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.fold-body{padding:0 2px 6px}
+.fold-body > .list:first-child{margin-top:4px}
 
-/* footer */
-.foot{max-width:760px;margin:0 auto;padding:4px 20px 40px;text-align:center;color:var(--muted);font-size:12px;line-height:1.7}
-.foot p{margin:2px 0}
-.review{display:inline-flex;align-items:center;gap:6px;margin:10px 0 8px;border:1px solid var(--line);background:#fff;color:#3c4450;text-decoration:none;font-size:12.5px;font-weight:800;padding:8px 13px;border-radius:999px}
+/* facts table */
+.facts{display:grid;gap:0;margin-top:14px;border-top:1px solid var(--line-soft)}
+.facts .row{display:flex;gap:14px;padding:11px 2px;border-bottom:1px solid var(--line-soft);font-size:14.5px}
+.facts .k{flex:0 0 96px;color:var(--muted);font-weight:600}
+.facts .v{flex:1;color:var(--ink);font-weight:600}
 
-/* back to top — 화면 구석에 고정하지 않고 오른쪽 중간에서 스크롤을 따라 움직임 */
-.to-top-rail{position:sticky;top:0;height:0;z-index:45;pointer-events:none}
-.to-top{position:absolute;top:calc(50vh - 22px);right:max(12px,calc((100vw - 760px)/2 - 58px));width:44px;height:44px;padding:0;border-radius:50%;border:1px solid rgba(16,24,40,.12);background:rgba(255,255,255,.88);-webkit-backdrop-filter:saturate(140%) blur(8px);backdrop-filter:saturate(140%) blur(8px);color:#3c4450;font-family:inherit;font-size:10.5px;font-weight:800;letter-spacing:.06em;box-shadow:0 6px 18px rgba(16,24,40,.12);cursor:pointer;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .28s ease,visibility .28s ease,background .15s ease,box-shadow .15s ease}
-.to-top.show{opacity:1;visibility:visible;pointer-events:auto}
-.to-top:hover{background:rgba(255,255,255,.97);box-shadow:0 8px 22px rgba(16,24,40,.18)}
-.to-top:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
-@media(max-width:899px){
-  /* 좁은 화면에서는 본문 글자를 가리지 않도록 오른쪽 가장자리의 얇은 탭으로 */
-  .to-top{top:calc(50vh - 42px);right:-1px;width:26px;height:84px;border-radius:10px 0 0 10px;border-right:0;font-size:9.5px;letter-spacing:.16em;writing-mode:vertical-rl;text-orientation:mixed;text-align:center;background:rgba(255,255,255,.84)}
+/* steps */
+.steps{list-style:none;counter-reset:s;margin:14px 0 0;padding:0;display:grid;gap:14px}
+.steps li{position:relative;padding-left:34px;font-size:14.8px;line-height:1.7;color:#4c463c}
+.steps li::before{
+  counter-increment:s;content:counter(s);
+  position:absolute;left:0;top:1px;width:23px;height:23px;border-radius:50%;
+  background:var(--accent-soft);color:var(--accent-dark);
+  font-size:12px;font-weight:700;display:grid;place-items:center;
 }
 
-@media(max-width:400px){
+/* spots (맛집) */
+.spots{display:grid;gap:10px;margin-top:14px}
+.spot{border:1px solid var(--line);border-radius:16px;padding:16px;background:#fff}
+.spot-h{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.spot-n{font-size:15.5px;font-weight:700;color:var(--ink);letter-spacing:-.01em}
+.spot-d{font-size:13.5px;color:var(--muted);margin-top:2px}
+.spot-f{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:9px;font-size:13px;color:#5f5749}
+.spot-f span b{font-weight:600;color:var(--muted);margin-right:5px}
+.spot-r{margin-top:9px;font-size:13.5px;line-height:1.66;color:#57503f;background:var(--soft);border-radius:10px;padding:9px 12px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tag{font-size:12px;font-weight:600;color:var(--accent-dark);background:var(--accent-soft);border-radius:999px;padding:4px 10px}
+.spot-map{display:inline-flex;align-items:center;gap:5px;margin-top:10px;font-size:12.5px;font-weight:600;color:var(--accent-dark);text-decoration:none;border-bottom:1px solid transparent}
+.spot-map:hover{border-color:var(--accent)}
+
+/* experiences */
+.xps{display:grid;gap:10px;margin-top:14px}
+.xp{border:1px solid var(--line);border-radius:16px;padding:16px;background:#fff}
+.xp-c{font-size:11.5px;font-weight:700;color:var(--accent);letter-spacing:.1em;text-transform:uppercase}
+.xp-t{font-size:15.5px;font-weight:700;color:var(--ink);margin-top:5px;letter-spacing:-.01em}
+.xp-d{font-size:13.8px;color:#57503f;margin-top:5px;line-height:1.65}
+.xp-m{display:flex;align-items:center;gap:10px;margin-top:9px;font-size:12.5px;color:var(--muted)}
+.xp-m b{color:var(--ink);font-weight:700}
+.xp-ca{font-size:12.5px;color:var(--warn-ink);background:var(--warn-bg);border-radius:9px;padding:8px 11px;margin-top:9px;line-height:1.55}
+
+/* faq */
+.faq{margin-top:6px;border-top:1px solid var(--line-soft)}
+.faq details{border-bottom:1px solid var(--line-soft)}
+.faq summary{
+  list-style:none;cursor:pointer;display:flex;align-items:flex-start;gap:12px;
+  padding:16px 2px;font-size:15.2px;font-weight:700;color:var(--ink);
+  line-height:1.5;letter-spacing:-.01em;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";margin-left:auto;flex:0 0 auto;color:var(--accent);font-size:20px;font-weight:400;line-height:1.1}
+.faq details[open] summary::after{content:"–"}
+.faq .a{padding:0 2px 18px;font-size:14.5px;line-height:1.75;color:#4c463c}
+.faq .a p + p{margin-top:8px}
+.faq summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+.tel{font-weight:700;color:var(--ink);white-space:nowrap}
+
+/* footer */
+.foot{max-width:780px;margin:0 auto;padding:10px 22px 48px;text-align:center;color:var(--muted);font-size:12px;line-height:1.75}
+.foot p{margin:3px 0}
+.review{
+  display:inline-flex;align-items:center;gap:6px;margin:14px 0 12px;
+  border:1px solid var(--line);background:#fff;color:var(--ink);
+  text-decoration:none;font-size:12.5px;font-weight:600;padding:9px 15px;border-radius:999px;
+}
+
+/* back to top — 오른쪽 중간에서 스크롤을 따라 움직임 */
+.to-top-rail{position:sticky;top:0;height:0;z-index:45;pointer-events:none}
+.to-top{
+  position:absolute;top:calc(50vh - 22px);right:max(12px,calc((100vw - 780px)/2 - 58px));
+  width:44px;height:44px;padding:0;border-radius:50%;
+  border:1px solid rgba(31,27,22,.1);background:rgba(255,255,255,.92);
+  -webkit-backdrop-filter:saturate(140%) blur(8px);backdrop-filter:saturate(140%) blur(8px);
+  color:#5b5448;font-family:inherit;font-size:10px;font-weight:700;letter-spacing:.08em;
+  box-shadow:0 6px 18px rgba(31,27,22,.1);cursor:pointer;
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .28s ease,visibility .28s ease,background .15s ease,box-shadow .15s ease;
+}
+.to-top.show{opacity:1;visibility:visible;pointer-events:auto}
+.to-top:hover{background:#fff;box-shadow:0 8px 22px rgba(31,27,22,.16)}
+.to-top:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media(max-width:899px){
+  .to-top{
+    top:calc(50vh - 42px);right:-1px;width:26px;height:84px;
+    border-radius:10px 0 0 10px;border-right:0;
+    font-size:9px;letter-spacing:.16em;writing-mode:vertical-rl;text-orientation:mixed;text-align:center;
+    background:rgba(255,255,255,.88);
+  }
+}
+
+@media(max-width:560px){
+  .header-in{padding:9px 16px}
+  .nav-in{padding:8px 16px}
+  .wrap{padding:0 16px 32px}
+  .card{padding:19px 16px;border-radius:18px}
+  .hero h1{font-size:clamp(26px,7.4vw,32px)}
+  .stages{grid-template-columns:1fr}
+  .gallery{gap:8px}
+  .photos.two{grid-template-columns:1fr}
+  .facts .k{flex-basis:84px}
   .brand-sub{display:none}
-  .langs a{padding:5px 6px;font-size:11.5px}
-  .hero h1{font-size:23px}
+  .langs a{padding:6px 8px;font-size:11.5px}
+}
+@media(max-width:400px){
+  .hero-media{border-radius:18px}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -138,7 +310,8 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
 @media print{
   .header,.nav,.to-top-rail,.to-top,.btn-copy{display:none!important}
   body{background:#fff}
-  .card{break-inside:avoid;border-color:#ddd}
+  .card{break-inside:avoid;border-color:#ddd;box-shadow:none}
+  .faq details{open:true}
 }
 </style>
 </head>
@@ -176,9 +349,11 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
     <a class="chip" href="#house" data-i18n="s.house">🏠 집 사용 안내</a>
     <a class="chip" href="#meeting" data-i18n="s.meeting">💼 회의실</a>
     <a class="chip" href="#garden" data-i18n="s.garden">🌿 정원·웰컴 선물</a>
+    <a class="chip" href="#guasha" data-i18n="s.guasha">🪷 괄사 사용법</a>
     <a class="chip" href="#rules" data-i18n="s.rules">📌 규칙 및 안전</a>
     <a class="chip" href="#trash" data-i18n="s.trash">🗑️ 분리수거</a>
     <a class="chip" href="#area" data-i18n="s.area">☕ 주변 정보</a>
+    <a class="chip" href="#faq" data-i18n="s.faq">💬 자주 묻는 질문</a>
     <a class="chip" href="#contact" data-i18n="s.contact">☎️ 비상 연락처</a>
   </div>
 </nav>
@@ -189,12 +364,42 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
     <p class="eyebrow" data-i18n="hero.eyebrow">이용안내</p>
     <h1 data-i18n="hero.h1">스테이 아른 이용안내</h1>
     <p class="lead" data-i18n="hero.lead">강남 한복판의 단독주택 독채, 스테이 아른입니다. 체크인부터 체크아웃까지 필요한 안내를 사진과 함께 한곳에 모았습니다.</p>
-    <img class="hero-img" src="images/garden-c.jpg" alt="저녁 조명이 켜진 스테이 아른 정원" loading="eager" fetchpriority="high">
+    <div class="hero-media">
+      <img src="images/garden-c.jpg" alt="저녁 조명이 켜진 스테이 아른 정원" loading="eager" fetchpriority="high">
+    </div>
     <blockquote class="quote" data-i18n="hero.quote">아른은 ‘아른거리다’에서 시작했습니다. 스쳐 지나간 장면이 오래 남듯, 어떤 공간은 떠난 뒤에 더 선명해집니다.</blockquote>
     <div class="meta">
       <span data-i18n="meta.checkinout">체크인 16:00 · 체크아웃 11:00</span>
       <span data-i18n="meta.rooms">침실 5 · 욕실 2.5 · 정원</span>
       <span data-i18n="meta.parking">주차 1대 (173-212)</span>
+    </div>
+
+    <p class="stages-label" data-i18n="stage.label">지금 어떤 상황이세요?</p>
+    <div class="stages">
+      <a class="stage" href="#checkin">
+        <span class="stage-ico" aria-hidden="true">🛬</span>
+        <span>
+          <span class="stage-t" data-i18n="stage.1.t">체크인 전</span>
+          <span class="stage-s" data-i18n="stage.1.s">오시는 길 · 주차 · 출입</span>
+        </span>
+        <span class="stage-arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="stage" href="#wifi">
+        <span class="stage-ico" aria-hidden="true">🏠</span>
+        <span>
+          <span class="stage-t" data-i18n="stage.2.t">머무는 동안</span>
+          <span class="stage-s" data-i18n="stage.2.s">와이파이 · 주방 · 회의실 · 정원</span>
+        </span>
+        <span class="stage-arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="stage" href="#contact">
+        <span class="stage-ico" aria-hidden="true">📞</span>
+        <span>
+          <span class="stage-t" data-i18n="stage.3.t">도움이 필요할 때</span>
+          <span class="stage-s" data-i18n="stage.3.s">연락처 · 규칙 · 분리수거</span>
+        </span>
+        <span class="stage-arrow" aria-hidden="true">→</span>
+      </a>
     </div>
   </div>
 
@@ -314,7 +519,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
   <!-- ────────── 객실과 욕실 ────────── -->
   <section class="card" id="rooms">
     <h2 data-i18n="s.rooms">🛏 객실과 욕실</h2>
-    <p style="margin:0 0 12px;font-size:14.5px" data-i18n="rooms.intro">침실은 5개(2인실 3, 4인실 2)이고, 욕실은 1층과 2층, 별채에 있습니다. 어느 방이든 편하게 쓰시면 됩니다.</p>
+    <p data-i18n="rooms.intro">침실은 5개(2인실 3, 4인실 2)이고, 욕실은 1층과 2층, 별채에 있습니다. 어느 방이든 편하게 쓰시면 됩니다.</p>
     <ul class="list">
       <li data-i18n="rooms.r1"><b>1층 2인실 · 1층 4인실 · 1.5층 계단방 2인실 · 2층 2인실 · 2층 4인실</b></li>
       <li data-i18n="rooms.r2"><b>4인실 옷장</b>에 가운, 에어컨 리모컨, 스팀다리미, 드라이기가 있습니다.</li>
@@ -359,32 +564,57 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
   <!-- ────────── 집 사용 안내 ────────── -->
   <section class="card" id="house">
     <h2 data-i18n="s.house">🏠 집 사용 안내</h2>
+    <p data-i18n="house.lead">주방·거실·조명·보일러 순서로 펼쳐 보실 수 있습니다.</p>
 
-    <h3 class="sub" data-i18n="house.kitchen.t">주방</h3>
-    <ul class="list">
-      <li data-i18n="house.kitchen1"><b>가장 왼쪽 키 큰 장</b>에 와인잔, 커피머신, 전기포트, 전자레인지가 있습니다.</li>
-      <li data-i18n="house.kitchen2"><b>왼쪽에서 두 번째 키 큰 장</b>이 냉장고입니다(위 냉장, 아래 냉동).</li>
-      <li data-i18n="house.kitchen3"><b>싱크대 상판</b>은 왼쪽부터 식기세척기, 수전, 정수기입니다. 서랍장에 식기·냄비·프라이팬·도마, 상부장에 여분 그릇, 하부장에 키친타월·고무장갑·음식물 쓰레기통이 있습니다.</li>
-      <li data-i18n="house.kitchen4"><b>정수기</b>는 상단 온수(°C) 버튼을 3초간 길게 누르면 잠금·해제가 됩니다.</li>
-    </ul>
+    <details class="fold" open>
+      <summary data-i18n="house.kitchen.t">주방</summary>
+      <div class="fold-body">
+        <ul class="list">
+          <li data-i18n="house.kitchen1"><b>가장 왼쪽 키 큰 장</b>에 와인잔, 커피머신, 전기포트, 전자레인지가 있습니다.</li>
+          <li data-i18n="house.kitchen2"><b>왼쪽에서 두 번째 키 큰 장</b>이 냉장고입니다(위 냉장, 아래 냉동).</li>
+          <li data-i18n="house.kitchen3"><b>싱크대 상판</b>은 왼쪽부터 식기세척기, 수전, 정수기입니다. 서랍장에 식기·냄비·프라이팬·도마, 상부장에 여분 그릇, 하부장에 키친타월·고무장갑·음식물 쓰레기통이 있습니다.</li>
+          <li data-i18n="house.kitchen4"><b>정수기</b>는 상단 온수(°C) 버튼을 3초간 길게 누르면 잠금·해제가 됩니다.</li>
+        </ul>
+      </div>
+    </details>
 
-    <h3 class="sub" data-i18n="house.living.t">거실</h3>
-    <ul class="list">
-      <li data-i18n="house.living1"><b>스피커</b>는 전원을 켜고 블루투스(STANMORE III)로 연결해 사용하세요.</li>
-      <li data-i18n="house.living2"><b>TV 리모컨</b>은 거실에 있습니다. 사용 후 원래 자리에 두어 주세요.</li>
-    </ul>
+    <details class="fold">
+      <summary data-i18n="house.living.t">거실</summary>
+      <div class="fold-body">
+        <ul class="list">
+          <li data-i18n="house.living1"><b>스피커</b>는 전원을 켜고 블루투스(STANMORE III)로 연결해 사용하세요.</li>
+          <li data-i18n="house.living2"><b>TV 리모컨</b>은 거실에 있습니다. 사용 후 원래 자리에 두어 주세요.</li>
+        </ul>
+      </div>
+    </details>
 
-    <h3 class="sub" data-i18n="house.light.t">조명 스위치</h3>
-    <ul class="list">
-      <li data-i18n="house.light1"><b>1층</b> (왼쪽부터) 계단 매입등 · 계단 난간등 · 발코니등 · 화단 조명 · 1층 일괄 소등 · 2층 일괄 소등</li>
-      <li data-i18n="house.light2"><b>2층</b> (왼쪽부터) 에어컨 간접등+다운라이트 · 커튼 간접등 · 발코니등 · 계단 매입등 · 계단 난간등</li>
-    </ul>
+    <details class="fold">
+      <summary data-i18n="house.light.t">조명 스위치</summary>
+      <div class="fold-body">
+        <ul class="list">
+          <li data-i18n="house.light1"><b>1층</b> (왼쪽부터) 계단 매입등 · 계단 난간등 · 발코니등 · 화단 조명 · 1층 일괄 소등 · 2층 일괄 소등</li>
+          <li data-i18n="house.light2"><b>2층</b> (왼쪽부터) 에어컨 간접등+다운라이트 · 커튼 간접등 · 발코니등 · 계단 매입등 · 계단 난간등</li>
+        </ul>
+        <figure class="photo">
+          <img src="images/switch-1f.jpg" alt="1층 조명 스위치 패널" loading="lazy">
+          <figcaption data-i18n="house.photo.switch">1층 스위치</figcaption>
+        </figure>
+      </div>
+    </details>
 
-    <h3 class="sub" data-i18n="house.boiler.t">보일러 · 온수</h3>
-    <ul class="list">
-      <li data-i18n="house.boiler1">보일러 조절기는 <b>1층 4인실 문 옆 벽</b>에 있습니다.</li>
-      <li data-i18n="house.boiler2"><b>온수만</b> 쓰실 때는 ‘온수 전용’, 침실·주방 <b>바닥 난방</b>까지 쓰실 때는 난방 모드로 두세요. 다이얼을 돌려 온도를 맞추고 다이얼을 눌러 설정합니다.</li>
-    </ul>
+    <details class="fold">
+      <summary data-i18n="house.boiler.t">보일러 · 온수</summary>
+      <div class="fold-body">
+        <ul class="list">
+          <li data-i18n="house.boiler1">보일러 조절기는 <b>1층 4인실 문 옆 벽</b>에 있습니다.</li>
+          <li data-i18n="house.boiler2"><b>온수만</b> 쓰실 때는 ‘온수 전용’, 침실·주방 <b>바닥 난방</b>까지 쓰실 때는 난방 모드로 두세요. 다이얼을 돌려 온도를 맞추고 다이얼을 눌러 설정합니다.</li>
+        </ul>
+        <figure class="photo">
+          <img src="images/boiler-heating.jpg" alt="보일러 조절기 난방 모드" loading="lazy">
+          <figcaption data-i18n="house.photo.boiler">보일러 조절기</figcaption>
+        </figure>
+      </div>
+    </details>
 
     <div class="note warn">
       <span class="ico" aria-hidden="true">❄️</span>
@@ -400,21 +630,13 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
         <img src="images/living-speaker.jpg" alt="거실 블루투스 스피커" loading="lazy">
         <figcaption data-i18n="house.photo.speaker">거실 스피커</figcaption>
       </figure>
-      <figure class="photo">
-        <img src="images/switch-1f.jpg" alt="1층 조명 스위치 패널" loading="lazy">
-        <figcaption data-i18n="house.photo.switch">1층 스위치</figcaption>
-      </figure>
-      <figure class="photo">
-        <img src="images/boiler-heating.jpg" alt="보일러 조절기 난방 모드" loading="lazy">
-        <figcaption data-i18n="house.photo.boiler">보일러 조절기</figcaption>
-      </figure>
     </div>
   </section>
 
   <!-- ────────── 회의실 (별채) ────────── -->
   <section class="card" id="meeting">
     <h2 data-i18n="s.meeting">💼 회의실 (별채)</h2>
-    <p style="margin:0 0 12px;font-size:14.5px" data-i18n="meeting.intro">숙박 게스트만 사전 예약으로 이용할 수 있는 별채 회의 공간입니다. 소규모 회의·발표·촬영 준비에 쓰실 수 있고, 단독 대관은 하지 않습니다.</p>
+    <p data-i18n="meeting.intro">숙박 게스트만 사전 예약으로 이용할 수 있는 별채 회의 공간입니다. 소규모 회의·발표·촬영 준비에 쓰실 수 있고, 단독 대관은 하지 않습니다.</p>
     <ul class="list">
       <li data-i18n="meeting.fee"><b>이용 요금(숙박 게스트)</b> 4시간 ₩300,000 · 6시간 ₩400,000 · 1시간 추가 ₩70,000</li>
       <li data-i18n="meeting.eq"><b>제공 장비</b> 프로젝터와 Apple TV, 무선 마이크·스피커, 글래스 보드(마커·지우개), 최대 21석(배치 조정 가능). 촬영용 보조 조명은 미리 말씀해 주세요.</li>
@@ -422,23 +644,27 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
       <li data-i18n="meeting.ask"><b>예약 방법</b> 에어비앤비 메시지로 ① 날짜·시간 ② 인원 ③ 사용 목적을 알려 주세요.</li>
     </ul>
 
-    <h3 class="sub" data-i18n="meeting.proj.t">빔프로젝터 · Apple TV</h3>
-    <ul class="list">
-      <li data-i18n="meeting.proj1">프로젝터와 Apple TV는 <b>ARN_B1_5G</b>에 연결되어 있습니다. HDMI 케이블은 Apple TV에 꽂혀 있고, 프로젝터·Apple TV 리모컨은 발표자 테이블 옆 벽에 있습니다.</li>
-      <li data-i18n="meeting.proj2"><b>노트북 발표</b>가 가장 안정적입니다. HDMI 케이블을 노트북에 연결하고 프로젝터 입력을 HDMI로 맞추세요.</li>
-      <li data-i18n="meeting.proj3"><b>아이폰·아이패드·맥북</b>은 같은 와이파이에 연결한 뒤 제어센터 → 화면 미러링 → ‘Apple TV(ARN)’을 선택하세요.</li>
-      <li data-i18n="meeting.proj4">화면이 나오지 않으면 입력이 HDMI인지, 케이블이 제대로 꽂혔는지 확인하고 Apple TV를 재시작해 보세요.</li>
-      <li data-i18n="meeting.proj5">사용 후 HDMI 케이블과 리모컨은 원래 자리에 두어 주세요.</li>
-    </ul>
+    <details class="fold">
+      <summary data-i18n="meeting.proj.t">빔프로젝터 · Apple TV</summary>
+      <div class="fold-body">
+        <ul class="list">
+          <li data-i18n="meeting.proj1">프로젝터와 Apple TV는 <b>ARN_B1_5G</b>에 연결되어 있습니다. HDMI 케이블은 Apple TV에 꽂혀 있고, 프로젝터·Apple TV 리모컨은 발표자 테이블 옆 벽에 있습니다.</li>
+          <li data-i18n="meeting.proj2"><b>노트북 발표</b>가 가장 안정적입니다. HDMI 케이블을 노트북에 연결하고 프로젝터 입력을 HDMI로 맞추세요.</li>
+          <li data-i18n="meeting.proj3"><b>아이폰·아이패드·맥북</b>은 같은 와이파이에 연결한 뒤 제어센터 → 화면 미러링 → ‘Apple TV(ARN)’을 선택하세요.</li>
+          <li data-i18n="meeting.proj4">화면이 나오지 않으면 입력이 HDMI인지, 케이블이 제대로 꽂혔는지 확인하고 Apple TV를 재시작해 보세요.</li>
+          <li data-i18n="meeting.proj5">사용 후 HDMI 케이블과 리모컨은 원래 자리에 두어 주세요.</li>
+        </ul>
+        <figure class="photo">
+          <img src="images/projector.jpg" alt="회의실 천장에 설치된 프로젝터" loading="lazy">
+          <figcaption data-i18n="meeting.photo.proj">프로젝터</figcaption>
+        </figure>
+      </div>
+    </details>
 
     <div class="gallery">
       <figure class="photo">
         <img src="images/meeting-b1.jpg" alt="지하 회의실 전경" loading="lazy">
         <figcaption data-i18n="meeting.photo.b1">지하 회의실</figcaption>
-      </figure>
-      <figure class="photo">
-        <img src="images/projector.jpg" alt="회의실 천장에 설치된 프로젝터" loading="lazy">
-        <figcaption data-i18n="meeting.photo.proj">프로젝터</figcaption>
       </figure>
       <figure class="photo">
         <img src="images/meeting-1f.jpg" alt="별채 1층 라운지" loading="lazy">
@@ -478,13 +704,147 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
       <li data-i18n="gift.intro">웰컴 간식과 선물을 준비해 두었습니다. 편하게 드세요.</li>
       <li data-i18n="gift.water"><b>제주 탄산수</b> 제주 현무암이 자연 필터가 되어 걸러낸 용암해수로 만든 미네랄 워터입니다.</li>
       <li data-i18n="gift.kim"><b>김부각</b> 완도 소안도 김과 나주 백옥찹쌀로 만든 수제 김부각입니다.</li>
-      <li data-i18n="gift.guasha"><b>괄사</b> 도구도 함께 두었습니다. 사용법과 자세한 이야기는 아래 원본 가이드에서 보실 수 있습니다.</li>
+      <li data-i18n="gift.guasha"><b>괄사</b> 도구도 함께 두었습니다. 사용법은 바로 아래 ‘괄사 사용법’에서 사진과 함께 보실 수 있습니다.</li>
     </ul>
 
     <figure class="photo">
       <img src="images/welcome.jpg" alt="웰컴 선물로 준비된 간식과 물" loading="lazy">
       <figcaption data-i18n="gift.photo">웰컴 선물</figcaption>
     </figure>
+    <div class="links">
+      <a class="linkbtn solid" href="#guasha" data-i18n="gs.jump">🪷 괄사 사용법 바로 보기</a>
+    </div>
+  </section>
+
+  <!-- ────────── 괄사 사용법 ────────── -->
+  <section class="card" id="guasha">
+    <h2 data-i18n="s.guasha">🪷 괄사 사용법</h2>
+    <p data-i18n="gs.intro">웰컴 선물로 드린 괄사는 얼굴과 몸을 가볍게 마사지하는 도구입니다. 힘을 빼고, 크림이나 오일을 충분히 바른 뒤 천천히 사용해 주세요. 아래 내용은 원본 노션 가이드(Gua Sha Welcome Guide)를 그대로 옮긴 것입니다.</p>
+
+    <details class="fold" open>
+      <summary data-i18n="gs.1.t">1. 먼저 피부 반응을 확인하세요</summary>
+      <div class="fold-body">
+        <p data-i18n="gs.1.p">아래 5가지 중 3가지 이상 해당되면 피부가 자극에 예민할 수 있습니다. 그럴 때는 힘을 더 빼고 시간을 짧게 가져가세요.</p>
+        <ul class="list tight">
+          <li data-i18n="gs.1.a">운동 후 얼굴 붉은기가 30분 넘게 남는다</li>
+          <li data-i18n="gs.1.b">세안 직후 얼굴이 금방 따뜻해진다</li>
+          <li data-i18n="gs.1.c">기온 변화에 얼굴이 쉽게 달아오른다</li>
+          <li data-i18n="gs.1.d">괄사 후 붉은기가 1시간 넘게 남는다</li>
+          <li data-i18n="gs.1.e">볼이나 코 주변이 원래부터 붉은 편이다</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="fold">
+      <summary data-i18n="gs.2.t">2. 기본 규칙 — 힘이 세다고 좋은 게 아닙니다</summary>
+      <div class="fold-body">
+        <ul class="list tight">
+          <li data-i18n="gs.2.a">아프면 너무 센 것입니다. 편안하게 눌리는 정도가 맞습니다.</li>
+          <li data-i18n="gs.2.b">멍이 드는 것은 잘 풀렸다는 뜻이 아닙니다.</li>
+          <li data-i18n="gs.2.c">오래 한다고 더 좋지 않고, 방향이 중요합니다.</li>
+          <li data-i18n="gs.2.d">도구는 피부에 30~45°로 눕혀 대고, 크림이나 오일을 충분히 발라 미끄러지게 합니다.</li>
+        </ul>
+        <div class="note">
+          <span class="ico" aria-hidden="true">🔴</span>
+          <span data-i18n="gs.2.note">민감한 피부는 자극이 반복되면 열감 → 붉어짐 → 오래 남는 자극으로 이어질 수 있습니다. 사용 후 10~15분 안에 열감이 가라앉는지 보고, 붉은기가 30분 넘게 남으면 자극이 과한 것입니다.</span>
+        </div>
+      </div>
+    </details>
+
+    <details class="fold">
+      <summary data-i18n="gs.3.t">3. 도구 종류</summary>
+      <div class="fold-body">
+        <div class="gallery">
+          <figure class="photo">
+            <img src="images/guasha-comb.jpg" alt="빗살 모양 괄사" loading="lazy">
+            <figcaption data-i18n="gs.3.p1">빗살형 · 목·두피·어깨</figcaption>
+          </figure>
+          <figure class="photo">
+            <img src="images/guasha-heart.jpg" alt="하트 모양 괄사" loading="lazy">
+            <figcaption data-i18n="gs.3.p2">하트형 · 턱선·볼</figcaption>
+          </figure>
+          <figure class="photo">
+            <img src="images/guasha-roller.jpg" alt="롤러형 괄사" loading="lazy">
+            <figcaption data-i18n="gs.3.p3">롤러 · 열감·붓기</figcaption>
+          </figure>
+          <figure class="photo">
+            <img src="images/guasha-ceramic.jpg" alt="도자기 괄사" loading="lazy">
+            <figcaption data-i18n="gs.3.p4">도자기 · 초보자에게</figcaption>
+          </figure>
+        </div>
+        <ul class="list tight">
+          <li data-i18n="gs.3.a"><b>빗살형</b> 목, 두피, 어깨를 풀 때 편합니다.</li>
+          <li data-i18n="gs.3.b"><b>하트형</b> 턱선과 볼에 쓰기 좋습니다.</li>
+          <li data-i18n="gs.3.c"><b>롤러</b> 열감을 내리고 붓기를 뺄 때 좋습니다.</li>
+          <li data-i18n="gs.3.d"><b>도자기</b> 어느 부위에나 쓸 수 있고 위생적이라 처음 쓰기에 좋습니다.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="fold">
+      <summary data-i18n="gs.4.t">4. 움직이는 방향</summary>
+      <div class="fold-body">
+        <ul class="list tight">
+          <li data-i18n="gs.4.a">중심에서 바깥으로</li>
+          <li data-i18n="gs.4.b">아래에서 위로</li>
+          <li data-i18n="gs.4.c">한 방향으로만, 천천히</li>
+        </ul>
+        <figure class="photo">
+          <img src="images/guasha-direction.jpg" alt="얼굴 부위별 괄사 방향을 화살표로 표시한 그림" loading="lazy">
+          <figcaption data-i18n="gs.4.cap">화살표 방향으로 가볍게</figcaption>
+        </figure>
+        <div class="note">
+          <span class="ico" aria-hidden="true">🔴</span>
+          <span data-i18n="gs.4.note">앞뒤로 문지르면 마찰이 늘어 붉어질 수 있습니다. 민감한 피부는 여러 번 끄는 것보다 5초간 가볍게 눌러 두는 편이 낫습니다.</span>
+        </div>
+      </div>
+    </details>
+
+    <details class="fold">
+      <summary data-i18n="gs.5.t">5. 부위별 요령</summary>
+      <div class="fold-body">
+        <ul class="list tight">
+          <li data-i18n="gs.5.a"><b>목·쇄골</b> 아래·바깥쪽으로</li>
+          <li data-i18n="gs.5.b"><b>턱선</b> 귀 아래쪽으로</li>
+          <li data-i18n="gs.5.c"><b>볼</b> 귀 방향으로</li>
+          <li data-i18n="gs.5.d"><b>이마</b> 헤어라인 위로</li>
+        </ul>
+        <div class="note">
+          <span class="ico" aria-hidden="true">🔴</span>
+          <span data-i18n="gs.5.note">부위당 5~10회면 충분합니다. 얼굴만 하지 말고 목과 두피의 긴장도 가볍게 풀어 주세요.</span>
+        </div>
+      </div>
+    </details>
+
+    <details class="fold">
+      <summary data-i18n="gs.6.t">6. 시간과 횟수</summary>
+      <div class="fold-body">
+        <div class="facts">
+          <div class="row"><span class="k" data-i18n="gs.6.k1">보통 피부</span><span class="v" data-i18n="gs.6.v1">하루 5~10분 · 주 3~5회</span></div>
+          <div class="row"><span class="k" data-i18n="gs.6.k2">민감한 피부</span><span class="v" data-i18n="gs.6.v2">3~5분 이내 · 주 2~3회</span></div>
+        </div>
+      </div>
+    </details>
+
+    <details class="fold">
+      <summary data-i18n="gs.7.t">이럴 때는 사용을 멈춰 주세요</summary>
+      <div class="fold-body">
+        <ul class="list tight">
+          <li data-i18n="gs.7.a">괄사 후 피부가 따갑다</li>
+          <li data-i18n="gs.7.b">모세혈관이 더 도드라져 보인다</li>
+          <li data-i18n="gs.7.c">다음 날까지 붉은기가 남는다</li>
+          <li data-i18n="gs.7.d">작은 뾰루지나 열감이 늘어난다</li>
+        </ul>
+        <div class="note danger">
+          <span class="ico" aria-hidden="true">⚠️</span>
+          <span data-i18n="gs.7.note">리프팅 효과가 아니라 자극이나 염증의 신호일 수 있습니다. 잠시 쉬어 주세요.</span>
+        </div>
+      </div>
+    </details>
+
+    <div class="links">
+      <a class="linkbtn" href="https://app.notion.com/p/Gua-Sha-Welcome-Guide-333d8f743856808cb7abe0d43619d8c2" target="_blank" rel="noopener" data-i18n="gs.link">📘 원본 가이드 전체 보기</a>
+    </div>
   </section>
 
   <!-- ────────── 규칙 및 안전 ────────── -->
@@ -507,7 +867,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
   <!-- ────────── 분리수거 ────────── -->
   <section class="card" id="trash">
     <h2 data-i18n="s.trash">🗑️ 쓰레기 분리수거</h2>
-    <p style="margin:0 0 12px;font-size:14.5px" data-i18n="trash.intro">한국은 분리배출 규정이 엄격하고, 잘못 배출하면 과태료가 부과될 수 있습니다. 번거롭더라도 꼭 나눠 주세요.</p>
+    <p data-i18n="trash.intro">한국은 분리배출 규정이 엄격하고, 잘못 배출하면 과태료가 부과될 수 있습니다. 번거롭더라도 꼭 나눠 주세요.</p>
     <ul class="list">
       <li data-i18n="trash.general"><b>일반쓰레기</b> 흰색 종량제 봉투에 담아 주세요. 봉투는 싱크대 하부장에 있습니다.</li>
       <li data-i18n="trash.food"><b>음식물</b> 노란색 음식물 봉투에 담아 주세요.</li>
@@ -563,6 +923,74 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
     <div class="links">
       <a class="linkbtn" href="https://app.notion.com/p/ARN-Private-House-Guide-ver-332d8f743856802c9283ffcf3ee3b446" target="_blank" rel="noopener" data-i18n="area.guide.ko">📘 한국어 가이드</a>
       <a class="linkbtn" href="https://app.notion.com/p/ARN-Private-House-Guide-33bd8f7438568042a3f9fe7205663849" target="_blank" rel="noopener" data-i18n="area.guide.en">📘 English guide</a>
+    </div>
+  </section>
+
+  <!-- ────────── 자주 묻는 질문 ────────── -->
+  <section class="card" id="faq">
+    <h2 data-i18n="s.faq">💬 자주 묻는 질문</h2>
+    <p data-i18n="faq.lead">지난 게스트분들이 실제로 가장 많이 물어보신 내용입니다. 질문을 누르면 답이 펼쳐집니다.</p>
+    <div class="faq">
+      <details>
+        <summary data-i18n="faq.1.q">정확한 주소를 미리 알 수 있나요?</summary>
+        <div class="a" data-i18n="faq.1.a"><p>예약이 확정되면 체크인 당일 오전 9시에 주소와 오시는 길을 메시지로 보내드립니다. 그전에는 역삼동, 선릉역 도보 5분 거리라고만 안내드리고 있습니다.</p></div>
+      </details>
+      <details>
+        <summary data-i18n="faq.2.q">얼리 체크인이나 레이트 체크아웃이 가능한가요?</summary>
+        <div class="a" data-i18n="faq.2.a"><p>사전에 요청하시면 가능 여부를 확인해 드립니다. 체크인 3일 전부터 확정되며, 청소와 예약 일정에 따릅니다. 요금은 1~2시간 ₩100,000, 3시간 이상 ₩200,000입니다. 사전 요청 없는 이른 도착과 늦은 퇴실은 어렵습니다.</p></div>
+      </details>
+      <details>
+        <summary data-i18n="faq.3.q">체크인 전이나 체크아웃 후에 짐을 맡길 수 있나요?</summary>
+        <div class="a" data-i18n="faq.3.a"><p>네. 정문 왼쪽(벽 옆) 유리문 안 보관 공간을 쓰실 수 있습니다. 문 잠금 코드는 짐 보관을 요청하시면 메시지로 안내드립니다.</p></div>
+      </details>
+      <details>
+        <summary data-i18n="faq.4.q">주차는 어떻게 하나요?</summary>
+        <div class="a" data-i18n="faq.4.a"><p>건물 앞 지정 주차면 173-212번을 무료로 1대 쓰실 수 있습니다. 다른 차량의 자리는 비워 주세요.</p></div>
+      </details>
+      <details>
+        <summary data-i18n="faq.5.q">난방과 온수는 제공되나요?</summary>
+        <div class="a" data-i18n="faq.5.a"><p>네, 계절과 상관없이 온수와 난방을 쓰실 수 있습니다. 보일러 조절기는 1층 4인실 문 옆 벽에 있고, 온수만 쓸 때는 ‘온수 전용’, 바닥 난방까지 쓸 때는 난방 모드로 두시면 됩니다.</p></div>
+      </details>
+      <details>
+        <summary data-i18n="faq.6.q">에어컨이 갑자기 멈추거나 작동하지 않을 때는요?</summary>
+        <div class="a" data-i18n="faq.6.a"><p>천장형 에어컨 9대가 실외기 2대에 연결되어 있어, 방마다 냉방과 난방 모드를 섞으면 오류가 나 작동이 멈출 수 있습니다. 모든 에어컨을 끄고 5분 뒤 집 전체를 한 가지 모드로 다시 켜 주세요.</p></div>
+      </details>
+      <details>
+        <summary data-i18n="faq.7.q">세탁기는 있나요?</summary>
+        <div class="a" data-i18n="faq.7.a"><p>숙소 안에는 게스트용 세탁기가 없습니다. 도보 2분 거리 코인세탁소를 이용해 주세요. 지도 링크는 위 ‘주변 정보’에 있습니다.</p></div>
+      </details>
+      <details>
+        <summary data-i18n="faq.8.q">정원이나 테라스에서 담배를 피워도 되나요?</summary>
+        <div class="a" data-i18n="faq.8.a"><p>아니요. 실내는 물론 정원·테라스·입구까지 전 구역 금연입니다. 담배꽁초도 숙소 어디에도 버리지 말아 주세요.</p></div>
+      </details>
+      <details>
+        <summary data-i18n="faq.9.q">머무는 동안 정원 관리 스태프가 오나요?</summary>
+        <div class="a" data-i18n="faq.9.a"><p>네. 물 주기와 정비를 위해 야외만 잠시 방문할 수 있습니다. 실내에는 들어오지 않습니다.</p></div>
+      </details>
+      <details>
+        <summary data-i18n="faq.10.q">회의실은 어떻게 이용하나요?</summary>
+        <div class="a" data-i18n="faq.10.a"><p>숙박 게스트만 사전 예약으로 이용하실 수 있습니다. 4시간 ₩300,000, 6시간 ₩400,000, 1시간 추가 ₩70,000입니다. 메시지로 ① 날짜·시간 ② 인원 ③ 사용 목적을 알려 주세요.</p></div>
+      </details>
+      <details>
+        <summary data-i18n="faq.11.q">침대 구성과 최대 인원은 어떻게 되나요?</summary>
+        <div class="a" data-i18n="faq.11.a"><p>2인실 3개, 4인실 2개로 최대 14인까지 머무실 수 있습니다. 추가 침구가 필요하시면 메시지로 요청해 주세요(별도 비용).</p></div>
+      </details>
+      <details>
+        <summary data-i18n="faq.12.q">방문객이나 파티를 할 수 있나요?</summary>
+        <div class="a" data-i18n="faq.12.a"><p>예약에 등록된 게스트만 입장하실 수 있고, 방문객 출입과 파티는 불가합니다. 주거 지역인 점을 감안해 주세요.</p></div>
+      </details>
+      <details>
+        <summary data-i18n="faq.13.q">웰컴 선물과 괄사는 무료인가요?</summary>
+        <div class="a" data-i18n="faq.13.a"><p>네. 제주 탄산수와 김부각, 괄사 도구는 머무시는 동안 드리는 선물입니다. 괄사 사용법은 이 페이지의 ‘괄사 사용법’에서 바로 보실 수 있습니다.</p></div>
+      </details>
+      <details>
+        <summary data-i18n="faq.14.q">체크아웃은 몇 시까지인가요?</summary>
+        <div class="a" data-i18n="faq.14.a"><p>오전 11시까지입니다. 스태프가 체크아웃 약 30분 후 방문합니다. 떠나시기 전 조명·에어컨·보일러를 끄고, 문단속을 확인해 주세요.</p></div>
+      </details>
+    </div>
+    <div class="note info">
+      <span class="ico" aria-hidden="true">💬</span>
+      <span data-i18n="faq.more">여기에 없는 궁금증은 예약하신 앱의 메시지로 언제든 물어봐 주세요.</span>
     </div>
   </section>
 
@@ -708,7 +1136,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
       "gift.intro": "We have left a few welcome snacks and gifts for you. Please enjoy them.",
       "gift.water": "<b>Jeju sparkling water</b> mineral water made from lava seawater filtered through Jeju basalt.",
       "gift.kim": "<b>Gim bugak</b> handmade seaweed crisps made with Soando seaweed from Wando and Naju glutinous rice.",
-      "gift.guasha": "<b>A gua sha tool</b> is included too. How to use it, and more of our story, is in the original guide below.",
+      "gift.guasha": "<b>Gua Sha</b> is here too. How to use it, with photos, is in the Gua Sha guide just below.",
       "gift.photo": "Welcome gifts",
       "s.rules": "📌 House rules & safety",
       "rules.smoke": "<b>No smoking anywhere</b> not indoors, and not in the garden, on the terrace or at the entrance. Please never leave cigarette butts anywhere on the property.",
@@ -751,15 +1179,104 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
       "area.guide.en": "📘 English guide",
       "s.contact": "☎️ Contacts",
       "contact.app": "<b>Questions or problems during your stay</b> message us in the app you booked with; that reaches us fastest.",
-      "contact.phone": "<b>Host, urgent</b> <span class=\u0027tel\u0027>010-9397-1289</span> · if we cannot answer, please leave a text message.",
+      "contact.phone": "<b>Host, urgent</b> <span class='tel'>010-9397-1289</span> · if we cannot answer, please leave a text message.",
       "contact.emergency": "<b>Emergency numbers</b> fire and ambulance 119 · police 112 · medical advice 1339",
       "contact.tour": "<b>Interpretation</b> Korea Travel Hotline 1330 (English, Japanese, Chinese)",
       "contact.review": "⭐ Leave a Google review",
       "foot.addr": "Stay ARN · 34 Teheran-ro 55-gil, Gangnam-gu, Seoul · ARN STAY Corp.",
       "foot.note": "Photos and details on this page may be updated without notice.",
       "doc.title": "Stay ARN — House Guide",
-      "doc.desc": "Stay ARN in Gangnam: check-in, directions, door access, Wi-Fi, bedrooms, kitchen, meeting room, garden, house rules, recycling, the neighbourhood and emergency contacts, with photos, in four languages."
+      "doc.desc": "Stay ARN in Gangnam: check-in, directions, door access, Wi-Fi, bedrooms, kitchen, meeting room, garden, house rules, recycling, the neighbourhood and emergency contacts, with photos, in four languages.",
+      "stage.label": "Where are you now?",
+      "stage.1.t": "Before check-in",
+      "stage.1.s": "Getting here · parking · door",
+      "stage.2.t": "During your stay",
+      "stage.2.s": "Wi-Fi · kitchen · meeting room · garden",
+      "stage.3.t": "Need help",
+      "stage.3.s": "Contact · house rules · rubbish",
+      "s.guasha": "🪷 Gua Sha guide",
+      "s.faq": "💬 FAQ",
+      "house.lead": "Tap kitchen, living room, lights or boiler to open it.",
+      "gs.jump": "🪷 Open the Gua Sha guide",
+      "gs.intro": "The gua sha tool is our welcome gift — a gentle massage tool for the face and body. Keep the pressure light and use plenty of cream or oil. This page follows the original Notion guide (Gua Sha Welcome Guide).",
+      "gs.1.t": "1. Check your skin's reaction first",
+      "gs.1.p": "If three or more of the five below apply to you, your skin may be easily irritated. In that case use even less pressure and keep it short.",
+      "gs.1.a": "Redness lasts more than 30 minutes after exercise",
+      "gs.1.b": "Your face feels warm right after washing",
+      "gs.1.c": "Your face flushes easily when the temperature changes",
+      "gs.1.d": "Redness lasts more than an hour after gua sha",
+      "gs.1.e": "Your cheeks or nose are usually a little red",
+      "gs.2.t": "2. The basics — more pressure is not better",
+      "gs.2.a": "If it hurts, it is too strong. A comfortable, gentle press is right.",
+      "gs.2.b": "Bruising does not mean the muscles were released well.",
+      "gs.2.c": "Longer is not better, and direction matters.",
+      "gs.2.d": "Hold the tool at 30–45° to the skin and use enough cream or oil so it glides.",
+      "gs.2.note": "With sensitive skin, repeated stimulation can lead from warmth to redness to irritation that lingers. Check whether the warmth settles within 10–15 minutes; if redness lasts over 30 minutes, it was too much.",
+      "gs.3.t": "3. Types of tools",
+      "gs.3.p1": "Comb · neck, scalp, shoulders",
+      "gs.3.p2": "Heart · jawline and cheeks",
+      "gs.3.p3": "Roller · heat and puffiness",
+      "gs.3.p4": "Ceramic · good for beginners",
+      "gs.3.a": "<b>Comb</b> is handy for the neck, scalp and shoulders.",
+      "gs.3.b": "<b>Heart</b> works well on the jawline and cheeks.",
+      "gs.3.c": "<b>Roller</b> is good for cooling and reducing puffiness.",
+      "gs.3.d": "<b>Ceramic</b> suits any area, is hygienic and is the easiest to start with.",
+      "gs.4.t": "4. Direction of movement",
+      "gs.4.a": "From the centre outward",
+      "gs.4.b": "From bottom to top",
+      "gs.4.c": "One direction only, slowly",
+      "gs.4.cap": "Gently, in the direction of the arrows",
+      "gs.4.note": "Rubbing back and forth adds friction and can redden the skin. With sensitive skin, a light 5-second hold is better than repeated strokes.",
+      "gs.5.t": "5. By area",
+      "gs.5.a": "<b>Neck & collarbone</b> downward and outward",
+      "gs.5.b": "<b>Jawline</b> toward below the ears",
+      "gs.5.c": "<b>Cheeks</b> toward the ears",
+      "gs.5.d": "<b>Forehead</b> upward to the hairline",
+      "gs.5.note": "5–10 strokes per area is enough. Don't stop at the face — gently release the neck and scalp too.",
+      "gs.6.t": "6. How long and how often",
+      "gs.6.k1": "Normal skin",
+      "gs.6.v1": "5–10 minutes a day · 3–5 times a week",
+      "gs.6.k2": "Sensitive skin",
+      "gs.6.v2": "Within 3–5 minutes · 2–3 times a week",
+      "gs.7.t": "Stop using it if…",
+      "gs.7.a": "Your skin stings after gua sha",
+      "gs.7.b": "Capillaries look more visible",
+      "gs.7.c": "Redness is still there the next day",
+      "gs.7.d": "Small bumps or heat increase",
+      "gs.7.note": "That may be a sign of irritation or inflammation rather than lifting. Give it a rest.",
+      "gs.link": "📘 Open the original guide",
+      "faq.lead": "These are the questions guests actually ask most. Tap a question to see the answer.",
+      "faq.1.q": "Can I have the exact address in advance?",
+      "faq.1.a": "<p>Once your booking is confirmed, we send the address and arrival details by message at 9:00 AM on your check-in day. Before that we only say it is in Yeoksam-dong, a 5-minute walk from Seolleung Station.</p>",
+      "faq.2.q": "Is early check-in or late check-out possible?",
+      "faq.2.a": "<p>On prior request we will check availability. It is confirmed from 3 days before, depending on cleaning and bookings. The fee is ₩100,000 for 1–2 hours and ₩200,000 for 3 hours or more. Unannounced early arrivals and late departures are not possible.</p>",
+      "faq.3.q": "Can I leave luggage before check-in or after check-out?",
+      "faq.3.a": "<p>Yes. Use the storage room through the glass door on the left of the main gate (next to the wall). We send the door code when you ask to leave your bags.</p>",
+      "faq.4.q": "How does parking work?",
+      "faq.4.a": "<p>You can use one free space, No. 173-212, directly in front of the building. Please leave the other cars' spaces free.</p>",
+      "faq.5.q": "Is heating and hot water available?",
+      "faq.5.a": "<p>Yes, hot water and heating work in every season. The boiler control is on the wall beside the ground-floor quad room: use hot water only for water, and heating mode to warm the floors.</p>",
+      "faq.6.q": "What if the air conditioning stops working?",
+      "faq.6.a": "<p>Nine ceiling units run off two outdoor units, so mixing cooling and heating around the house can trigger an error and stop them. Turn every unit off, wait 5 minutes, then start them again in one mode only.</p>",
+      "faq.7.q": "Is there a washing machine?",
+      "faq.7.a": "<p>There is no guest washing machine in the house. There is a coin laundry a 2-minute walk away; the map link is in Around the house above.</p>",
+      "faq.8.q": "Can I smoke in the garden or on the terrace?",
+      "faq.8.a": "<p>No. The whole property is non-smoking, indoors and out, including the garden, terrace and entrance. Please do not leave cigarette butts anywhere either.</p>",
+      "faq.9.q": "Will garden staff come during my stay?",
+      "faq.9.a": "<p>Yes. Our garden team may briefly visit the outdoor area to water and tidy the plants. They do not come inside.</p>",
+      "faq.10.q": "How do I use the meeting room?",
+      "faq.10.a": "<p>It is available to staying guests by prior booking: ₩300,000 for 4 hours, ₩400,000 for 6 hours, ₩70,000 per extra hour. Message us the date and time, the number of people and what it is for.</p>",
+      "faq.11.q": "What are the beds and the maximum number of guests?",
+      "faq.11.a": "<p>Three double rooms and two quad rooms, up to 14 guests. If you need extra bedding, message us (additional charge).</p>",
+      "faq.12.q": "Can I have visitors or a party?",
+      "faq.12.a": "<p>Only registered guests may enter, and visitors and parties are not allowed. Please remember this is a residential street.</p>",
+      "faq.13.q": "Are the welcome gifts and the gua sha free?",
+      "faq.13.a": "<p>Yes. The Jeju sparkling water, the seaweed crisps and the gua sha tool are gifts for your stay. How to use the gua sha is in the Gua Sha guide on this page.</p>",
+      "faq.14.q": "What time is check-out?",
+      "faq.14.a": "<p>By 11:00 AM. Our staff come about 30 minutes after check-out. Before you leave, turn off the lights, air conditioning and boiler, and lock up.</p>",
+      "faq.more": "If anything else comes up, message us any time in the app you booked with."
     },
+
     ja: {
       "brand.name": "ステイ アーン",
       "brand.sub": "江南 · プライベートハウス",
@@ -878,7 +1395,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
       "gift.intro": "ウェルカムのお菓子とギフトをご用意しています。どうぞお召し上がりください。",
       "gift.water": "<b>済州の炭酸水</b> 済州の玄武岩を自然のフィルターとしてろ過した溶岩海水で作ったミネラルウォーターです。",
       "gift.kim": "<b>キムブガク</b> 莞島の素安島のりと羅州の白玉もち米で作った手作りの海苔チップスです。",
-      "gift.guasha": "<b>カッサ</b>もご用意しています。使い方と詳しいお話は下のオリジナルガイドをご覧ください。",
+      "gift.guasha": "<b>かっさ</b>も置いています。使い方はすぐ下の「かっさの使い方」で写真と一緒にご覧いただけます。",
       "gift.photo": "ウェルカムギフト",
       "s.rules": "📌 ご滞在ルールと安全",
       "rules.smoke": "<b>敷地内すべて禁煙</b> 室内はもちろん、庭・テラス・入口を含む敷地内すべてで喫煙できません。吸い殻も敷地内に捨てないでください。",
@@ -921,15 +1438,104 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
       "area.guide.en": "📘 英語ガイド",
       "s.contact": "☎️ 緊急連絡先",
       "contact.app": "<b>ご滞在中のご質問・トラブル</b> ご予約のアプリのメッセージでご連絡ください。一番早く対応できます。",
-      "contact.phone": "<b>運営者（緊急）</b> <span class=\u0027tel\u0027>010-9397-1289</span>・通話に出られない場合はメッセージをお残しください。",
+      "contact.phone": "<b>運営者（緊急）</b> <span class='tel'>010-9397-1289</span>・通話に出られない場合はメッセージをお残しください。",
       "contact.emergency": "<b>緊急電話</b> 消防・救急 119・警察 112・医療相談 1339",
       "contact.tour": "<b>通訳案内</b> 観光通訳案内 1330（英語・日本語・中国語）",
       "contact.review": "⭐ Google レビューを書く",
       "foot.addr": "ステイ アーン・ソウル 江南区 テヘラン路55キル 34・ARN STAY Corp.",
       "foot.note": "本ページの写真・内容は予告なく更新される場合があります。",
       "doc.title": "ステイ アーン ご利用案内",
-      "doc.desc": "江南のステイ アーン：チェックイン、アクセス、入室、Wi-Fi、客室、キッチン、会議室、庭、ご滞在ルール、ゴミ分別、周辺情報、緊急連絡先を写真と4言語でご案内します。"
+      "doc.desc": "江南のステイ アーン：チェックイン、アクセス、入室、Wi-Fi、客室、キッチン、会議室、庭、ご滞在ルール、ゴミ分別、周辺情報、緊急連絡先を写真と4言語でご案内します。",
+      "stage.label": "いま、どの場面ですか？",
+      "stage.1.t": "チェックイン前",
+      "stage.1.s": "道順・駐車・入室",
+      "stage.2.t": "滞在中",
+      "stage.2.s": "Wi-Fi・キッチン・会議室・庭",
+      "stage.3.t": "困ったとき",
+      "stage.3.s": "連絡先・ルール・ゴミ",
+      "s.guasha": "🪷 かっさの使い方",
+      "s.faq": "💬 よくある質問",
+      "house.lead": "キッチン・リビング・照明・ボイラーをタップすると開きます。",
+      "gs.jump": "🪷 かっさの使い方を見る",
+      "gs.intro": "かっさはウェルカムギフトとしてお渡ししている、顔と体をやさしくマッサージする道具です。力を抜いて、クリームかオイルを十分に塗ってからゆっくりお使いください。この内容は元のNotionガイド（Gua Sha Welcome Guide）をそのまま移したものです。",
+      "gs.1.t": "1. まず肌の反応を確認",
+      "gs.1.p": "次の5つのうち3つ以上当てはまる方は、肌が刺激に敏感かもしれません。その場合はさらに力を抜いて、短い時間にしてください。",
+      "gs.1.a": "運動後、顔の赤みが30分以上残る",
+      "gs.1.b": "洗顔直後に顔がすぐ温かくなる",
+      "gs.1.c": "気温の変化で顔がほてりやすい",
+      "gs.1.d": "かっさ後、赤みが1時間以上残る",
+      "gs.1.e": "頬や小鼻の周りがもともと赤い",
+      "gs.2.t": "2. 基本のルール — 強いほど良いわけではありません",
+      "gs.2.a": "痛ければ強すぎます。心地よく押される程度が適切です。",
+      "gs.2.b": "あざになるのは、よくほぐれたという意味ではありません。",
+      "gs.2.c": "長くやれば良いわけではなく、方向が大切です。",
+      "gs.2.d": "道具は肌に30〜45°で寝かせ、クリームやオイルを十分に塗って滑らせます。",
+      "gs.2.note": "敏感な肌は刺激を繰り返すと、ほてり→赤み→長く残る刺激につながります。使用後10〜15分でほてりが収まるか確認し、赤みが30分以上残るなら刺激が強すぎます。",
+      "gs.3.t": "3. 道具の種類",
+      "gs.3.p1": "くし型・首・頭皮・肩",
+      "gs.3.p2": "ハート型・フェイスライン・頬",
+      "gs.3.p3": "ローラー・ほてり・むくみ",
+      "gs.3.p4": "陶器・初心者に",
+      "gs.3.a": "<b>くし型</b>は首・頭皮・肩をほぐすのに便利です。",
+      "gs.3.b": "<b>ハート型</b>はフェイスラインと頬に。",
+      "gs.3.c": "<b>ローラー</b>はほてりを下げ、むくみを取るのに向いています。",
+      "gs.3.d": "<b>陶器</b>はどの部位にも使え、衛生的で初めての方にも使いやすいです。",
+      "gs.4.t": "4. 動かす方向",
+      "gs.4.a": "中心から外へ",
+      "gs.4.b": "下から上へ",
+      "gs.4.c": "一方向に、ゆっくり",
+      "gs.4.cap": "矢印の方向にやさしく",
+      "gs.4.note": "前後にこすると摩擦が増えて赤くなることがあります。敏感な肌は何度も滑らせるより、5秒ほど軽く押さえるほうが良いです。",
+      "gs.5.t": "5. 部位別のコツ",
+      "gs.5.a": "<b>首・鎖骨</b> 下・外側へ",
+      "gs.5.b": "<b>フェイスライン</b> 耳の下へ",
+      "gs.5.c": "<b>頬</b> 耳のほうへ",
+      "gs.5.d": "<b>額</b> 生え際へ上に",
+      "gs.5.note": "部位ごとに5〜10回で十分です。顔だけでなく、首と頭皮の緊張も軽くほぐしてください。",
+      "gs.6.t": "6. 時間と回数",
+      "gs.6.k1": "普通肌",
+      "gs.6.v1": "1日5〜10分・週3〜5回",
+      "gs.6.k2": "敏感な肌",
+      "gs.6.v2": "3〜5分以内・週2〜3回",
+      "gs.7.t": "こんなときは使うのをやめてください",
+      "gs.7.a": "かっさ後に肌がひりひりする",
+      "gs.7.b": "毛細血管が目立って見える",
+      "gs.7.c": "翌日まで赤みが残る",
+      "gs.7.d": "小さな吹き出物やほてりが増える",
+      "gs.7.note": "リフトアップではなく、刺激や炎症のサインかもしれません。少し休ませてください。",
+      "gs.link": "📘 元のガイドを全部見る",
+      "faq.lead": "これまでのゲストが実際に一番多く聞かれた内容です。質問をタップすると答えが開きます。",
+      "faq.1.q": "正確な住所を事前に知ることはできますか？",
+      "faq.1.a": "<p>予約確定後、チェックイン当日の午前9時に住所と道順をメッセージでお送りします。それまでは駅三洞（ヨクサムドン）、ソンヌン駅から徒歩5分とだけお伝えしています。</p>",
+      "faq.2.q": "アーリーチェックインやレイトチェックアウトはできますか？",
+      "faq.2.a": "<p>事前のご依頼で空きを確認します。チェックイン3日前から確定し、清掃と予約状況によります。料金は1〜2時間 ₩100,000、3時間以上 ₩200,000です。事前連絡なしの早着や遅い出発はお受けできません。</p>",
+      "faq.3.q": "チェックイン前・チェックアウト後に荷物を預けられますか？",
+      "faq.3.a": "<p>はい。正面ゲート左（壁側）のガラス扉の奥の保管スペースをご利用ください。ロックの暗証番号は預ける際にお知らせします。</p>",
+      "faq.4.q": "駐車はどうすればいいですか？",
+      "faq.4.a": "<p>建物前の指定駐車区画173-212を無料で1台ご利用いただけます。他の車の区画は空けておいてください。</p>",
+      "faq.5.q": "暖房とお湯は使えますか？",
+      "faq.5.a": "<p>はい、季節を問わずお湯と暖房が使えます。ボイラー調節器は1階4人部屋のドア横の壁にあり、お湯だけなら「給湯専用」、床暖房まで使うなら暖房モードにしてください。</p>",
+      "faq.6.q": "エアコンが止まったり動かないときは？",
+      "faq.6.a": "<p>天井型エアコン9台が室外機2台につながっているため、部屋ごとに冷房と暖房を混ぜるとエラーで止まることがあります。すべてのエアコンを切り、5分後に家全体を1つのモードで入れ直してください。</p>",
+      "faq.7.q": "洗濯機はありますか？",
+      "faq.7.a": "<p>宿の中にゲスト用の洗濯機はありません。徒歩2分のコインランドリーをご利用ください。地図リンクは上の「周辺情報」にあります。</p>",
+      "faq.8.q": "庭やテラスでたばこを吸えますか？",
+      "faq.8.a": "<p>いいえ。室内はもちろん、庭・テラス・入口まで全エリア禁煙です。吸い殻も敷地内のどこにも捨てないでください。</p>",
+      "faq.9.q": "滞在中に庭の管理スタッフが来ますか？",
+      "faq.9.a": "<p>はい。水やりと手入れのため屋外に短時間入ることがあります。室内には入りません。</p>",
+      "faq.10.q": "会議室はどう使いますか？",
+      "faq.10.a": "<p>宿泊ゲストのみ事前予約で利用できます。4時間 ₩300,000、6時間 ₩400,000、1時間追加 ₩70,000です。メッセージで日時・人数・利用目的をお知らせください。</p>",
+      "faq.11.q": "ベッドの構成と最大人数は？",
+      "faq.11.a": "<p>2人部屋3つ、4人部屋2つで最大14名です。追加の寝具が必要な場合はメッセージでご依頼ください（別料金）。</p>",
+      "faq.12.q": "訪問者やパーティーはできますか？",
+      "faq.12.a": "<p>予約に登録されたゲストのみ入室でき、訪問者の入室やパーティーはできません。住宅街である点をご了承ください。</p>",
+      "faq.13.q": "ウェルカムギフトとかっさは無料ですか？",
+      "faq.13.a": "<p>はい。済州のスパークリングウォーター、キムブガク、かっさはご滞在用のギフトです。かっさの使い方はこのページの「かっさの使い方」でご覧いただけます。</p>",
+      "faq.14.q": "チェックアウトは何時ですか？",
+      "faq.14.a": "<p>午前11時までです。チェックアウトの約30分後にスタッフが伺います。出る前に照明・エアコン・ボイラーを切り、戸締まりをご確認ください。</p>",
+      "faq.more": "ここにない疑問は、予約したアプリのメッセージでいつでもお尋ねください。"
     },
+
     zh: {
       "brand.name": "STAY ARN",
       "brand.sub": "江南 · 私人住宅",
@@ -1048,7 +1654,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
       "gift.intro": "我们准备了迎宾小食与礼物，请随意享用。",
       "gift.water": "<b>济州气泡水</b> 以济州玄武岩天然过滤的熔岩海水制成的矿泉水。",
       "gift.kim": "<b>海苔脆片</b> 用莞岛素安岛海苔与罗州白玉糯米手工制作。",
-      "gift.guasha": "<b>刮痧板</b>也已备好，使用方法和更多故事请看下方原版指南。",
+      "gift.guasha": "<b>刮痧板</b>也放在这里。用法可在下面的“刮痧板用法”中配合照片查看。",
       "gift.photo": "迎宾礼物",
       "s.rules": "📌 入住须知与安全",
       "rules.smoke": "<b>全区禁烟</b> 室内以及花园、露台、入口等任何区域都禁止吸烟，请勿在房源任何位置丢弃烟头。",
@@ -1091,14 +1697,102 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
       "area.guide.en": "📘 英语指南",
       "s.contact": "☎️ 紧急联络",
       "contact.app": "<b>入住期间的咨询与问题</b> 请通过预订所用 App 的消息联系我们，这是最快的联系方式。",
-      "contact.phone": "<b>房东（紧急）</b> <span class=\u0027tel\u0027>010-9397-1289</span> · 如未接听，请留下短信。",
+      "contact.phone": "<b>房东（紧急）</b> <span class='tel'>010-9397-1289</span> · 如未接听，请留下短信。",
       "contact.emergency": "<b>紧急电话</b> 消防与急救 119 · 警察 112 · 医疗咨询 1339",
       "contact.tour": "<b>翻译服务</b> 旅游翻译热线 1330（支持英语、日语、中文）",
       "contact.review": "⭐ 留下 Google 评价",
       "foot.addr": "STAY ARN · 首尔江南区 Teheran-ro 55-gil 34 · ARN STAY Corp.",
       "foot.note": "本页照片与内容可能随时更新，恕不另行通知。",
       "doc.title": "STAY ARN 入住指南",
-      "doc.desc": "江南 STAY ARN：入住、交通、门禁、Wi-Fi、卧室、厨房、会议室、花园、入住须知、垃圾分类、周边信息与紧急联络，附照片，四种语言说明。"
+      "doc.desc": "江南 STAY ARN：入住、交通、门禁、Wi-Fi、卧室、厨房、会议室、花园、入住须知、垃圾分类、周边信息与紧急联络，附照片，四种语言说明。",
+      "stage.label": "现在是什么情况？",
+      "stage.1.t": "入住前",
+      "stage.1.s": "路线 · 停车 · 门锁",
+      "stage.2.t": "入住期间",
+      "stage.2.s": "Wi-Fi · 厨房 · 会议室 · 花园",
+      "stage.3.t": "需要帮助时",
+      "stage.3.s": "联系方式 · 规则 · 垃圾分类",
+      "s.guasha": "🪷 刮痧板用法",
+      "s.faq": "💬 常见问题",
+      "house.lead": "点击厨房、客厅、照明或锅炉即可展开。",
+      "gs.jump": "🪷 查看刮痧板用法",
+      "gs.intro": "刮痧板是送给您的欢迎礼物，用来轻轻按摩面部和身体。请放松力度，充分涂抹面霜或精油后慢慢使用。以下内容照原 Notion 指南（Gua Sha Welcome Guide）移录。",
+      "gs.1.t": "1. 先确认皮肤反应",
+      "gs.1.p": "下面5项中有3项以上符合，说明皮肤可能对刺激比较敏感。那就把力度再放轻、时间缩短。",
+      "gs.1.a": "运动后脸部泛红超过30分钟",
+      "gs.1.b": "洗脸后脸部很快变热",
+      "gs.1.c": "气温变化时脸部容易发红",
+      "gs.1.d": "刮痧后泛红超过1小时",
+      "gs.1.e": "脸颊或鼻翼周围本来就偏红",
+      "gs.2.t": "2. 基本规则 — 力度大不一定好",
+      "gs.2.a": "如果疼，就是太重了。按下去舒服的力度才合适。",
+      "gs.2.b": "出现淤青并不代表肌肉放松得好。",
+      "gs.2.c": "时间越长不一定越好，方向更重要。",
+      "gs.2.d": "工具与皮肤保持30~45°，涂足面霜或精油让它顺滑。",
+      "gs.2.note": "敏感皮肤反复刺激，会从发热→泛红→长时间不适。用后10~15分钟内看热度是否消退，若泛红超过30分钟就是刺激过度。",
+      "gs.3.t": "3. 工具种类",
+      "gs.3.p1": "梳型 · 颈部、头皮、肩",
+      "gs.3.p2": "心型 · 下颌线、脸颊",
+      "gs.3.p3": "滚轮 · 退热、消肿",
+      "gs.3.p4": "陶瓷 · 适合新手",
+      "gs.3.a": "<b>梳型</b>适合放松颈部、头皮和肩部。",
+      "gs.3.b": "<b>心型</b>适合下颌线和脸颊。",
+      "gs.3.c": "<b>滚轮</b>适合降温、消除浮肿。",
+      "gs.3.d": "<b>陶瓷</b>各个部位都能用，卫生又好上手。",
+      "gs.4.t": "4. 移动方向",
+      "gs.4.a": "由中心向外",
+      "gs.4.b": "由下向上",
+      "gs.4.c": "只朝一个方向，慢慢来",
+      "gs.4.cap": "顺着箭头方向轻轻刮",
+      "gs.4.note": "来回摩擦会增加摩擦、容易发红。敏感皮肤与其反复拖动，不如轻按5秒。",
+      "gs.5.t": "5. 各部位要点",
+      "gs.5.a": "<b>颈部 · 锁骨</b> 向下、向外",
+      "gs.5.b": "<b>下颌线</b> 朝耳下",
+      "gs.5.c": "<b>脸颊</b> 朝耳朵方向",
+      "gs.5.d": "<b>额头</b> 向上到发际线",
+      "gs.5.note": "每个部位5~10次就足够。别只做脸，颈部和头皮的紧张也轻轻放松一下。",
+      "gs.6.t": "6. 时间与次数",
+      "gs.6.k1": "普通皮肤",
+      "gs.6.v1": "每天5~10分钟 · 每周3~5次",
+      "gs.6.k2": "敏感皮肤",
+      "gs.6.v2": "3~5分钟以内 · 每周2~3次",
+      "gs.7.t": "出现这些情况请停止使用",
+      "gs.7.a": "刮痧后皮肤刺痛",
+      "gs.7.b": "毛细血管看起来更明显",
+      "gs.7.c": "到第二天仍然泛红",
+      "gs.7.d": "小疹子或发热感增加",
+      "gs.7.note": "这可能不是提拉效果，而是刺激或发炎的信号。请先停一停。",
+      "gs.link": "📘 打开原版指南",
+      "faq.lead": "这些都是过去客人实际最常问的问题。点击问题即可查看回答。",
+      "faq.1.q": "可以提前知道确切地址吗？",
+      "faq.1.a": "<p>预订确认后，我们会在入住当天上午9点用消息发送地址和路线。在此之前只告知位于驿三洞、宣陵站步行5分钟。</p>",
+      "faq.2.q": "可以提前入住或延后退房吗？",
+      "faq.2.a": "<p>提前申请可以为您确认。入住3天前开始确认，视清洁和预订情况而定。费用为1~2小时 ₩100,000，3小时以上 ₩200,000。未提前申请的早到和晚退无法安排。</p>",
+      "faq.3.q": "入住前或退房后可以寄存行李吗？",
+      "faq.3.a": "<p>可以。请使用正门左侧（墙边）玻璃门内的存放空间。门锁密码会在您提出寄存时用消息告知。</p>",
+      "faq.4.q": "停车怎么安排？",
+      "faq.4.a": "<p>可使用楼前指定车位173-212，免费一台。请勿占用其他车辆的位置。</p>",
+      "faq.5.q": "有暖气和热水吗？",
+      "faq.5.a": "<p>有，任何季节都有热水和暖气。锅炉控制器在一楼四人房门旁的墙上，只用热水选“热水专用”，需要地暖则选供暖模式。</p>",
+      "faq.6.q": "空调突然停止或不制冷怎么办？",
+      "faq.6.a": "<p>九台天花板空调连接两台室外机，各房间冷暖气模式混用会报错停机。请把所有空调关掉，等5分钟后整栋只用一种模式重新开启。</p>",
+      "faq.7.q": "有洗衣机吗？",
+      "faq.7.a": "<p>屋内没有供客人使用的洗衣机。请使用步行2分钟的投币洗衣店，地图链接在上方“周边信息”中。</p>",
+      "faq.8.q": "可以在花园或露台吸烟吗？",
+      "faq.8.a": "<p>不可以。室内、花园、露台和入口全部禁烟。烟头也不要丢在住所任何地方。</p>",
+      "faq.9.q": "入住期间会有花园管理员工来吗？",
+      "faq.9.a": "<p>会。为浇水和整理，他们可能短暂进入室外区域，不会进入室内。</p>",
+      "faq.10.q": "会议室怎么使用？",
+      "faq.10.a": "<p>仅限住客提前预约：4小时 ₩300,000，6小时 ₩400,000，每加1小时 ₩70,000。请用消息告知日期时间、人数和用途。</p>",
+      "faq.11.q": "床型如何，最多几人？",
+      "faq.11.a": "<p>三间双人房、两间四人房，最多14人。需要加床品请用消息告知（另收费）。</p>",
+      "faq.12.q": "可以带访客或办派对吗？",
+      "faq.12.a": "<p>仅限预订登记的住客入内，访客和派对不可。这里属于住宅区，请谅解。</p>",
+      "faq.13.q": "欢迎礼物和刮痧板是免费的吗？",
+      "faq.13.a": "<p>是的。济州气泡水、紫菜脆片和刮痧板都是入住期间赠送的礼物。用法可在本页“刮痧板用法”查看。</p>",
+      "faq.14.q": "退房时间是几点？",
+      "faq.14.a": "<p>上午11点前。工作人员会在退房约30分钟后到访。离开前请关灯、关空调和锅炉，并确认门锁。</p>",
+      "faq.more": "这里没有的问题，随时在预订的App里发消息问我们。"
     }
   };
 
