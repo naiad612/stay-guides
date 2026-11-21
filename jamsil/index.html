@@ -182,6 +182,20 @@
   .card-small { margin: 4px 0 0; font-size: 16px; color: var(--muted); }
   .card + .card { margin-top: 12px; }
 
+  /* 주문 사이트 카드 (음식 배달) */
+  .apps { display: grid; gap: 12px; }
+  .app { padding: 18px; border-radius: 14px; border: 1px solid var(--line); background: #FFFFFF; box-shadow: var(--shadow); }
+  .app-head { display: flex; align-items: center; gap: 12px; }
+  .app-ic { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; width: 44px; height: 44px; border-radius: 12px; background: var(--tint); color: var(--accent); }
+  .app-ic svg { width: 24px; height: 24px; }
+  .app-name { margin: 0; font-size: 20px; font-weight: 800; line-height: 1.25; }
+  .app-tag { margin: 3px 0 0; font-size: 16px; color: var(--muted); line-height: 1.4; }
+  .app-desc { margin: 12px 0 0; font-size: 16px; color: #4A4A4A; line-height: 1.55; }
+  .app-facts { list-style: none; margin: 10px 0 0; padding: 0; }
+  .app-facts li { position: relative; padding: 4px 0 4px 16px; font-size: 16px; color: var(--muted); line-height: 1.45; }
+  .app-facts li::before { content: ""; position: absolute; left: 2px; top: 14px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); opacity: 0.45; }
+  .app .btn { margin-top: 14px; }
+
   /* 버튼 */
   .btn {
     display: flex; align-items: center; justify-content: center; width: 100%; min-height: 52px; margin-top: 12px; padding: 12px 16px;
@@ -812,10 +826,10 @@ var CONFIG = {
     "delivery",
     "scooter",
     {
-     "ko": "배달 주소 자동 입력",
-     "en": "Delivery, address filled in",
-     "ja": "配達・住所入力済み",
-     "zh": "外卖 · 地址已填好"
+     "ko": "코리아오더 · 셔틀 주문",
+     "en": "Order food delivery",
+     "ja": "フードデリバリーを注文",
+     "zh": "点外卖"
     }
    ]
   ]
@@ -1339,10 +1353,10 @@ var CONFIG = {
       "delivery",
       "scooter",
       {
-       "ko": "배달앱 · 주소 입력 요령",
-       "en": "Delivery apps · address tips",
-       "ja": "デリバリー・住所の入れ方",
-       "zh": "外卖App · 地址填写方法"
+       "ko": "코리아오더 · 셔틀 · 주소 입력",
+       "en": "Korea Order · Shuttle · address",
+       "ja": "コリアオーダー・シャトル・住所",
+       "zh": "Korea Order · Shuttle · 地址"
       }
      ]
     ]
@@ -1385,10 +1399,10 @@ var CONFIG = {
       "airport",
       "plane",
       {
-       "ko": "인천공항에서 오는 방법",
-       "en": "Getting here from Incheon",
-       "ja": "仁川空港からの道順",
-       "zh": "从仁川机场过来"
+       "ko": "인천공항 · 김포공항 오는 길",
+       "en": "From Incheon or Gimpo Airport",
+       "ja": "仁川空港・金浦空港からの道順",
+       "zh": "从仁川机场·金浦机场过来"
       }
      ],
      [
@@ -1515,10 +1529,10 @@ var CONFIG = {
       "delivery",
       "scooter",
       {
-       "ko": "배달앱 · 주소 입력",
-       "en": "Delivery apps · address",
-       "ja": "デリバリー・住所",
-       "zh": "外卖App · 地址"
+       "ko": "코리아오더 · 셔틀 딜리버리",
+       "en": "Korea Order · Shuttle",
+       "ja": "コリアオーダー・シャトル",
+       "zh": "Korea Order · Shuttle"
       }
      ]
     ]
@@ -1665,10 +1679,10 @@ var CONFIG = {
   "words": {
    "wifi": "와이파이 인터넷 비밀번호 wifi wi-fi internet password ネット 无线 密码",
    "arrive": "체크인 입실 도어락 비밀번호 공동현관 입구 주차 check-in door lock entrance parking 入住 门锁 入口 停车",
-   "airport": "공항 인천공항 공항버스 리무진 6006 공항철도 삼전역 airport incheon bus arex subway 机场 仁川 机场巴士 地铁",
+   "airport": "공항 인천공항 김포공항 공항버스 리무진 6006 공항철도 지하철 삼전역 9호선 airport incheon gimpo bus arex subway line9 机场 仁川 金浦 机场巴士 地铁",
    "luggage": "짐 보관 캐리어 물품보관함 삼전역 얼리 luggage storage locker 行李 寄存",
    "taxi": "택시 밴 우버 카카오 공항 taxi van uber kakao airport 出租车 打车 面包车 机场",
-   "delivery": "배달 음식 주문 배달앱 셔틀 delivery food order shuttle 外卖 点餐",
+   "delivery": "배달 음식 주문 배달앱 코리아오더 셔틀 딜리버리 korea order shuttle delivery food 外卖 点餐",
    "spaces": "숙소 공간 침실 소파베드 침대 6인 rooms bedroom sofa bed 房间 沙发床",
    "facilities": "온수 보일러 세탁기 건조기 에어컨 냉방 heating hot water washer dryer air conditioner 热水 洗衣机 烘干机 空调",
    "rules": "규칙 금연 정숙 소음 변기 rules smoking quiet noise toilet 规则 禁烟 安静 马桶",
@@ -1828,10 +1842,10 @@ var CONFIG = {
      "items": [
       [
        {
-        "ko": "인천공항에서 오시는 길",
-        "en": "From Incheon Airport",
-        "ja": "仁川空港からの道順",
-        "zh": "从仁川机场过来"
+        "ko": "공항에서 오시는 길",
+        "en": "From the airport",
+        "ja": "空港からの道順",
+        "zh": "从机场过来"
        },
        "airport"
       ],
@@ -1980,68 +1994,6 @@ var CONFIG = {
      }
     },
     {
-     "type": "heading",
-     "text": {
-      "ko": "체크아웃",
-      "en": "Check-out",
-      "ja": "チェックアウト",
-      "zh": "退房"
-     },
-     "sub": ""
-    },
-    {
-     "type": "text",
-     "text": [
-      {
-       "ko": "체크아웃 오전 11시(11:00)까지입니다. 퇴실하실 때 메시지를 남겨 주시면 15분 뒤 스태프가 방문합니다.",
-       "en": "Check-out by 11:00 AM. Send us a message when you leave and our staff will come 15 minutes later.",
-       "ja": "チェックアウト 11:00までです。ご出発の際にメッセージをいただければ、15分後にスタッフが伺います。",
-       "zh": "退房 上午 11:00 之前。离开时请留言告知，15 分钟后工作人员会上门。"
-      },
-      {
-       "ko": "얼리 체크인 · 레이트 체크아웃 · 숙소 내 짐 보관 단독 세대에 청소·정비 일정(11:00~15:00)이 있어 어렵습니다.",
-       "en": "Early check-in · Late check-out · Luggage storage are not possible: this is a single-unit flat with same-day cleaning and preparation from 11:00 to 15:00.",
-       "ja": "アーリーチェックイン・レイトチェックアウト・館内での荷物預かり はできません。1室のみの物件で、当日11:00〜15:00に清掃・準備を行います。",
-       "zh": "提前入住 · 延迟退房 · 房内行李寄存 均无法安排：本房源为单一住户结构，当天 11:00–15:00 需清扫与整理。"
-      }
-     ]
-    },
-    {
-     "type": "points",
-     "items": [
-      {
-       "ko": "전체 소등",
-       "en": "Turn off all lights",
-       "ja": "すべての照明を消す",
-       "zh": "关闭全部照明"
-      },
-      {
-       "ko": "에어컨 전원 끄기",
-       "en": "Turn off the air conditioning",
-       "ja": "エアコンの電源を切る",
-       "zh": "关闭空调电源"
-      },
-      {
-       "ko": "보일러는 실온 유지로 두기",
-       "en": "Leave the boiler on room-temperature mode",
-       "ja": "ボイラーは室温維持に設定する",
-       "zh": "锅炉调至维持室温模式"
-      },
-      {
-       "ko": "쓰레기는 주방 지정 공간에 정리",
-       "en": "Leave rubbish in the kitchen area",
-       "ja": "ゴミはキッチンの指定場所にまとめる",
-       "zh": "垃圾集中到厨房指定位置"
-      },
-      {
-       "ko": "퇴실 메시지 남기기",
-       "en": "Message us that you have checked out",
-       "ja": "ご出発のメッセージを送る",
-       "zh": "发送退房留言"
-      }
-     ]
-    },
-    {
      "type": "links",
      "items": [
       [
@@ -2068,22 +2020,37 @@ var CONFIG = {
   },
   "airport": {
    "title": {
-    "ko": "인천공항에서 오시는 길",
-    "en": "From Incheon Airport",
-    "ja": "仁川空港からの道順",
-    "zh": "从仁川机场过来"
+    "ko": "공항에서 오시는 길",
+    "en": "From the airport",
+    "ja": "空港からの道順",
+    "zh": "从机场过来"
    },
    "sub": {
-    "ko": "택시 · 공항 리무진 6006 · 공항철도 + 9호선",
-    "en": "Taxi, airport bus 6006, or airport train + Line 9",
-    "ja": "タクシー・リムジン6006・空港鉄道＋9号線",
-    "zh": "出租车 · 机场大巴6006 · 机场铁路+9号线"
+    "ko": "인천공항 3가지 · 김포공항 2가지 방법",
+    "en": "Three ways from Incheon, two from Gimpo",
+    "ja": "仁川空港3通り・金浦空港2通り",
+    "zh": "仁川机场3种・金浦机场2种方式"
    },
    "back": "arrive",
    "tab": "home",
    "blocks": [
     {
      "type": "address"
+    },
+    {
+     "type": "heading",
+     "text": {
+      "ko": "인천공항에서",
+      "en": "From Incheon Airport",
+      "ja": "仁川空港から",
+      "zh": "从仁川机场"
+     },
+     "sub": {
+      "ko": "장거리 국제선은 인천공항으로 옵니다",
+      "en": "Long-haul international flights land at Incheon",
+      "ja": "長距離国際線は仁川空港に到着します",
+      "zh": "长途国际航线到达仁川机场"
+     }
     },
     {
      "type": "heading",
@@ -2309,6 +2276,188 @@ var CONFIG = {
       "en": "The airport bus and train stop late in the evening. On a late flight, take a taxi.",
       "ja": "空港バスと空港鉄道は深夜に運行が終わります。遅い便ならタクシーを。",
       "zh": "机场巴士和机场铁路深夜停运。晚班飞机建议打车。"
+     }
+    },
+    {
+     "type": "heading",
+     "text": {
+      "ko": "김포공항에서",
+      "en": "From Gimpo Airport",
+      "ja": "金浦空港から",
+      "zh": "从金浦机场"
+     },
+     "sub": {
+      "ko": "일본·중국·대만 등 가까운 국제선과 국내선은 김포공항으로 옵니다",
+      "en": "Short-haul international flights and domestic flights land at Gimpo",
+      "ja": "日本・中国・台湾などの近距離国際線と国内線は金浦空港に到着します",
+      "zh": "日本、中国、台湾等短程国际航线和国内航线到达金浦机场"
+     }
+    },
+    {
+     "type": "heading",
+     "text": {
+      "ko": "1. 택시",
+      "en": "1. Taxi",
+      "ja": "1. タクシー",
+      "zh": "1. 出租车"
+     },
+     "sub": {
+      "ko": "짐이 많으면 택시가 가장 편합니다",
+      "en": "Easiest with luggage",
+      "ja": "荷物が多いときはタクシーが一番楽です",
+      "zh": "行李多时打车最方便"
+     }
+    },
+    {
+     "type": "facts",
+     "items": [
+      [
+       {
+        "ko": "목적지",
+        "en": "Go to",
+        "ja": "目的地",
+        "zh": "目的地"
+       },
+       {
+        "ko": "바라스 잠실 (삼전로7길 17)",
+        "en": "Baras Jamsil, 17 Samjeon-ro 7-gil",
+        "ja": "バラス・チャムシル（三田路7キル17）",
+        "zh": "巴拉斯蚕室（三田路7街17）"
+       },
+       ""
+      ],
+      [
+       {
+        "ko": "소요 시간",
+        "en": "Time",
+        "ja": "所要時間",
+        "zh": "所需时间"
+       },
+       {
+        "ko": "약 40분 ~ 1시간",
+        "en": "About 40 min to 1 hour",
+        "ja": "約40分〜1時間",
+        "zh": "约40分钟~1小时"
+       },
+       {
+        "ko": "교통 상황에 따라 달라요",
+        "en": "Depends on traffic",
+        "ja": "交通状況により変わります",
+        "zh": "视路况而定"
+       }
+      ],
+      [
+       {
+        "ko": "요금",
+        "en": "Fare",
+        "ja": "料金",
+        "zh": "费用"
+       },
+       {
+        "ko": "미터기 요금 (심야에는 할증)",
+        "en": "On the meter (surcharge late at night)",
+        "ja": "メーター制（深夜は割増）",
+        "zh": "按计价器（深夜加价）"
+       },
+       {
+        "ko": "통행료는 별도",
+        "en": "Tolls extra",
+        "ja": "通行料は別",
+        "zh": "过路费另计"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "heading",
+     "text": {
+      "ko": "2. 9호선 급행 → 삼전역",
+      "en": "2. Line 9 express → Samjeon",
+      "ja": "2. 9号線急行→三田駅",
+      "zh": "2. 9号线急行→三田站"
+     },
+     "sub": {
+      "ko": "약 1시간 · 급행은 삼전역에 서지 않아 고속터미널역에서 한 번 갈아탑니다",
+      "en": "About 1 hour · the express skips Samjeon, so change once at Express Bus Terminal",
+      "ja": "約1時間・急行は三田駅に停まらないため高速ターミナル駅で1回乗り換えます",
+      "zh": "约1小时 · 急行不停三田站，需在高速巴士客运站换乘1次"
+     }
+    },
+    {
+     "type": "steps",
+     "items": [
+      [
+       {
+        "ko": "김포공항역으로",
+        "en": "To Gimpo Airport Station",
+        "ja": "金浦空港駅へ",
+        "zh": "前往金浦机场站"
+       },
+       {
+        "ko": "청사에서 안내 표지를 따라 지하 통로로 김포공항역까지 걸어가세요(약 5분).",
+        "en": "Follow the signs from the terminal through the underground walkway to Gimpo Airport Station (about 5 minutes).",
+        "ja": "ターミナルから案内表示に沿って地下通路で金浦空港駅へ（約5分）。",
+        "zh": "从航站楼沿指示牌走地下通道到金浦机场站（约5分钟）。"
+       }
+      ],
+      [
+       {
+        "ko": "9호선 급행 탑승",
+        "en": "Take the Line 9 express",
+        "ja": "9号線急行に乗車",
+        "zh": "乘坐9号线急行"
+       },
+       {
+        "ko": "‘중앙보훈병원’ 방면 급행열차를 타고 고속터미널역에서 내리세요. 급행은 삼전역에 서지 않습니다.",
+        "en": "Take the express toward Jungangboehun Hospital and get off at Express Bus Terminal. The express does not stop at Samjeon.",
+        "ja": "「中央報勳病院」方面の急行に乗り、高速ターミナル駅で下車。急行は三田駅に停まりません。",
+        "zh": "乘坐开往“中央报勋医院”方向的急行，到高速巴士客运站下车。急行不停三田站。"
+       }
+      ],
+      [
+       {
+        "ko": "일반열차로 환승",
+        "en": "Change to the all-stop train",
+        "ja": "一般列車に乗り換え",
+        "zh": "换乘普通列车"
+       },
+       {
+        "ko": "고속터미널역에서 같은 9호선 일반열차(중앙보훈병원 방면)로 갈아타고 삼전역에서 내리세요.",
+        "en": "At Express Bus Terminal, change to the Line 9 all-stop train toward Jungangboehun Hospital and get off at Samjeon.",
+        "ja": "高速ターミナル駅で同じ9号線の一般列車（中央報勳病院方面）に乗り換え、三田駅で下車。",
+        "zh": "在高速巴士客运站换乘同一条9号线普通列车（中央报勋医院方向），到三田站下车。"
+       }
+      ],
+      [
+       {
+        "ko": "삼전역 1번 출구",
+        "en": "Samjeon, Exit 1",
+        "ja": "三田駅1番出口",
+        "zh": "三田站1号出口"
+       },
+       {
+        "ko": "삼전역 1번 출구로 나와 숙소까지 평지로 도보 2~3분입니다.",
+        "en": "Leave by Exit 1 and walk 2–3 minutes on the flat to the house.",
+        "ja": "三田駅1番出口から宿まで平坦な道で徒歩2〜3分です。",
+        "zh": "从三田站1号出口到住处是平路，步行2~3分钟。"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "accent",
+     "title": {
+      "ko": "김포공항에서 오는 공항버스",
+      "en": "Airport bus from Gimpo",
+      "ja": "金浦空港からの空港バス",
+      "zh": "从金浦机场出发的机场大巴"
+     },
+     "text": {
+      "ko": "김포공항과 강남·잠실을 잇던 6000번 공항버스는 지금 운행하지 않습니다. 9호선이나 택시를 이용해 주세요.",
+      "en": "The 6000 airport bus that linked Gimpo Airport with Gangnam and Jamsil is not running now. Take Line 9 or a taxi.",
+      "ja": "金浦空港と江南・蚕室を結んでいた6000番の空港バスは現在運行していません。9号線かタクシーをご利用ください。",
+      "zh": "连接金浦机场与江南、蚕室的原6000路机场大巴现已停运。请乘坐9号线或出租车。"
      }
     },
     {
@@ -4922,10 +5071,10 @@ var CONFIG = {
      "items": [
       [
        {
-        "ko": "인천공항에서 오시는 길",
-        "en": "From Incheon Airport",
-        "ja": "仁川空港からの道順",
-        "zh": "从仁川机场过来"
+        "ko": "공항에서 오시는 길",
+        "en": "From the airport",
+        "ja": "空港からの道順",
+        "zh": "从机场过来"
        },
        "airport"
       ],
@@ -4959,10 +5108,10 @@ var CONFIG = {
     "zh": "外卖"
    },
    "sub": {
-    "ko": "배달앱 고르는 법과 주소 입력 요령",
-    "en": "Which app to use and how to enter the address",
-    "ja": "アプリの選び方と住所の入れ方",
-    "zh": "选哪个App，以及地址怎么填"
+    "ko": "코리아오더 · 셔틀 딜리버리, 주소 입력 요령",
+    "en": "Korea Order and Shuttle, plus how to enter the address",
+    "ja": "コリアオーダー・シャトル、住所の入れ方",
+    "zh": "Korea Order · Shuttle，以及地址怎么填"
    },
    "back": "hub",
    "tab": "home",
@@ -4970,93 +5119,106 @@ var CONFIG = {
     {
      "type": "heading",
      "text": {
-      "ko": "한국 앱",
-      "en": "Korean apps",
-      "ja": "韓国のアプリ",
-      "zh": "韩国本地App"
+      "ko": "주문은 이 두 곳에서",
+      "en": "Two places to order",
+      "ja": "注文はこの2か所で",
+      "zh": "从这两个网站下单"
      },
-     "sub": ""
-    },
-    {
-     "type": "facts",
-     "items": [
-      [
-       {
-        "ko": "배달의민족",
-        "en": "Baemin (배달의민족)",
-        "ja": "Baemin（배달の民族）",
-        "zh": "Baemin（배달의민족）"
-       },
-       {
-        "ko": "가장 큰 배달앱",
-        "en": "The biggest delivery app",
-        "ja": "最大手のデリバリーアプリ",
-        "zh": "最大的外卖App"
-       },
-       {
-        "ko": "한국 휴대폰 번호·국내 결제수단 필요",
-        "en": "Korean phone number and payment needed",
-        "ja": "韓国の携帯番号・国内決済が必要",
-        "zh": "需要韩国手机号和本地支付方式"
-       }
-      ],
-      [
-       {
-        "ko": "쿠팡이츠",
-        "en": "Coupang Eats",
-        "ja": "Coupang Eats",
-        "zh": "Coupang Eats"
-       },
-       {
-        "ko": "빠른 배달",
-        "en": "Fast delivery",
-        "ja": "配達が速い",
-        "zh": "配送快"
-       },
-       {
-        "ko": "같은 조건",
-        "en": "Same requirement",
-        "ja": "同じ条件",
-        "zh": "条件相同"
-       }
-      ],
-      [
-       {
-        "ko": "요기요",
-        "en": "Yogiyo",
-        "ja": "Yogiyo",
-        "zh": "Yogiyo"
-       },
-       {
-        "ko": "쿠폰이 많은 편",
-        "en": "Often has coupons",
-        "ja": "クーポン多め",
-        "zh": "优惠券较多"
-       },
-       {
-        "ko": "같은 조건",
-        "en": "Same requirement",
-        "ja": "同じ条件",
-        "zh": "条件相同"
-       }
-      ]
-     ]
-    },
-    {
-     "type": "note",
-     "tone": "accent",
-     "title": {
-      "ko": "외국인 게스트에게는 Shuttle이 편합니다",
-      "en": "For visitors, Shuttle is easiest",
-      "ja": "海外からのゲストにはShuttleが便利",
-      "zh": "外国客人用Shuttle更方便"
-     },
-     "text": {
-      "ko": "Shuttle Delivery는 영어를 비롯한 여러 언어로 주문하는 앱입니다. 한국 휴대폰 번호 없이 이메일로 가입하고, 해외 카드·PayPal로 결제할 수 있습니다. 운영 시간은 매일 10:00~22:00입니다.",
-      "en": "Shuttle Delivery orders in English and many other languages. You can sign up with an email, no Korean phone number, and pay with an international card or PayPal. Open daily 10:00–22:00.",
-      "ja": "Shuttle Delivery は英語など多言語で注文できるアプリです。韓国の携帯番号なしでメール登録でき、海外カードやPayPalで支払えます。営業時間は毎日10:00〜22:00です。",
-      "zh": "Shuttle Delivery 支持英语等多种语言下单。无需韩国手机号，用邮箱注册，可用境外银行卡或PayPal支付。每天10:00~22:00营业。"
+     "sub": {
+      "ko": "둘 다 영어로 주문하고 해외 카드로 결제할 수 있습니다",
+      "en": "Both take orders in English and overseas cards",
+      "ja": "どちらも英語で注文でき、海外カードで支払えます",
+      "zh": "两个都能用英文下单、用境外卡支付"
      }
+    },
+    {
+     "type": "apps",
+     "items": [
+      {
+       "icon": "bowl",
+       "name": {
+        "ko": "코리아오더",
+        "en": "Korea Order",
+        "ja": "コリアオーダー",
+        "zh": "Korea Order"
+       },
+       "tag": {
+        "ko": "영어로 주문하면 한국어로 대신 주문해 줍니다",
+        "en": "Order in English — they place it in Korean",
+        "ja": "英語で注文すると韓国語で代行します",
+        "zh": "用英文下单，由他们代点"
+       },
+       "desc": {
+        "ko": "영문 주문 사이트입니다. 한국 휴대폰 번호나 회원가입 없이 주소만 넣으면, 우리 집까지 배달되는 식당이 영어 메뉴로 나옵니다. 요청 사항을 영어로 적으면 식당에 한국어로 전달해 줍니다. 보통 40~60분 걸리고 주문 상황은 이메일로 알려 줍니다. 우리 집 주소로도 주문되는 것을 확인했습니다.",
+        "en": "An English ordering site. Enter the address — no Korean phone number, no sign-up — and you see the restaurants that deliver here, with English menus. Requests you write in English are passed to the restaurant in Korean. Delivery usually takes 40–60 minutes, with updates by email. We checked that it delivers to our address.",
+        "ja": "英語の注文サイトです。韓国の携帯番号や会員登録なしで住所を入れるだけで、この家まで届く店が英語メニューで表示されます。英語で書いた要望は韓国語にして店に伝えてくれます。通常40〜60分、注文状況はメールで届きます。この住所にも配達されることを確認しています。",
+        "zh": "英文下单网站。无需韩国手机号或注册，输入地址后就会显示能送到这里的餐厅和英文菜单。用英文写的备注会译成韩语转给餐厅。通常40~60分钟送达，订单进度通过邮件通知。我们已经确认这个地址可以下单。"
+       },
+       "facts": [
+        {
+         "ko": "결제 해외 카드 · PayPal · 알리페이+ · 위챗페이",
+         "en": "Pay international card, PayPal, Alipay+, WeChat Pay",
+         "ja": "支払い海外カード・PayPal・Alipay+・WeChat Pay",
+         "zh": "支付境外银行卡 · PayPal · 支付宝+ · 微信支付"
+        },
+        {
+         "ko": "문의 영어·일본어·중국어 채팅 상담",
+         "en": "Help live chat in English, Japanese and Chinese",
+         "ja": "問い合わせ英語・日本語・中国語のチャット",
+         "zh": "咨询英语·日语·中文在线客服"
+        }
+       ],
+       "url": "https://www.koreaorder.com",
+       "button": {
+        "ko": "코리아오더에서 주문하기",
+        "en": "Order on Korea Order",
+        "ja": "コリアオーダーで注文する",
+        "zh": "在 Korea Order 下单"
+       }
+      },
+      {
+       "icon": "scooter",
+       "name": {
+        "ko": "셔틀 딜리버리",
+        "en": "Shuttle Delivery",
+        "ja": "シャトル・デリバリー",
+        "zh": "Shuttle Delivery"
+       },
+       "tag": {
+        "ko": "외국인을 위한 영어 배달 서비스",
+        "en": "The delivery service built for visitors",
+        "ja": "外国人向けの英語デリバリー",
+        "zh": "为外国客人打造的英文外卖"
+       },
+       "desc": {
+        "ko": "이메일로 가입하고 한국 휴대폰 번호 없이 주문할 수 있습니다. 매일 10:00~22:00 운영하며, 주소를 넣으면 배달 가능한 식당이 가까운 순서로 나옵니다. 앱 화면은 일본어·중국어 등 여러 언어를 지원합니다(메뉴는 영어·한국어).",
+        "en": "Sign up with an email and order without a Korean phone number. Open daily 10:00–22:00. Enter the address and the restaurants that deliver appear, nearest first. The app runs in Japanese, Chinese and other languages; menus are in English and Korean.",
+        "ja": "メールで登録し、韓国の携帯番号なしで注文できます。毎日10:00〜22:00営業。住所を入れると配達できる店が近い順に表示されます。アプリは日本語・中国語など多言語対応（メニューは英語・韓国語）。",
+        "zh": "用邮箱注册，无需韩国手机号即可下单。每天10:00~22:00营业。输入地址后会按距离显示可配送的餐厅。App 界面支持日语、中文等多种语言（菜单为英文和韩语）。"
+       },
+       "facts": [
+        {
+         "ko": "결제 해외 카드 · PayPal · 카카오페이",
+         "en": "Pay international card, PayPal, KakaoPay",
+         "ja": "支払い海外カード・PayPal・KakaoPay",
+         "zh": "支付境外银行卡 · PayPal · KakaoPay"
+        },
+        {
+         "ko": "배달 지역 서울·평택·대구·부산 등, 주소로 확인",
+         "en": "Areas Seoul, Pyeongtaek, Daegu, Busan and more — check with your address",
+         "ja": "配達地域ソウル・平澤・大邱・釜山など。住所でご確認を",
+         "zh": "配送区域首尔·平泽·大邱·釜山等，请用地址确认"
+        }
+       ],
+       "url": "https://www.shuttledelivery.co.kr/en",
+       "button": {
+        "ko": "셔틀에서 주문하기",
+        "en": "Order on Shuttle",
+        "ja": "シャトルで注文する",
+        "zh": "在 Shuttle 下单"
+       }
+      }
+     ]
     },
     {
      "type": "heading",
@@ -6055,6 +6217,27 @@ var CONFIG = {
       var c = el("div", "block card");
       add(c, el("p", "card-label", b.title), !isEmpty(b.text) ? el("p", "card-small", b.text) : null, linkBtn(b.button, String(b.url || ""), "", true));
       return c;
+    },
+    apps: function (b) {
+      var w = el("div", "block apps");
+      (b.items || []).forEach(function (it) {
+        var c = el("article", "app");
+        var hd = el("div", "app-head");
+        var icw = el("span", "app-ic"); icw.appendChild(icon(it.icon || "scooter"));
+        var tx = el("div", "app-txt");
+        add(tx, el("h3", "app-name", it.name), !isEmpty(it.tag) ? el("p", "app-tag", it.tag) : null);
+        add(hd, icw, tx);
+        c.appendChild(hd);
+        if (!isEmpty(it.desc)) { c.appendChild(el("p", "app-desc", it.desc)); }
+        if (it.facts && it.facts.length) {
+          var ul = el("ul", "app-facts");
+          it.facts.forEach(function (f) { ul.appendChild(el("li", "", f)); });
+          c.appendChild(ul);
+        }
+        c.appendChild(linkBtn(it.button, String(it.url || ""), "", true));
+        w.appendChild(c);
+      });
+      return w;
     },
     links: function (b) {
       var w = el("div", "block");
