@@ -12,7 +12,7 @@
 
   :root {
     --accent: #A8663A;
-    --tint: #E4EFEC;
+    --tint: #F6E8DC;
     --ink: #222222;
     --muted: #6B6B6B;
     --line: #ECE6DC;
@@ -320,6 +320,8 @@
   /* 맛집 카드 */
   .food { border-radius: 14px; border: 1px solid var(--line); background: #FFFFFF; box-shadow: var(--shadow); overflow: hidden; }
   .food + .food { margin-top: 14px; }
+  .food-photos { display: grid; grid-template-columns: 1fr; gap: 2px; background: var(--soft); }
+  .food-photos.n2 { grid-template-columns: 1fr 1fr; }
   .food-photo { display: block; background: var(--soft); }
   .food-photo img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
   .food-body { padding: 14px 16px 16px; }
@@ -660,6 +662,24 @@ var CONFIG = {
    "en": "Google Maps",
    "ja": "Googleマップ",
    "zh": "Google地图"
+  },
+  "btnCall": {
+   "ko": "전화",
+   "en": "Call",
+   "ja": "電話",
+   "zh": "电话"
+  },
+  "btnMapNaver": {
+   "ko": "지도",
+   "en": "Map",
+   "ja": "地図",
+   "zh": "地图"
+  },
+  "btnMapGoogle": {
+   "ko": "Google",
+   "en": "Google",
+   "ja": "Google",
+   "zh": "Google"
   },
   "spotMap": {
    "ko": "지도에서 보기",
@@ -3611,16 +3631,22 @@ var CONFIG = {
      "type": "text",
      "text": [
       {
-       "ko": "바로 인근 지인 숙소(Moment Seoul)의 안내를 그대로 옮겨 왔습니다. 걸어서 가는 삼전동 골목부터 송리단길·석촌호수·롯데월드몰까지, 도착한 날 바로 쓸 수 있는 목록입니다.",
-       "en": "Copied over from the guide of a neighbouring house (Moment Seoul). From the Samjeon-dong alleys you can walk to, to Songnidan-gil, Seokchon Lake and Lotte World Mall — a list you can use on the day you arrive.",
-       "ja": "すぐ近くの知人宅（Moment Seoul）の案内をそのまま移しました。歩いて行ける三田洞の路地から、ソンリダンキル・石村湖・ロッテワールドモールまで、到着日から使えるリストです。",
-       "zh": "内容照附近朋友家（Moment Seoul）的指南搬来。从步行可达的三田洞小巷，到松理团路、石村湖和乐天世界购物中心，是到达当天就能用的清单。"
+       "ko": "바라스 잠실(삼전로7길 17)에서 걸어서 가는 삼전동 골목부터 송리단길·석촌호수·롯데월드몰까지, 도착한 날 바로 쓸 수 있는 20곳입니다.",
+       "en": "Twenty places you can use from the day you arrive — the Samjeon-dong alleys within walking distance of Baras Jamsil (17 Samjeon-ro 7-gil), plus Songnidan-gil, Seokchon Lake and Lotte World Mall.",
+       "ja": "バラス・チャムシル（三田路7キル17）から歩いて行ける三田洞の路地から、ソンリダンキル・石村湖・ロッテワールドモールまで、到着日から使える20軒です。",
+       "zh": "从巴拉斯蚕室（三田路7街17）步行可达的三田洞小巷，到松理团路、石村湖和乐天世界购物中心，共20家，到达当天就能用。"
       },
       {
-       "ko": "이동 시간과 영업시간은 인근 숙소 기준으로 정리된 안내입니다. 문을 닫았거나 시간이 바뀌었을 수 있으니, 출발 전에 지도 앱으로 한 번 확인해 주세요.",
-       "en": "Walking times and hours come from that nearby house. A place may have closed or changed its hours, so please check a map app before you set out.",
-       "ja": "移動時間と営業時間は近隣の宿を基準にまとめた案内です。閉店や時間変更があるかもしれないので、出発前に地図アプリでご確認ください。",
-       "zh": "移动时间和营业时间是按附近住宿整理的。店家可能已关门或改了时间，出发前请用地图App确认一下。"
+       "ko": "사진을 누르면 그 집의 지도가 열립니다. 카드 아래 버튼으로 네이버 지도·Google 지도·전화를 따로 열 수 있습니다.",
+       "en": "Tap a photo to open that place on the map. The buttons under each card open Naver Map, Google Maps or the phone separately.",
+       "ja": "写真をタップするとそのお店の地図が開きます。カード下のボタンでNaver地図・Googleマップ・電話を別々に開けます。",
+       "zh": "点击照片即可打开该店地图。卡片下方按钮可分别打开Naver地图、Google地图和拨打电话。"
+      },
+      {
+       "ko": "이동 시간과 영업시간은 숙소 기준입니다. 문을 닫았거나 시간이 바뀌었을 수 있으니 출발 전에 지도 앱에서 한 번 확인해 주세요.",
+       "en": "Walking times and hours are measured from the house. A place may have closed or changed its hours, so check a map app before you set out.",
+       "ja": "移動時間と営業時間は宿を基準にしています。閉店や時間変更があるかもしれないので、出発前に地図アプリでご確認ください。",
+       "zh": "移动时间和营业时间以住处为基准。店家可能已关门或改了时间，出发前请用地图App确认一下。"
       }
      ]
     },
@@ -3640,15 +3666,19 @@ var CONFIG = {
      }
     },
     {
-     "type": "spots",
+     "type": "food",
      "items": [
       {
+       "photos": [
+        "images/spots/migang-1.jpg",
+        "images/spots/migang-2.jpg"
+       ],
        "name": "미강식당 · Migang Sikdang",
        "desc": {
         "ko": "숙소에서 가장 가까운 삼겹살집",
         "en": "The Korean pork BBQ closest to the house",
         "ja": "宿から一番近いサムギョプサル店",
-        "zh": "离住处最近的三层肉烤肉店"
+        "zh": "离住处最近的五花肉烤肉店"
        },
        "hours": {
         "ko": "11:30–23:00 (브레이크 15:00–16:30)",
@@ -3673,9 +3703,15 @@ var CONFIG = {
         "ja": "到着日の夕食にちょうどいいです。",
         "zh": "到达当天的晚餐很方便。"
        },
-       "map": "미강식당 송파"
+       "phone": "+82 502-5550-4555",
+       "naver": "https://map.naver.com/p/search/%EB%AF%B8%EA%B0%95%EC%8B%9D%EB%8B%B9%20%EC%86%A1%ED%8C%8C",
+       "google": "https://maps.google.com/?cid=11364082974739478582"
       },
       {
+       "photos": [
+        "images/spots/cheonggukjang-1.jpg",
+        "images/spots/cheonggukjang-2.jpg"
+       ],
        "name": "청국장과보리밥 잠실점 · Cheonggukjang & Boribap",
        "desc": {
         "ko": "집밥이 그리울 때 찾는 한국 전통 가정식",
@@ -3701,9 +3737,15 @@ var CONFIG = {
         "ja": "油っこい食事に疲れたときのやさしい一食。チョングッチャンは発酵大豆独特的な香りがあり、初めての方には少し慣れが必要です。",
         "zh": "吃腻油腻食物时的一顿舒服饭菜。清麴酱有发酵豆的特殊气味，第一次吃可能不太习惯。"
        },
-       "map": "청국장과보리밥 잠실점"
+       "phone": "+82 2-2042-1234",
+       "naver": "https://map.naver.com/p/search/%EC%B2%AD%EA%B5%AD%EC%9E%A5%EA%B3%BC%EB%B3%B4%EB%A6%AC%EB%B0%A5%20%EC%9E%A0%EC%8B%A4%EC%A0%90",
+       "google": "https://maps.google.com/?cid=2023514409977444597"
       },
       {
+       "photos": [
+        "images/spots/bonjuk-1.jpg",
+        "images/spots/bonjuk-2.jpg"
+       ],
        "name": "본죽 삼전동점 · Bonjuk Samjeon-dong",
        "desc": {
         "ko": "부담 없이 든든한 한 끼",
@@ -3729,7 +3771,9 @@ var CONFIG = {
         "ja": "朝早くから開いていて、早朝やお腹の調子が悪い日にいいです。",
         "zh": "开门早，适合早餐或肠胃不舒服的时候。"
        },
-       "map": "본죽 삼전동점"
+       "phone": "+82 2-424-6282",
+       "naver": "https://map.naver.com/p/search/%EB%B3%B8%EC%A3%BD%20%EC%82%BC%EC%A0%84%EB%8F%99%EC%A0%90",
+       "google": "https://maps.google.com/?cid=13209878866078005787"
       }
      ]
     },
@@ -3749,9 +3793,13 @@ var CONFIG = {
      }
     },
     {
-     "type": "spots",
+     "type": "food",
      "items": [
       {
+       "photos": [
+        "images/spots/jerrybrown-1.jpg",
+        "images/spots/jerrybrown-2.jpg"
+       ],
        "name": "제리브라운 · Jerry Brown",
        "desc": {
         "ko": "삼전동에서 만나는 미국식 다이닝",
@@ -3771,9 +3819,15 @@ var CONFIG = {
         "ja": "韓国料理以外が食べたいときに気軽に行けます。",
         "zh": "想换换口味不吃韩餐时很方便。"
        },
-       "map": "제리브라운 삼전동"
+       "phone": "+82 10-5771-3420",
+       "naver": "https://map.naver.com/p/search/%EC%A0%9C%EB%A6%AC%EB%B8%8C%EB%9D%BC%EC%9A%B4%20%EC%82%BC%EC%A0%84%EB%8F%99",
+       "google": "https://maps.google.com/?cid=14535205031107619362"
       },
       {
+       "photos": [
+        "images/spots/seonhyangwon-1.jpg",
+        "images/spots/seonhyangwon-2.jpg"
+       ],
        "name": "선향원 · Seonhyangwon",
        "desc": {
         "ko": "삼전동의 오래된 중식당",
@@ -3794,9 +3848,15 @@ var CONFIG = {
         "ja": "出前よりお店で食べたい街中華です。",
         "zh": "比起外卖，更推荐去店里吃的街坊中餐。"
        },
-       "map": "선향원 삼전동"
+       "phone": "+82 2-419-3009",
+       "naver": "https://map.naver.com/p/search/%EC%84%A0%ED%96%A5%EC%9B%90%20%EC%82%BC%EC%A0%84%EB%8F%99",
+       "google": "https://maps.google.com/?cid=5343931803212808760"
       },
       {
+       "photos": [
+        "images/spots/yuwon-1.jpg",
+        "images/spots/yuwon-2.jpg"
+       ],
        "name": "유원설렁탕 · Yuwon Seolleongtang",
        "desc": {
         "ko": "삼전동의 구수한 설렁탕집",
@@ -3816,7 +3876,9 @@ var CONFIG = {
         "ja": "寒い日に熱いスープが欲しくなったときに。",
         "zh": "天凉时想喝一碗热汤的时候。"
        },
-       "map": "유원설렁탕 삼전동"
+       "phone": "+82 2-414-2256",
+       "naver": "https://map.naver.com/p/search/%EC%9C%A0%EC%9B%90%EC%84%A4%EB%A0%81%ED%83%95%20%EC%82%BC%EC%A0%84%EB%8F%99",
+       "google": "https://maps.google.com/?cid=17160993824143080516"
       }
      ]
     },
@@ -3831,9 +3893,12 @@ var CONFIG = {
      "sub": ""
     },
     {
-     "type": "spots",
+     "type": "food",
      "items": [
       {
+       "photos": [
+        "images/spots/mcdonalds-1.jpg"
+       ],
        "name": "맥도날드 송파잠실DT점 · McDonald's Songpa Jamsil DT",
        "desc": {
         "ko": "밤늦게 출출할 때 가까운 패스트푸드",
@@ -3856,9 +3921,12 @@ var CONFIG = {
        "address": "",
        "tags": [],
        "reason": "",
-       "map": "맥도날드 송파잠실DT점"
+       "phone": "+82 2-6204-6700",
+       "naver": "https://map.naver.com/p/search/%EB%A7%A5%EB%8F%84%EB%82%A0%EB%93%9C%20%EC%86%A1%ED%8C%8C%EC%9E%A0%EC%8B%A4DT%EC%A0%90",
+       "google": "https://maps.google.com/?cid=16937130755436521175"
       },
       {
+       "photos": [],
        "name": "메가MGC커피 잠실본동점 · Mega MGC Coffee",
        "desc": {
         "ko": "테이크아웃 커피",
@@ -3876,9 +3944,15 @@ var CONFIG = {
        "address": "",
        "tags": [],
        "reason": "",
-       "map": "메가MGC커피 잠실본동점"
+       "phone": "+82 2-422-2689",
+       "naver": "https://map.naver.com/p/search/%EB%A9%94%EA%B0%80MGC%EC%BB%A4%ED%94%BC%20%EC%9E%A0%EC%8B%A4%EB%B3%B8%EB%8F%99%EC%A0%90",
+       "google": "https://maps.google.com/?cid=7899180104349536551"
       },
       {
+       "photos": [
+        "images/spots/twosome-1.jpg",
+        "images/spots/twosome-2.jpg"
+       ],
        "name": "투썸플레이스 송파잠실H타워점 · A Twosome Place",
        "desc": {
         "ko": "앉아서 쉬어 가기 좋은 카페",
@@ -3896,9 +3970,14 @@ var CONFIG = {
        "address": "",
        "tags": [],
        "reason": "",
-       "map": "투썸플레이스 송파잠실H타워점"
+       "phone": "+82 2-417-4360",
+       "naver": "https://map.naver.com/p/search/%ED%88%AC%EC%8D%B8%ED%94%8C%EB%A0%88%EC%9D%B4%EC%8A%A4%20%EC%86%A1%ED%8C%8C%EC%9E%A0%EC%8B%A4H%ED%83%80%EC%9B%8C%EC%A0%90",
+       "google": "https://maps.google.com/?cid=3274785475082278249"
       },
       {
+       "photos": [
+        "images/spots/suhalin-1.jpg"
+       ],
        "name": "수할인마트 · Su Halin Mart",
        "desc": {
         "ko": "생수·음료·과일·식료품",
@@ -3916,7 +3995,9 @@ var CONFIG = {
        "address": "",
        "tags": [],
        "reason": "",
-       "map": "수할인마트 잠실"
+       "phone": "+82 2-425-5164",
+       "naver": "https://map.naver.com/p/search/%EC%88%98%ED%95%A0%EC%9D%B8%EB%A7%88%ED%8A%B8%20%EC%9E%A0%EC%8B%A4",
+       "google": "https://maps.google.com/?cid=7171303296412231461"
       }
      ]
     },
@@ -3936,9 +4017,13 @@ var CONFIG = {
      }
     },
     {
-     "type": "spots",
+     "type": "food",
      "items": [
       {
+       "photos": [
+        "images/spots/hanwoo-1.jpg",
+        "images/spots/hanwoo-2.jpg"
+       ],
        "name": "송파한우정육식당 · Songpa Hanu Jeongyuk Sikdang",
        "desc": {
         "ko": "특별한 저녁을 위한 한우",
@@ -3969,9 +4054,15 @@ var CONFIG = {
         "ja": "旅行の特別な夜に韓牛をしっかり味わいたいときに。",
         "zh": "想在特别的夜晚好好吃一顿韩牛时。"
        },
-       "map": "송파한우정육식당"
+       "phone": "+82 2-422-7002",
+       "naver": "https://map.naver.com/p/search/%EC%86%A1%ED%8C%8C%ED%95%9C%EC%9A%B0%EC%A0%95%EC%9C%A1%EC%8B%9D%EB%8B%B9",
+       "google": "https://maps.google.com/?cid=13011688078814087430"
       },
       {
+       "photos": [
+        "images/spots/bbq-1.jpg",
+        "images/spots/bbq-2.jpg"
+       ],
        "name": "BBQ치킨 빌리지 송리단길점 · BBQ Chicken",
        "desc": {
         "ko": "송리단길에서 즐기는 치킨",
@@ -3998,9 +4089,15 @@ var CONFIG = {
         "ja": "深夜2時まで営業。ソンリダンキル散歩のあとに。",
         "zh": "营业到凌晨2点，逛完松理团路后正好去。"
        },
-       "map": "BBQ치킨빌리지 송리단길점"
+       "phone": "+82 2-2203-8292",
+       "naver": "https://map.naver.com/p/search/BBQ%EC%B9%98%ED%82%A8%EB%B9%8C%EB%A6%AC%EC%A7%80%20%EC%86%A1%EB%A6%AC%EB%8B%A8%EA%B8%B8%EC%A0%90",
+       "google": "https://maps.google.com/?cid=10904614505229930740"
       },
       {
+       "photos": [
+        "images/spots/orinji-1.jpg",
+        "images/spots/orinji-2.jpg"
+       ],
        "name": "오린지 · Orinji",
        "desc": {
         "ko": "쑥 디저트로 알려진 송리단길 카페",
@@ -4026,7 +4123,9 @@ var CONFIG = {
         "ja": "散歩の途中でヨモギのデザートとひと休み。",
         "zh": "逛松理团路时，配着艾草甜点歇一会儿。"
        },
-       "map": "오린지 송리단길"
+       "phone": "+82 70-7755-4802",
+       "naver": "https://map.naver.com/p/search/%EC%98%A4%EB%A6%B0%EC%A7%80%20%EC%86%A1%EB%A6%AC%EB%8B%A8%EA%B8%B8",
+       "google": "https://maps.google.com/?cid=13291524503952490448"
       }
      ]
     },
@@ -4046,9 +4145,13 @@ var CONFIG = {
      }
     },
     {
-     "type": "spots",
+     "type": "food",
      "items": [
       {
+       "photos": [
+        "images/spots/jungdamok-1.jpg",
+        "images/spots/jungdamok-2.jpg"
+       ],
        "name": "정담옥 · JungDamOk",
        "desc": {
         "ko": "24시간 문 여는 감자탕과 등갈비",
@@ -4079,9 +4182,15 @@ var CONFIG = {
         "ja": "辛さを選べる炭火焼きカルビが看板メニュー。夜遅く着いた日でも行けます。",
         "zh": "招牌是可以选辣度的炭烤排骨。通宵营业，晚到的那天也能去。"
        },
-       "map": "정담옥 백제고분로7길"
+       "phone": "+82 2-420-9233",
+       "naver": "https://map.naver.com/p/search/%EC%A0%95%EB%8B%B4%EC%98%A5%20%EB%B0%B1%EC%A0%9C%EA%B3%A0%EB%B6%84%EB%A1%9C7%EA%B8%B8",
+       "google": "https://maps.google.com/?cid=3091101476406206157"
       },
       {
+       "photos": [
+        "images/spots/cheotjip-1.jpg",
+        "images/spots/cheotjip-2.jpg"
+       ],
        "name": "잠실첫집 · Jamsil Cheotjip",
        "desc": {
         "ko": "속이 꽉 찬 김밥과 분식",
@@ -4112,9 +4221,14 @@ var CONFIG = {
         "ja": "朝早くから開いていて、出かける前の軽食や持ち帰りに便利です。",
         "zh": "开门早，出门前吃一点或打包带走都很方便。"
        },
-       "map": "잠실첫집 석촌호수로"
+       "phone": "+82 2-422-6226",
+       "naver": "https://map.naver.com/p/search/%EC%9E%A0%EC%8B%A4%EC%B2%AB%EC%A7%91%20%EC%84%9D%EC%B4%8C%ED%98%B8%EC%88%98%EB%A1%9C",
+       "google": "https://maps.google.com/?cid=7891268671493157303"
       },
       {
+       "photos": [
+        "images/spots/quesera-1.jpg"
+       ],
        "name": "쾌세라 · Qué será",
        "desc": {
         "ko": "석촌호수 가는 길의 브런치 카페",
@@ -4145,9 +4259,15 @@ var CONFIG = {
         "ja": "韓国料理以外が食べたいときに。木の温かい店内とオープンキッチンで落ち着けます。",
         "zh": "想换换口味时的好选择。温暖的木质装修和开放式厨房，坐着很舒服。"
        },
-       "map": "쾌세라 삼전동"
+       "phone": "",
+       "naver": "https://map.naver.com/p/search/%EC%BE%8C%EC%84%B8%EB%9D%BC%20%EC%82%BC%EC%A0%84%EB%8F%99",
+       "google": "https://maps.google.com/?cid=3412548842492753709"
       },
       {
+       "photos": [
+        "images/spots/matsumi-1.jpg",
+        "images/spots/matsumi-2.jpg"
+       ],
        "name": "마츠미 · Matsumi",
        "desc": {
         "ko": "돈가스와 마제소바 전문점",
@@ -4178,9 +4298,15 @@ var CONFIG = {
         "ja": "味噌とんかつの評判が特に良く、量も十分です。",
         "zh": "味噌炸猪排特别受好评，分量也很足。"
        },
-       "map": "마츠미 삼전동"
+       "phone": "+82 2-416-5999",
+       "naver": "https://map.naver.com/p/search/%EB%A7%88%EC%B8%A0%EB%AF%B8%20%EC%82%BC%EC%A0%84%EB%8F%99",
+       "google": "https://maps.google.com/?cid=5736715990338775460"
       },
       {
+       "photos": [
+        "images/spots/seokchon-1.jpg",
+        "images/spots/seokchon-2.jpg"
+       ],
        "name": "석촌 칼국수 보리밥 본점 · Seokchon Kalguksu Boribap",
        "desc": {
         "ko": "24시간 칼국수와 보리밥",
@@ -4212,7 +4338,9 @@ var CONFIG = {
         "ja": "ご飯とおかずのおかわりができ、外国人客の評判も良いです。チョングッチャンが苦手ならここの麦ごはんを。",
         "zh": "米饭和小菜可以续加，外国客人的评价也很好。觉得清麴酱太重口的话，推荐来这里吃大麦饭。"
        },
-       "map": "석촌칼국수보리밥 본점"
+       "phone": "+82 2-2088-2909",
+       "naver": "https://map.naver.com/p/search/%EC%84%9D%EC%B4%8C%EC%B9%BC%EA%B5%AD%EC%88%98%EB%B3%B4%EB%A6%AC%EB%B0%A5%20%EB%B3%B8%EC%A0%90",
+       "google": "https://maps.google.com/?cid=18207530980668842487"
       }
      ]
     },
@@ -4232,9 +4360,13 @@ var CONFIG = {
      }
     },
     {
-     "type": "spots",
+     "type": "food",
      "items": [
       {
+       "photos": [
+        "images/spots/vikings-1.jpg",
+        "images/spots/vikings-2.jpg"
+       ],
        "name": "바이킹스워프 · Viking's Wharf",
        "desc": {
         "ko": "랍스터를 마음껏 먹는 해산물 뷔페",
@@ -4266,9 +4398,15 @@ var CONFIG = {
         "ja": "特別な日の一食に。価格は高めで、週末は予約がおすすめです。",
         "zh": "适合特别的日子吃一顿。价格偏高，周末最好提前预约。"
        },
-       "map": "바이킹스워프 롯데월드몰"
+       "phone": "1644-3210",
+       "naver": "https://map.naver.com/p/search/%EB%B0%94%EC%9D%B4%ED%82%B9%EC%8A%A4%EC%9B%8C%ED%94%84%20%EB%A1%AF%EB%8D%B0%EC%9B%94%EB%93%9C%EB%AA%B0",
+       "google": "https://maps.google.com/?cid=11931027179450813995"
       },
       {
+       "photos": [
+        "images/spots/londonbagel-1.jpg",
+        "images/spots/londonbagel-2.jpg"
+       ],
        "name": "런던베이글뮤지엄 잠실점 · London Bagel Museum",
        "desc": {
         "ko": "줄 서서 먹는 서울의 인기 베이글",
@@ -4294,20 +4432,11 @@ var CONFIG = {
         "ja": "到着後にタブレットで待ち登録すると、選んだ言語で呼ばれます。安国本店より空いています。",
         "zh": "到店后在平板上登记排队，会用你选的语言叫号。通常比安国本店人少。"
        },
-       "map": "런던베이글뮤지엄 잠실"
+       "phone": "",
+       "naver": "https://map.naver.com/p/search/%EB%9F%B0%EB%8D%98%EB%B2%A0%EC%9D%B4%EA%B8%80%EB%AE%A4%EC%A7%80%EC%97%84%20%EC%9E%A0%EC%8B%A4",
+       "google": "https://maps.google.com/?cid=7939622330577598365"
       }
      ]
-    },
-    {
-     "type": "note",
-     "tone": "soft",
-     "title": "",
-     "text": {
-      "ko": "영업시간은 바뀔 수 있습니다. 출발 전에 지도 앱에서 한 번 확인해 주세요.",
-      "en": "Hours can change. Check a map app before you go.",
-      "ja": "営業時間は変わることがあります。出かける前に地図アプリでご確認ください。",
-      "zh": "营业时间可能变动，出发前请在地图App确认。"
-     }
     },
     {
      "type": "links",
@@ -4547,10 +4676,10 @@ var CONFIG = {
      "type": "text",
      "text": [
       {
-       "ko": "지인 숙소 안내에 정리된 추천 목록입니다. 에어비앤비 공식 순위가 아니며, 평점·후기 수는 2026년 10월 31일 확인 기준입니다. 최신 가격과 일정은 각 체험 페이지에서 확인하세요.",
-       "en": "A list of recommendations from a neighbouring host's guide. This is not an official Airbnb ranking; ratings and review counts were checked on 31 October 2026. Check each experience page for current prices and schedules.",
-       "ja": "近隣の宿のガイドにまとめられたおすすめ一覧です。Airbnb公式のランキングではなく、評価・レビュー数は2026年10月31日時点のものです。最新の料金と日程は各体験ページでご確認ください。",
-       "zh": "这是邻近住宿指南整理的推荐清单，并非Airbnb官方排名。评分与评价数为2026年10月31日确认的结果。最新价格与日程请在各体验页面确认。"
+       "ko": "인근 숙소 안내를 참고해 정리한 추천 목록입니다. 에어비앤비 공식 순위가 아니며, 평점·후기 수는 2026년 10월 31일 확인 기준입니다. 최신 가격과 일정은 각 체험 페이지에서 확인하세요.",
+       "en": "A list of recommendations put together from guides of nearby stays. This is not an official Airbnb ranking; ratings and review counts were checked on 31 October 2026. Check each experience page for current prices and schedules.",
+       "ja": "近隣の宿のガイドを参考にまとめたおすすめ一覧です。Airbnb公式のランキングではなく、評価・レビュー数は2026年10月31日時点のものです。最新の料金と日程は各体験ページでご確認ください。",
+       "zh": "这是参考附近住宿指南整理的推荐清单，并非Airbnb官方排名。评分与评价数为2026年10月31日确认的结果。最新价格与日程请在各体验页面确认。"
       }
      ]
     },
@@ -6353,23 +6482,34 @@ var CONFIG = {
       c.appendChild(row);
       return c;
     },
-    /* 맛집 카드 — 사진을 누르면 그 집 지도로, 전화·지도 버튼은 따로 */
+    /* 맛집 카드 — 사진(한 장 또는 두 장)을 누르면 그 집 지도로, 전화·지도 버튼은 따로 */
     food: function (b) {
       var w = el("div", "block foods");
       (b.items || []).forEach(function (it) {
         var c = el("article", "food");
         var naver = !isEmpty(it.naver) ? String(it.naver) : naverUrl(pick(it.name, "ko"));
-        if (!isEmpty(it.photo)) {
-          var a = el("a", "food-photo"); a.href = naver; a.target = "_blank"; a.rel = "noopener";
-          a.setAttribute("aria-label", pick(it.name) + " · " + pick(U.btnMapNaver));
-          var img = document.createElement("img"); img.loading = "lazy"; img.decoding = "async";
-          img.alt = pick(it.name); img.src = String(it.photo);
-          img.onerror = function () { if (a.parentNode) { a.parentNode.removeChild(a); } };
-          a.appendChild(img); c.appendChild(a);
+        var shots = (it.photos && it.photos.length) ? it.photos.slice(0, 2) : (!isEmpty(it.photo) ? [it.photo] : []);
+        if (shots.length) {
+          var strip = el("div", "food-photos" + (shots.length > 1 ? " n2" : ""));
+          shots.forEach(function (src) {
+            var a = el("a", "food-photo"); a.href = naver; a.target = "_blank"; a.rel = "noopener";
+            a.setAttribute("aria-label", pick(it.name) + " · " + pick(U.btnMapNaver));
+            var img = document.createElement("img"); img.loading = "lazy"; img.decoding = "async";
+            img.alt = pick(it.name); img.src = String(src);
+            img.onerror = function () { if (a.parentNode) { a.parentNode.removeChild(a); } if (!strip.childNodes.length && strip.parentNode) { strip.parentNode.removeChild(strip); } };
+            a.appendChild(img); strip.appendChild(a);
+          });
+          c.appendChild(strip);
         }
         var body = el("div", "food-body");
-        add(body, el("h3", "food-name", it.name), !isEmpty(it.meta) ? el("p", "food-meta", it.meta) : null,
-          !isEmpty(it.desc) ? el("p", "food-desc", it.desc) : null);
+        add(body, el("h3", "food-name", it.name), !isEmpty(it.meta) ? el("p", "food-meta", it.meta) : null);
+        [[U.hours, it.hours], [U.move, it.move], [U.addressLabel, it.address]].forEach(function (m) {
+          if (isEmpty(m[1])) { return; }
+          body.appendChild(metaLine(m[0], m[1]));
+        });
+        if (!isEmpty(it.desc)) { body.appendChild(el("p", "food-desc", it.desc)); }
+        if (it.tags && it.tags.length) { var tul = el("ul", "tags"); it.tags.forEach(function (t) { tul.appendChild(el("li", "tag", t)); }); body.appendChild(tul); }
+        if (!isEmpty(it.reason)) { var rsn = el("p", "reason"); add(rsn, el("b", "", U.reason)); rsn.appendChild(T(it.reason)); body.appendChild(rsn); }
         var acts = el("div", "row-acts");
         if (!isEmpty(it.phone)) { acts.appendChild(telAct(U.btnCall, String(it.phone))); }
         acts.appendChild(mapAct("pin", U.btnMapNaver, naver));
