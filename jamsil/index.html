@@ -287,14 +287,46 @@
   .xc .btn { margin-top: 14px; width: 100%; }
   .xf-empty { margin: 0; padding: 18px; border-radius: 14px; border: 1px dashed var(--line); font-size: 16px; color: var(--muted); text-align: center; }
 
-  /* 한 줄 목록 */
-  .rows { border-radius: 14px; border: 1px solid var(--line); overflow: hidden; }
-  .row { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 64px; padding: 12px 16px; text-decoration: none; background: #FFFFFF; }
+  /* 한 줄 목록 — 전화·지도 버튼을 따로 */
+  .rows { border-radius: 14px; border: 1px solid var(--line); background: #FFFFFF; overflow: hidden; }
+  .row { padding: 14px 16px; }
   .row + .row { border-top: 1px solid var(--line); }
-  .row-name { display: block; font-size: 17px; font-weight: 700; line-height: 1.35; }
-  .row-desc { display: block; font-size: 16px; color: var(--muted); }
-  .row-side { flex-shrink: 0; font-size: 16px; color: var(--muted); }
-  a.row .row-side { font-size: 22px; font-weight: 800; color: var(--accent); }
+  .row-top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+  .row-name { font-size: 17px; font-weight: 700; line-height: 1.35; }
+  .row-desc { margin: 2px 0 0; font-size: 16px; color: var(--muted); line-height: 1.45; }
+  .row-side { flex-shrink: 0; font-size: 15px; color: var(--muted); white-space: nowrap; }
+
+  /* 전화 · 지도 버튼 */
+  .row-acts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .act {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line);
+    background: #FFFFFF; color: var(--accent); font-size: 15px; font-weight: 700;
+    text-decoration: none; white-space: nowrap;
+  }
+  .act:active { border-color: var(--accent); }
+  .act-ic { display: inline-flex; width: 17px; height: 17px; }
+  .act-ic svg { width: 17px; height: 17px; }
+  .act.tel { border-color: var(--accent); }
+
+  /* 전체 맛집 지도 카드 */
+  .mapcard { padding: 18px; border-radius: 16px; background: var(--tint); border: 1px solid var(--line); }
+  .mapcard-label { margin: 0; font-size: 15px; font-weight: 800; letter-spacing: 0.05em; color: var(--accent); }
+  .mapcard-title { margin: 4px 0 0; font-size: 20px; font-weight: 800; line-height: 1.3; }
+  .mapcard-sub { margin: 6px 0 0; font-size: 16px; color: #4A4A4A; line-height: 1.5; }
+  .mapcard .btn-row { margin-top: 14px; }
+  .mapcard .btn { background: var(--accent); color: #FFFFFF; border-color: var(--accent); }
+
+  /* 맛집 카드 */
+  .food { border-radius: 14px; border: 1px solid var(--line); background: #FFFFFF; box-shadow: var(--shadow); overflow: hidden; }
+  .food + .food { margin-top: 14px; }
+  .food-photo { display: block; background: var(--soft); }
+  .food-photo img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  .food-body { padding: 14px 16px 16px; }
+  .food-name { margin: 0; font-size: 19px; font-weight: 800; line-height: 1.3; }
+  .food-meta { margin: 3px 0 0; font-size: 16px; color: var(--muted); line-height: 1.45; }
+  .food-desc { margin: 8px 0 0; font-size: 16px; color: #4A4A4A; line-height: 1.5; }
+  .food .row-acts { margin-top: 12px; }
 
   /* 코스 */
   .stop { position: relative; padding: 0 0 18px 44px; }
@@ -6008,6 +6040,16 @@ var CONFIG = {
     var s = el("span", "btn-icon"); s.appendChild(icon(ic)); a.insertBefore(s, a.firstChild);
     return a;
   }
+  /* 전화 · 지도 버튼 (한 줄 목록과 맛집 카드가 함께 씁니다) */
+  function actBtn(ic, label, href, newTab) {
+    var a = el("a", "act", label); a.href = href;
+    if (newTab) { a.target = "_blank"; a.rel = "noopener"; }
+    if (ic) { var s = el("span", "act-ic"); s.appendChild(icon(ic)); a.insertBefore(s, a.firstChild); }
+    return a;
+  }
+  function telAct(label, phone) { var a = actBtn("phone", label, "tel:" + String(phone).replace(/[^0-9+]/g, ""), false); a.classList.add("tel"); return a; }
+  function mapAct(ic, label, url) { return actBtn(ic || "pin", label, String(url), true); }
+
   function uberUrl() {
     var X = C.uber || {};
     var q = "action=setPickup&pickup=my_location";
@@ -6276,16 +6318,65 @@ var CONFIG = {
       });
       return w;
     },
+    /* 한 줄 목록 — 전화와 지도를 따로 누를 수 있습니다.
+       it = [이름, 설명, 거리/비고, 전화번호, 네이버지도URL, 구글지도URL]
+       전화·지도 주소가 없으면 이름으로 네이버 지도 검색 링크를 만듭니다(예전 형식 호환). */
     rows: function (b) {
       var w = el("div", "block rows");
       (b.items || []).forEach(function (it) {
-        var row = el("a", "row");
-        if (it[3]) { row.href = "tel:" + String(it[3]); row.classList.add("tel-row"); }
-        else { row.href = naverUrl(pick(it[0], "ko")); row.target = "_blank"; row.rel = "noopener"; }
-        var left = el("span");
-        add(left, el("span", "row-name", it[0]), !isEmpty(it[1]) ? el("span", "row-desc", it[1]) : null);
-        add(row, left, !isEmpty(it[2]) ? el("span", "row-side", it[2]) : null);
+        var row = el("div", "row");
+        var top = el("div", "row-top");
+        add(top, el("span", "row-name", it[0]), !isEmpty(it[2]) ? el("span", "row-side", it[2]) : null);
+        add(row, top, !isEmpty(it[1]) ? el("p", "row-desc", it[1]) : null);
+        var naver = !isEmpty(it[4]) ? String(it[4]) : naverUrl(pick(it[0], "ko"));
+        var gmap = !isEmpty(it[5]) ? String(it[5]) : "";
+        var acts = el("div", "row-acts");
+        if (!isEmpty(it[3])) { acts.appendChild(telAct(U.btnCall, String(it[3]))); }
+        acts.appendChild(mapAct("pin", U.btnMapNaver, naver));
+        if (gmap) { acts.appendChild(mapAct("map", U.btnMapGoogle, gmap)); }
+        row.appendChild(acts);
         w.appendChild(row);
+      });
+      return w;
+    },
+    /* 전체 지도 링크 카드 */
+    mapcard: function (b) {
+      var c = el("div", "block mapcard");
+      if (!isEmpty(b.label)) { c.appendChild(el("p", "mapcard-label", b.label)); }
+      add(c, !isEmpty(b.title) ? el("p", "mapcard-title", b.title) : null,
+        !isEmpty(b.text) ? el("p", "mapcard-sub", b.text) : null);
+      var row = el("div", "btn-row");
+      (b.items || []).forEach(function (it) {
+        var a = linkBtn(it[0], String(it[1] || ""), "", true);
+        row.appendChild(a);
+      });
+      c.appendChild(row);
+      return c;
+    },
+    /* 맛집 카드 — 사진을 누르면 그 집 지도로, 전화·지도 버튼은 따로 */
+    food: function (b) {
+      var w = el("div", "block foods");
+      (b.items || []).forEach(function (it) {
+        var c = el("article", "food");
+        var naver = !isEmpty(it.naver) ? String(it.naver) : naverUrl(pick(it.name, "ko"));
+        if (!isEmpty(it.photo)) {
+          var a = el("a", "food-photo"); a.href = naver; a.target = "_blank"; a.rel = "noopener";
+          a.setAttribute("aria-label", pick(it.name) + " · " + pick(U.btnMapNaver));
+          var img = document.createElement("img"); img.loading = "lazy"; img.decoding = "async";
+          img.alt = pick(it.name); img.src = String(it.photo);
+          img.onerror = function () { if (a.parentNode) { a.parentNode.removeChild(a); } };
+          a.appendChild(img); c.appendChild(a);
+        }
+        var body = el("div", "food-body");
+        add(body, el("h3", "food-name", it.name), !isEmpty(it.meta) ? el("p", "food-meta", it.meta) : null,
+          !isEmpty(it.desc) ? el("p", "food-desc", it.desc) : null);
+        var acts = el("div", "row-acts");
+        if (!isEmpty(it.phone)) { acts.appendChild(telAct(U.btnCall, String(it.phone))); }
+        acts.appendChild(mapAct("pin", U.btnMapNaver, naver));
+        if (!isEmpty(it.google)) { acts.appendChild(mapAct("map", U.btnMapGoogle, String(it.google))); }
+        body.appendChild(acts);
+        c.appendChild(body);
+        w.appendChild(c);
       });
       return w;
     },
@@ -6431,6 +6522,8 @@ var CONFIG = {
     route: '<circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h7.5a3.5 3.5 0 0 0 0-7h-7a3.5 3.5 0 0 1 0-7H16"/>',
     ticket: '<path d="M3 8a2 2 0 0 0 0 4v0a2 2 0 0 1 0 4v2h18v-2a2 2 0 0 1 0-4 2 2 0 0 0 0-4V6H3z"/><path d="M14 6v12" stroke-dasharray="2 2"/>',
     pin: '<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
+    map: '<path d="M9 3 3 5.5V21l6-2.5 6 2.5 6-2.5V3l-6 2.5z"/><path d="M9 3v15.5M15 5.5V21"/>',
+    store: '<path d="M4 9.5h16l-1.1-4.3A1 1 0 0 0 17.9 4.5H6.1a1 1 0 0 0-1 .7z"/><path d="M5 9.5V20h14V9.5"/><path d="M9.5 20v-5.5h5V20"/>',
     phone: '<path d="M5 4h3l1.5 4-2 1.5a11 11 0 0 0 5 5l1.5-2 4 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/>',
     chev: '<path d="M9 6l6 6-6 6"/>',
     chat: '<path d="M4 5h16v11H9l-5 4z"/>',
@@ -6728,7 +6821,7 @@ var CONFIG = {
 
   /* ---------- 검색 ---------- */
   var SQ = "", SIDX = null;
-  var SKIP = { photo: 1, photos: 1, go: 1, back: 1, tab: 1, icon: 1, map: 1, url: 1, href: 1, airbnb: 1, langs: 1, type: 1, tone: 1, src: 1 };
+  var SKIP = { photo: 1, photos: 1, go: 1, back: 1, tab: 1, icon: 1, map: 1, url: 1, href: 1, airbnb: 1, langs: 1, type: 1, tone: 1, src: 1, naver: 1, google: 1, phone: 1 };
   function sCollect(v, out) {
     if (v == null) { return; }
     if (isBi(v)) { LANGS.forEach(function (l) { if (v[l]) { out[l].push(String(v[l])); } }); return; }

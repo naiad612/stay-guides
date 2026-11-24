@@ -287,14 +287,46 @@
   .xc .btn { margin-top: 14px; width: 100%; }
   .xf-empty { margin: 0; padding: 18px; border-radius: 14px; border: 1px dashed var(--line); font-size: 16px; color: var(--muted); text-align: center; }
 
-  /* 한 줄 목록 */
-  .rows { border-radius: 14px; border: 1px solid var(--line); overflow: hidden; }
-  .row { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 64px; padding: 12px 16px; text-decoration: none; background: #FFFFFF; }
+  /* 한 줄 목록 — 전화·지도 버튼을 따로 */
+  .rows { border-radius: 14px; border: 1px solid var(--line); background: #FFFFFF; overflow: hidden; }
+  .row { padding: 14px 16px; }
   .row + .row { border-top: 1px solid var(--line); }
-  .row-name { display: block; font-size: 17px; font-weight: 700; line-height: 1.35; }
-  .row-desc { display: block; font-size: 16px; color: var(--muted); }
-  .row-side { flex-shrink: 0; font-size: 16px; color: var(--muted); }
-  a.row .row-side { font-size: 22px; font-weight: 800; color: var(--accent); }
+  .row-top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+  .row-name { font-size: 17px; font-weight: 700; line-height: 1.35; }
+  .row-desc { margin: 2px 0 0; font-size: 16px; color: var(--muted); line-height: 1.45; }
+  .row-side { flex-shrink: 0; font-size: 15px; color: var(--muted); white-space: nowrap; }
+
+  /* 전화 · 지도 버튼 */
+  .row-acts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .act {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line);
+    background: #FFFFFF; color: var(--accent); font-size: 15px; font-weight: 700;
+    text-decoration: none; white-space: nowrap;
+  }
+  .act:active { border-color: var(--accent); }
+  .act-ic { display: inline-flex; width: 17px; height: 17px; }
+  .act-ic svg { width: 17px; height: 17px; }
+  .act.tel { border-color: var(--accent); }
+
+  /* 전체 맛집 지도 카드 */
+  .mapcard { padding: 18px; border-radius: 16px; background: var(--tint); border: 1px solid var(--line); }
+  .mapcard-label { margin: 0; font-size: 15px; font-weight: 800; letter-spacing: 0.05em; color: var(--accent); }
+  .mapcard-title { margin: 4px 0 0; font-size: 20px; font-weight: 800; line-height: 1.3; }
+  .mapcard-sub { margin: 6px 0 0; font-size: 16px; color: #4A4A4A; line-height: 1.5; }
+  .mapcard .btn-row { margin-top: 14px; }
+  .mapcard .btn { background: var(--accent); color: #FFFFFF; border-color: var(--accent); }
+
+  /* 맛집 카드 */
+  .food { border-radius: 14px; border: 1px solid var(--line); background: #FFFFFF; box-shadow: var(--shadow); overflow: hidden; }
+  .food + .food { margin-top: 14px; }
+  .food-photo { display: block; background: var(--soft); }
+  .food-photo img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  .food-body { padding: 14px 16px 16px; }
+  .food-name { margin: 0; font-size: 19px; font-weight: 800; line-height: 1.3; }
+  .food-meta { margin: 3px 0 0; font-size: 16px; color: var(--muted); line-height: 1.45; }
+  .food-desc { margin: 8px 0 0; font-size: 16px; color: #4A4A4A; line-height: 1.5; }
+  .food .row-acts { margin-top: 12px; }
 
   /* 코스 */
   .stop { position: relative; padding: 0 0 18px 44px; }
@@ -628,6 +660,24 @@ var CONFIG = {
    "en": "Google Maps",
    "ja": "Googleマップ",
    "zh": "Google地图"
+  },
+  "btnCall": {
+   "ko": "전화",
+   "en": "Call",
+   "ja": "電話",
+   "zh": "电话"
+  },
+  "btnMapNaver": {
+   "ko": "지도",
+   "en": "Map",
+   "ja": "地図",
+   "zh": "地图"
+  },
+  "btnMapGoogle": {
+   "ko": "Google",
+   "en": "Google",
+   "ja": "Google",
+   "zh": "Google"
   },
   "spotMap": {
    "ko": "지도에서 보기",
@@ -1386,12 +1436,22 @@ var CONFIG = {
    },
    {
     "go": "area",
+    "icon": "store",
+    "title": {
+     "ko": "주변 정보",
+     "en": "Around the house",
+     "ja": "周辺情報",
+     "zh": "周边信息"
+    }
+   },
+   {
+    "go": "food",
     "icon": "fork",
     "title": {
-     "ko": "주변·맛집",
-     "en": "Around",
-     "ja": "周辺・グルメ",
-     "zh": "周边·美食"
+     "ko": "맛집",
+     "en": "Places to eat",
+     "ja": "グルメ",
+     "zh": "美食"
     }
    },
    {
@@ -1480,30 +1540,50 @@ var CONFIG = {
    "zh": "周边"
   },
   "sub": {
-   "ko": "걸어서 갈 수 있는 편의점·맛집·산책길",
-   "en": "Convenience store, food and walks on foot",
-   "ja": "徒歩圏のコンビニ・グルメ・散歩道",
-   "zh": "步行可达的便利店、美食和散步路"
+   "ko": "편의점·세탁소·인쇄소와 산책길, 병원, 그리고 맛집",
+   "en": "Store, laundry, printing, walks, hospitals — and places to eat",
+   "ja": "コンビニ・ランドリー・印刷・散歩道・病院、そしてグルメ",
+   "zh": "便利店、洗衣、打印、散步路、医院，还有美食"
   },
   "sections": [
    {
     "title": {
-     "ko": "동네와 이동",
-     "en": "Around & getting around",
-     "ja": "周辺と移動",
-     "zh": "周边与出行"
+     "ko": "동네 정보",
+     "en": "The neighborhood",
+     "ja": "周辺の情報",
+     "zh": "周边信息"
     },
     "items": [
      [
       "area",
-      "fork",
+      "store",
       {
-       "ko": "맛집 10곳 · 편의점 · 세탁 · 인쇄",
-       "en": "10 places to eat · store · laundry · printing",
-       "ja": "グルメ10軒・コンビニ・洗濯・印刷",
-       "zh": "10家美食 · 便利店 · 洗衣 · 打印"
+       "ko": "편의점 · 세탁 · 인쇄 · 산책 · 병원",
+       "en": "Store · laundry · printing · walks · hospitals",
+       "ja": "コンビニ・洗濯・印刷・散歩・病院",
+       "zh": "便利店 · 洗衣 · 打印 · 散步 · 医院"
       }
      ],
+     [
+      "food",
+      "fork",
+      {
+       "ko": "걸어서 갈 수 있는 맛집 10곳 · 전체 지도",
+       "en": "10 places to eat on foot · full map",
+       "ja": "徒歩圏のグルメ10軒・全体マップ",
+       "zh": "步行10家美食 · 全部地图"
+      }
+     ]
+    ]
+   },
+   {
+    "title": {
+     "ko": "이동과 주문",
+     "en": "Getting around & ordering",
+     "ja": "移動と注文",
+     "zh": "出行与订餐"
+    },
+    "items": [
      [
       "taxi",
       "taxi",
@@ -1702,12 +1782,22 @@ var CONFIG = {
      ],
      [
       "area",
+      "store",
+      {
+       "ko": "편의점 · 세탁 · 인쇄 · 병원",
+       "en": "Store · laundry · printing · hospitals",
+       "ja": "コンビニ・洗濯・印刷・病院",
+       "zh": "便利店 · 洗衣 · 打印 · 医院"
+      }
+     ],
+     [
+      "food",
       "fork",
       {
-       "ko": "편의점 · 맛집 10곳 · 병원",
-       "en": "Store · 10 places to eat · hospital",
-       "ja": "コンビニ・グルメ10軒・病院",
-       "zh": "便利店 · 10家美食 · 医院"
+       "ko": "걸어서 갈 수 있는 맛집 10곳 · 전체 지도",
+       "en": "10 places to eat on foot · full map",
+       "ja": "徒歩圏のグルメ10軒・全体マップ",
+       "zh": "步行10家美食 · 全部地图"
       }
      ]
     ]
@@ -1865,7 +1955,8 @@ var CONFIG = {
    "guasha": "괄사 마사지 gua sha massage 刮痧 按摩",
    "rules": "규칙 금연 정숙 소음 rules smoking quiet noise 规则 禁烟 安静",
    "waste": "쓰레기 분리수거 재활용 음식물 trash recycling food waste 垃圾 回收",
-   "area": "주변 맛집 편의점 세탁소 인쇄소 병원 restaurant store laundry pharmacy hospital 周边 美食 便利店 洗衣 医院",
+   "area": "주변 편의점 세탁소 인쇄소 병원 약국 산책 공원 store laundry printing hospital pharmacy walk 周边 便利店 洗衣 医院 散步",
+   "food": "맛집 식당 레스토랑 밥집 국밥 순대 냉면 고기 구이 베이커리 미쉐린 지도 restaurant food eat dinner lunch bakery michelin map 美食 餐厅 地图 米其林",
    "checkout": "체크아웃 퇴실 떠날때 check-out leave 退房 离开",
    "faq": "자주 묻는 질문 faq question 常见问题",
    "contact": "연락 호스트 메시지 전화 문자 contact host message phone 联系 房东 消息",
@@ -4670,10 +4761,10 @@ var CONFIG = {
     "zh": "周边信息"
    },
    "sub": {
-    "ko": "편의점 · 세탁소 · 인쇄소 · 산책 · 병원 · 맛집 10곳",
-    "en": "Store, laundry, printing, walks, hospitals, 10 places to eat",
-    "ja": "コンビニ・ランドリー・印刷・散歩・病院・グルメ10軒",
-    "zh": "便利店 · 洗衣 · 打印 · 散步 · 医院 · 10家美食"
+    "ko": "편의점 · 세탁소 · 인쇄소 · 산책 · 병원",
+    "en": "Store, laundry, printing, walks, hospitals",
+    "ja": "コンビニ・ランドリー・印刷・散歩・病院",
+    "zh": "便利店 · 洗衣 · 打印 · 散步 · 医院"
    },
    "back": "hub",
    "tab": "around",
@@ -4710,7 +4801,9 @@ var CONFIG = {
         "ja": "徒歩1分",
         "zh": "步行1分钟"
        },
-       ""
+       "",
+       "https://map.naver.com/p/search/GS25%20%EC%97%AD%EC%82%BC%EC%82%AC%EB%9E%91%EC%A0%90",
+       "https://maps.google.com/?cid=1364084196085979438"
       ],
       [
        {
@@ -4731,7 +4824,9 @@ var CONFIG = {
         "ja": "徒歩2分",
         "zh": "步行2分钟"
        },
-       ""
+       "",
+       "https://naver.me/GFsCyB30",
+       "https://maps.app.goo.gl/oWqDD37E2uTkQaMGA"
       ],
       [
        {
@@ -4747,7 +4842,9 @@ var CONFIG = {
         "zh": "可以打印和复印"
        },
        "",
-       ""
+       "",
+       "https://naver.me/FUiQlhlb",
+       "https://maps.app.goo.gl/gqxP3f75aQhbTuSf8"
       ]
      ]
     },
@@ -4783,7 +4880,9 @@ var CONFIG = {
         "ja": "徒歩10分",
         "zh": "步行10分钟"
        },
-       ""
+       "",
+       "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%84%A0%EB%A6%89%EA%B3%BC%20%EC%A0%95%EB%A6%89",
+       "https://maps.google.com/?cid=17486552915600020254"
       ],
       [
        {
@@ -4799,7 +4898,9 @@ var CONFIG = {
         "zh": "夜景很美的寺院"
        },
        "",
-       ""
+       "",
+       "https://map.naver.com/p/search/%EB%B4%89%EC%9D%80%EC%82%AC",
+       "https://maps.google.com/?cid=5001419286940765545"
       ],
       [
        {
@@ -4815,7 +4916,9 @@ var CONFIG = {
         "zh": "急诊 · 代客泊车"
        },
        "",
-       "1599-6114"
+       "1599-6114",
+       "https://map.naver.com/p/search/%EA%B0%95%EB%82%A8%EC%84%B8%EB%B8%8C%EB%9E%80%EC%8A%A4%EB%B3%91%EC%9B%90",
+       "https://maps.google.com/?cid=8283719760528288227"
       ],
       [
        {
@@ -4831,7 +4934,111 @@ var CONFIG = {
         "zh": "急诊"
        },
        "",
-       "1599-3114"
+       "1599-3114",
+       "https://map.naver.com/p/search/%EC%82%BC%EC%84%B1%EC%84%9C%EC%9A%B8%EB%B3%91%EC%9B%90",
+       "https://maps.google.com/?cid=18318376602745240849"
+      ]
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "soft",
+     "title": "",
+     "text": {
+      "ko": "영업시간과 전화번호는 바뀔 수 있습니다. 출발 전에 지도 앱에서 한 번 확인해 주세요.",
+      "en": "Hours and numbers can change. Check the map app before you go.",
+      "ja": "営業時間と電話番号は変わることがあります。お出かけ前に地図アプリでご確認ください。",
+      "zh": "营业时间和电话可能变动，出发前请在地图App确认。"
+     }
+    },
+    {
+     "type": "links",
+     "items": [
+      [
+       {
+        "ko": "맛집 지도 보기",
+        "en": "Places to eat nearby",
+        "ja": "近くのグルメ",
+        "zh": "查看附近美食"
+       },
+       "food"
+      ],
+      [
+       {
+        "ko": "음식 배달 시키기",
+        "en": "Order delivery",
+        "ja": "デリバリーを頼む",
+        "zh": "点外卖"
+       },
+       "delivery"
+      ],
+      [
+       {
+        "ko": "택시 부르기",
+        "en": "Call a taxi",
+        "ja": "タクシーを呼ぶ",
+        "zh": "叫出租车"
+       },
+       "taxi"
+      ]
+     ]
+    }
+   ]
+  },
+  "food": {
+   "title": {
+    "ko": "맛집",
+    "en": "Places to eat",
+    "ja": "グルメ",
+    "zh": "美食"
+   },
+   "sub": {
+    "ko": "걸어서 갈 수 있는 맛집 10곳 · 전체 맛집 지도",
+    "en": "10 places to eat on foot · the full map",
+    "ja": "徒歩圏のグルメ10軒・全体マップ",
+    "zh": "步行10家美食 · 全部地图"
+   },
+   "back": "around",
+   "tab": "around",
+   "blocks": [
+    {
+     "type": "mapcard",
+     "label": {
+      "ko": "전체 맛집 지도",
+      "en": "All restaurants on a map",
+      "ja": "グルメ全体マップ",
+      "zh": "全部美食地图"
+     },
+     "title": {
+      "ko": "저장해 둔 맛집을 지도에서 한 번에",
+      "en": "Every saved place on one map",
+      "ja": "保存したお店を地図でまとめて",
+      "zh": "把收藏的餐厅放在同一张地图上"
+     },
+     "text": {
+      "ko": "지도에서 분홍 하트가 아른 위치입니다. 지도 앱의 저장 목록이라, 아래 10곳 말고 다른 곳도 함께 보입니다.",
+      "en": "The pink heart on the map is ARN. These are the saved lists, so you will see places beyond the ten below.",
+      "ja": "地図のピンクのハートがアーンの位置です。保存リストなので、下の10軒以外のお店も表示されます。",
+      "zh": "地图上的粉色爱心是Stay ARN的位置。这是收藏列表，除下面10家外还能看到其他店。"
+     },
+     "items": [
+      [
+       {
+        "ko": "네이버 지도",
+        "en": "Naver Map",
+        "ja": "Naver地図",
+        "zh": "Naver地图"
+       },
+       "https://map.naver.com/p/favorite/myPlace/folder/d8568a9561ec407c9d08c3baa47f68dd?c=16.00,0,0,0,dh&at=a"
+      ],
+      [
+       {
+        "ko": "Google 지도",
+        "en": "Google Maps",
+        "ja": "Googleマップ",
+        "zh": "Google地图"
+       },
+       "https://maps.app.goo.gl/sJpniNvUBhi4FzT36"
       ]
      ]
     },
@@ -4843,171 +5050,256 @@ var CONFIG = {
       "ja": "徒歩圏のグルメ",
       "zh": "步行可达的美食"
      },
-     "sub": ""
+     "sub": {
+      "ko": "사진을 누르면 그 집 지도가 열립니다",
+      "en": "Tap a photo to open that place on the map",
+      "ja": "写真をタップするとお店の地図が開きます",
+      "zh": "点击照片即可打开该店地图"
+     }
     },
     {
-     "type": "rows",
+     "type": "food",
      "items": [
-      [
-       {
+      {
+       "photo": "images/food-yukjeon.jpg",
+       "name": {
         "ko": "육전국밥 선릉점",
         "en": "Yukjeon Gukbap Seolleung",
         "ja": "ユクチョングクパプ宣陵店",
         "zh": "肉煎汤饭 宣陵店"
        },
-       {
+       "meta": {
         "ko": "한식 · 24시간",
         "en": "Korean · 24 hours",
         "ja": "韓国料理・24時間",
         "zh": "韩餐 · 24小时"
        },
-       "",
-       "02-556-4504"
-      ],
-      [
-       {
+       "desc": {
+        "ko": "24시간 여는 국밥집. 육전과 육전비빔막국수, 각종 전이 주메뉴이고 아이들도 잘 먹습니다.",
+        "en": "A gukbap house open 24 hours. Beef yukjeon, yukjeon bibim makguksu and assorted jeon — children like it too.",
+        "ja": "24時間営業のクッパプ店。ユクチョン（牛肉の衣揚げ）やビビン麺、各種チヂミが看板メニューです。",
+        "zh": "24小时营业的汤饭店。牛肉煎饼、拌冷面和各式煎饼是招牌，孩子也爱吃。"
+       },
+       "phone": "02-556-4504",
+       "naver": "https://map.naver.com/p/entry/place/2063978135",
+       "google": "https://maps.google.com/?cid=3189342722497555570"
+      },
+      {
+       "photo": "images/food-himnaera.jpg",
+       "name": {
         "ko": "힘내라정육 선릉점",
         "en": "Himnaera Jeongyuk Seolleung",
         "ja": "ヒムネラ精肉宣陵店",
         "zh": "加油肉铺 宣陵店"
        },
-       {
-        "ko": "한돈·한우 구이 · 24시간",
-        "en": "Korean pork and beef grill · 24 hours",
-        "ja": "韓牛・韓豚焼肉・24時間",
-        "zh": "韩猪·韩牛烤肉 · 24小时"
+       "meta": {
+        "ko": "구이 · 24시간",
+        "en": "Korean BBQ · 24 hours",
+        "ja": "焼肉・24時間",
+        "zh": "烤肉 · 24小时"
        },
-       "",
-       "02-555-3438"
-      ],
-      [
-       {
+       "desc": {
+        "ko": "정육식당. 한돈·한우를 골라 구워 주고, 직접 담근 장아찌와 김치가 함께 나옵니다. 단체·포장 가능.",
+        "en": "A butcher's grill: pick Korean pork or beef and they cook it at your table, with house pickles and kimchi. Groups and takeaway.",
+        "ja": "精肉食堂。韓牛・韓豚を選んで焼いてもらえ、手作りの漬物とキムチが付きます。団体・テイクアウト可。",
+        "zh": "肉铺餐厅。自选韩牛、韩猪现场烤制，配自制酱菜和泡菜。可团体用餐和打包。"
+       },
+       "phone": "02-555-3438",
+       "naver": "https://map.naver.com/p/entry/place/2025691467",
+       "google": "https://maps.google.com/?cid=17448163904623479222"
+      },
+      {
+       "photo": "images/food-baegam.jpg",
+       "name": {
         "ko": "농민백암순대",
         "en": "Nongmin Baegam Sundae",
         "ja": "農民白岩スンデ",
         "zh": "农民白岩血肠"
        },
-       {
+       "meta": {
         "ko": "순대국밥 · 일요일 휴무",
         "en": "Sundae soup · closed Sundays",
         "ja": "スンデクッパプ・日曜定休",
         "zh": "血肠汤饭 · 周日休息"
        },
-       "",
-       "02-555-9603"
-      ],
-      [
-       {
+       "desc": {
+        "ko": "진한 육수에 순대가 가득한 순대국밥. 수육이 들어간 세트도 인기입니다.",
+        "en": "Sundae gukbap with a rich broth and plenty of sundae; the set with boiled pork is popular too.",
+        "ja": "濃厚なスープにスンデがたっぷり。ゆで豚付きのセットも人気です。",
+        "zh": "汤浓料足的血肠汤饭，配白切肉的套餐也很受欢迎。"
+       },
+       "phone": "02-555-9603",
+       "naver": "https://map.naver.com/p/entry/place/13149768",
+       "google": "https://maps.google.com/?cid=4684677330261969181"
+      },
+      {
+       "photo": "images/food-morak.jpg",
+       "name": {
         "ko": "모락정원",
         "en": "Morak Garden",
         "ja": "モラク庭園",
         "zh": "Morak庭院"
        },
-       {
-        "ko": "한식 퓨전 · 일요일 휴무",
-        "en": "Korean fusion · closed Sundays",
-        "ja": "韓国フュージョン・日曜定休",
-        "zh": "韩式融合菜 · 周日休息"
+       "meta": {
+        "ko": "한식 퓨전 · 브레이크 15:00~17:00 · 일요일 휴무",
+        "en": "Korean fusion · break 15:00–17:00 · closed Sundays",
+        "ja": "韓国フュージョン・15〜17時休憩・日曜定休",
+        "zh": "韩式融合菜 · 15:00~17:00休息 · 周日休息"
        },
-       "",
-       "0507-1334-9452"
-      ],
-      [
-       {
+       "desc": {
+        "ko": "한식에 손을 더한 퓨전 요리와 룸이 있는 집. 모임에 쓰기 좋습니다.",
+        "en": "Korean fusion cooking with private rooms — handy for a group meal.",
+        "ja": "韓国料理をひとひねりしたフュージョン料理と個室のあるお店。集まりに便利です。",
+        "zh": "韩式融合菜，带包间，适合聚会。"
+       },
+       "phone": "0507-1334-9452",
+       "naver": "https://naver.me/5IS9e7qv",
+       "google": "https://maps.google.com/?cid=3227192979263086433"
+      },
+      {
+       "photo": "images/food-piyang.jpg",
+       "name": {
         "ko": "피양콩할머니",
         "en": "Piyang Kong Halmeoni",
         "ja": "ピヤンコンハルモニ",
         "zh": "平壤豆奶奶"
        },
-       {
-        "ko": "콩국수 · 매일 11:30~22:00",
-        "en": "Soybean noodles · daily 11:30–22:00",
-        "ja": "豆乳麺・毎日11:30〜22:00",
-        "zh": "豆浆面 · 每天11:30~22:00"
+       "meta": {
+        "ko": "콩국수 · 매일 11:30~22:00 · 빕구르망",
+        "en": "Soybean noodles · daily 11:30–22:00 · Bib Gourmand",
+        "ja": "豆乳麺・毎日11:30〜22:00・ビブグルマン",
+        "zh": "豆浆面 · 每天11:30~22:00 · 必比登"
        },
-       "",
-       "02-508-0476"
-      ],
-      [
-       {
+       "desc": {
+        "ko": "평양식 콩국수와 콩비지찌개. 미쉐린 빕구르망 2017~2023에 이름을 올린 집입니다.",
+        "en": "Pyongyang-style soybean noodles and kongbiji stew; a Michelin Bib Gourmand from 2017 to 2023.",
+        "ja": "平壌式の豆乳麺とおからチゲ。ミシュラン・ビブグルマン2017〜2023に選ばれています。",
+        "zh": "平壤风味豆浆面和豆渣汤，2017~2023年米其林必比登推荐。"
+       },
+       "phone": "02-508-0476",
+       "naver": "https://naver.me/5Rh0ttMw",
+       "google": "https://maps.google.com/?cid=8544710394809092431"
+      },
+      {
+       "photo": "images/food-banryongsan.jpg",
+       "name": {
         "ko": "반룡산 함흥냉면",
         "en": "Bannyongsan Hamhung Naengmyeon",
         "ja": "パンニョンサン咸興冷麺",
         "zh": "盘龙山咸兴冷面"
        },
-       {
-        "ko": "함흥냉면",
-        "en": "Hamhung cold noodles",
-        "ja": "咸興冷麺",
-        "zh": "咸兴冷面"
+       "meta": {
+        "ko": "함흥냉면 · 매일 11:00~",
+        "en": "Hamhung cold noodles · daily from 11:00",
+        "ja": "咸興冷麺・毎日11:00〜",
+        "zh": "咸兴冷面 · 每天11:00起"
        },
-       "",
-       "02-3446-8966"
-      ],
-      [
-       {
+       "desc": {
+        "ko": "함흥식 물냉면과 비빔냉면. 매일 11시에 엽니다.",
+        "en": "Hamhung-style mul and bibim cold noodles, open daily from 11:00.",
+        "ja": "咸興式の水冷麺とビビン冷麺。毎日11時から。",
+        "zh": "咸兴式水冷面和拌冷面，每天11点开门。"
+       },
+       "phone": "02-3446-8966",
+       "naver": "https://map.naver.com/p/entry/place/12053368",
+       "google": "https://maps.google.com/?cid=12645894535991670880"
+      },
+      {
+       "photo": "images/food-hwaseol.jpg",
+       "name": {
         "ko": "화설 선릉점",
         "en": "Hwaseol Seolleung",
         "ja": "ファソル宣陵店",
         "zh": "火雪 宣陵店"
        },
-       {
-        "ko": "한우·한돈 · 매일 11:30~23:00",
-        "en": "Beef and pork · daily 11:30–23:00",
-        "ja": "韓牛・韓豚・毎日11:30〜23:00",
-        "zh": "韩牛·韩猪 · 每天11:30~23:00"
+       "meta": {
+        "ko": "구이 · 매일 11:30~23:00 · 브레이크 15:00~17:00",
+        "en": "Korean BBQ · daily 11:30–23:00 · break 15:00–17:00",
+        "ja": "焼肉・毎日11:30〜23:00・15〜17時休憩",
+        "zh": "烤肉 · 每天11:30~23:00 · 15:00~17:00休息"
        },
-       "",
-       "0507-1350-7847"
-      ],
-      [
-       {
+       "desc": {
+        "ko": "한우·한돈 구이와 룸, 와인. 회식과 저녁 모임에 많이 갑니다.",
+        "en": "Korean beef and pork grilled at the table, with private rooms and wine — popular for dinners and team meals.",
+        "ja": "韓牛・韓豚の焼肉、個室とワイン。会食や夜の集まりによく使われます。",
+        "zh": "韩牛、韩猪烤肉，有包间和葡萄酒，适合聚餐。"
+       },
+       "phone": "0507-1350-7847",
+       "naver": "https://naver.me/Fk738Ve0",
+       "google": "https://maps.google.com/?cid=6441896196537081271"
+      },
+      {
+       "photo": "images/food-allen.jpg",
+       "name": {
         "ko": "알렌",
-        "en": "Allen",
-        "ja": "アレン",
-        "zh": "Allen"
+        "en": "Restaurant Allen",
+        "ja": "レストラン・アレン",
+        "zh": "Restaurant Allen"
        },
-       {
+       "meta": {
         "ko": "프렌치 · 미쉐린 2스타 · 화~토",
         "en": "French · two Michelin stars · Tue–Sat",
         "ja": "フレンチ・ミシュラン2つ星・火〜土",
         "zh": "法餐 · 米其林二星 · 周二至周六"
        },
-       "",
-       "02-6985-7214"
-      ],
-      [
-       {
+       "desc": {
+        "ko": "미쉐린 2스타 프렌치. 런치와 디너 코스가 있고, 센터필드 지하 주차 4시간이 무료입니다.",
+        "en": "Two-Michelin-star French with lunch and dinner courses; four hours of parking under Centrefield is free.",
+        "ja": "ミシュラン2つ星のフレンチ。ランチ・ディナーコースがあり、センターフィールド地下駐車場が4時間無料です。",
+        "zh": "米其林二星法餐，有午市和晚市套餐，Centrefield 地下停车4小时免费。"
+       },
+       "phone": "02-6985-7214",
+       "naver": "https://naver.me/5T4ARvVJ",
+       "google": "https://maps.google.com/?cid=6210893994118499245"
+      },
+      {
+       "photo": "images/food-eatanic.jpg",
+       "name": {
         "ko": "조선팰리스 이타닉가든",
-        "en": "Joseon Palace Eatanic Garden",
+        "en": "Josun Palace Eatanic Garden",
         "ja": "朝鮮パレス イタニックガーデン",
         "zh": "朝鲜宫殿 Eatanic Garden"
        },
-       {
+       "meta": {
         "ko": "한식 파인다이닝 · 미쉐린 1스타 · 수~일",
         "en": "Korean fine dining · one Michelin star · Wed–Sun",
         "ja": "韓国料理ファインダイニング・ミシュラン1つ星・水〜日",
         "zh": "韩式高级餐厅 · 米其林一星 · 周三至周日"
        },
-       "",
-       "02-727-7610"
-      ],
-      [
-       {
-        "ko": "르뱅룰즈 선릉",
-        "en": "Le Vin Roulez Seolleung",
-        "ja": "ル・ヴァン・ルレ宣陵",
-        "zh": "Le Vin Roulez 宣陵"
+       "desc": {
+        "ko": "조선팰리스 36층 한식 파인다이닝. 창가 자리에서 시내가 내려다보입니다.",
+        "en": "Korean fine dining on the 36th floor of Josun Palace, with the city below the window seats.",
+        "ja": "朝鮮パレス36階の韓国料理ファインダイニング。窓際の席から街を見下ろせます。",
+        "zh": "朝鲜宫殿36层的韩式高级餐厅，靠窗座位可以俯瞰市区。"
        },
-       {
+       "phone": "02-727-7610",
+       "naver": "https://naver.me/GbDRmKbo",
+       "google": "https://maps.google.com/?cid=10560846928613281508"
+      },
+      {
+       "photo": "images/food-levain.jpg",
+       "name": {
+        "ko": "르뱅룰즈 선릉",
+        "en": "Levain Rules Seolleung",
+        "ja": "ルヴァン・ルール宣陵",
+        "zh": "Levain Rules 宣陵店"
+       },
+       "meta": {
         "ko": "베이커리·브런치 · 매일 08:00~",
-        "en": "Bakery and brunch · daily from 08:00",
+        "en": "Bakery & brunch · daily from 08:00",
         "ja": "ベーカリー・ブランチ・毎日08:00〜",
         "zh": "烘焙·早午餐 · 每天08:00起"
        },
-       "",
-       "0507-1418-0426"
-      ]
+       "desc": {
+        "ko": "사워도우와 샌드위치가 유명한 동네 빵집. 오후에는 빵이 일찍 떨어집니다.",
+        "en": "The neighbourhood bakery for sourdough and sandwiches; bread often sells out by the afternoon.",
+        "ja": "サワードウとサンドイッチが評判の町のパン屋。午後は売り切れが早いです。",
+        "zh": "以酸面包和三明治出名的社区面包店，下午面包常提前卖完。"
+       },
+       "phone": "0507-1418-0426",
+       "naver": "https://map.naver.com/p/entry/place/1235425429",
+       "google": "https://maps.google.com/?cid=15463683707280637803"
+      }
      ]
     },
     {
@@ -5032,6 +5324,15 @@ var CONFIG = {
         "zh": "点外卖"
        },
        "delivery"
+      ],
+      [
+       {
+        "ko": "주변 정보 보기",
+        "en": "Around the house",
+        "ja": "周辺情報",
+        "zh": "周边信息"
+       },
+       "area"
       ],
       [
        {
@@ -5611,12 +5912,12 @@ var CONFIG = {
      "items": [
       [
        {
-        "ko": "주변 맛집 보기",
+        "ko": "맛집 지도 보기",
         "en": "Places to eat nearby",
         "ja": "近くのグルメ",
         "zh": "查看附近美食"
        },
-       "area"
+       "food"
       ],
       [
        {
@@ -6326,6 +6627,16 @@ var CONFIG = {
     var s = el("span", "btn-icon"); s.appendChild(icon(ic)); a.insertBefore(s, a.firstChild);
     return a;
   }
+  /* 전화 · 지도 버튼 (한 줄 목록과 맛집 카드가 함께 씁니다) */
+  function actBtn(ic, label, href, newTab) {
+    var a = el("a", "act", label); a.href = href;
+    if (newTab) { a.target = "_blank"; a.rel = "noopener"; }
+    if (ic) { var s = el("span", "act-ic"); s.appendChild(icon(ic)); a.insertBefore(s, a.firstChild); }
+    return a;
+  }
+  function telAct(label, phone) { var a = actBtn("phone", label, "tel:" + String(phone).replace(/[^0-9+]/g, ""), false); a.classList.add("tel"); return a; }
+  function mapAct(ic, label, url) { return actBtn(ic || "pin", label, String(url), true); }
+
   function uberUrl() {
     var X = C.uber || {};
     var q = "action=setPickup&pickup=my_location";
@@ -6594,16 +6905,65 @@ var CONFIG = {
       });
       return w;
     },
+    /* 한 줄 목록 — 전화와 지도를 따로 누를 수 있습니다.
+       it = [이름, 설명, 거리/비고, 전화번호, 네이버지도URL, 구글지도URL]
+       전화·지도 주소가 없으면 이름으로 네이버 지도 검색 링크를 만듭니다(예전 형식 호환). */
     rows: function (b) {
       var w = el("div", "block rows");
       (b.items || []).forEach(function (it) {
-        var row = el("a", "row");
-        if (it[3]) { row.href = "tel:" + String(it[3]); row.classList.add("tel-row"); }
-        else { row.href = naverUrl(pick(it[0], "ko")); row.target = "_blank"; row.rel = "noopener"; }
-        var left = el("span");
-        add(left, el("span", "row-name", it[0]), !isEmpty(it[1]) ? el("span", "row-desc", it[1]) : null);
-        add(row, left, !isEmpty(it[2]) ? el("span", "row-side", it[2]) : null);
+        var row = el("div", "row");
+        var top = el("div", "row-top");
+        add(top, el("span", "row-name", it[0]), !isEmpty(it[2]) ? el("span", "row-side", it[2]) : null);
+        add(row, top, !isEmpty(it[1]) ? el("p", "row-desc", it[1]) : null);
+        var naver = !isEmpty(it[4]) ? String(it[4]) : naverUrl(pick(it[0], "ko"));
+        var gmap = !isEmpty(it[5]) ? String(it[5]) : "";
+        var acts = el("div", "row-acts");
+        if (!isEmpty(it[3])) { acts.appendChild(telAct(U.btnCall, String(it[3]))); }
+        acts.appendChild(mapAct("pin", U.btnMapNaver, naver));
+        if (gmap) { acts.appendChild(mapAct("map", U.btnMapGoogle, gmap)); }
+        row.appendChild(acts);
         w.appendChild(row);
+      });
+      return w;
+    },
+    /* 전체 지도 링크 카드 */
+    mapcard: function (b) {
+      var c = el("div", "block mapcard");
+      if (!isEmpty(b.label)) { c.appendChild(el("p", "mapcard-label", b.label)); }
+      add(c, !isEmpty(b.title) ? el("p", "mapcard-title", b.title) : null,
+        !isEmpty(b.text) ? el("p", "mapcard-sub", b.text) : null);
+      var row = el("div", "btn-row");
+      (b.items || []).forEach(function (it) {
+        var a = linkBtn(it[0], String(it[1] || ""), "", true);
+        row.appendChild(a);
+      });
+      c.appendChild(row);
+      return c;
+    },
+    /* 맛집 카드 — 사진을 누르면 그 집 지도로, 전화·지도 버튼은 따로 */
+    food: function (b) {
+      var w = el("div", "block foods");
+      (b.items || []).forEach(function (it) {
+        var c = el("article", "food");
+        var naver = !isEmpty(it.naver) ? String(it.naver) : naverUrl(pick(it.name, "ko"));
+        if (!isEmpty(it.photo)) {
+          var a = el("a", "food-photo"); a.href = naver; a.target = "_blank"; a.rel = "noopener";
+          a.setAttribute("aria-label", pick(it.name) + " · " + pick(U.btnMapNaver));
+          var img = document.createElement("img"); img.loading = "lazy"; img.decoding = "async";
+          img.alt = pick(it.name); img.src = String(it.photo);
+          img.onerror = function () { if (a.parentNode) { a.parentNode.removeChild(a); } };
+          a.appendChild(img); c.appendChild(a);
+        }
+        var body = el("div", "food-body");
+        add(body, el("h3", "food-name", it.name), !isEmpty(it.meta) ? el("p", "food-meta", it.meta) : null,
+          !isEmpty(it.desc) ? el("p", "food-desc", it.desc) : null);
+        var acts = el("div", "row-acts");
+        if (!isEmpty(it.phone)) { acts.appendChild(telAct(U.btnCall, String(it.phone))); }
+        acts.appendChild(mapAct("pin", U.btnMapNaver, naver));
+        if (!isEmpty(it.google)) { acts.appendChild(mapAct("map", U.btnMapGoogle, String(it.google))); }
+        body.appendChild(acts);
+        c.appendChild(body);
+        w.appendChild(c);
       });
       return w;
     },
@@ -6749,6 +7109,8 @@ var CONFIG = {
     route: '<circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h7.5a3.5 3.5 0 0 0 0-7h-7a3.5 3.5 0 0 1 0-7H16"/>',
     ticket: '<path d="M3 8a2 2 0 0 0 0 4v0a2 2 0 0 1 0 4v2h18v-2a2 2 0 0 1 0-4 2 2 0 0 0 0-4V6H3z"/><path d="M14 6v12" stroke-dasharray="2 2"/>',
     pin: '<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
+    map: '<path d="M9 3 3 5.5V21l6-2.5 6 2.5 6-2.5V3l-6 2.5z"/><path d="M9 3v15.5M15 5.5V21"/>',
+    store: '<path d="M4 9.5h16l-1.1-4.3A1 1 0 0 0 17.9 4.5H6.1a1 1 0 0 0-1 .7z"/><path d="M5 9.5V20h14V9.5"/><path d="M9.5 20v-5.5h5V20"/>',
     phone: '<path d="M5 4h3l1.5 4-2 1.5a11 11 0 0 0 5 5l1.5-2 4 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/>',
     chev: '<path d="M9 6l6 6-6 6"/>',
     chat: '<path d="M4 5h16v11H9l-5 4z"/>',
@@ -7046,7 +7408,7 @@ var CONFIG = {
 
   /* ---------- 검색 ---------- */
   var SQ = "", SIDX = null;
-  var SKIP = { photo: 1, photos: 1, go: 1, back: 1, tab: 1, icon: 1, map: 1, url: 1, href: 1, airbnb: 1, langs: 1, type: 1, tone: 1, src: 1 };
+  var SKIP = { photo: 1, photos: 1, go: 1, back: 1, tab: 1, icon: 1, map: 1, url: 1, href: 1, airbnb: 1, langs: 1, type: 1, tone: 1, src: 1, naver: 1, google: 1, phone: 1 };
   function sCollect(v, out) {
     if (v == null) { return; }
     if (isBi(v)) { LANGS.forEach(function (l) { if (v[l]) { out[l].push(String(v[l])); } }); return; }
